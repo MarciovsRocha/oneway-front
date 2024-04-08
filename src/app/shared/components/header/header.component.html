@@ -1,43 +1,45 @@
-<mat-toolbar class="header">
+<mat-toolbar class="header" [ngClass]="{ mobile: showMenu }">
   <span class="header__logo mb-1">oneway</span>
-  <div class="header__icons">
-    <div class="d-none d-sm-block" clas="header__button-row">
+  <ul class="header__icons buttons">
+    <li>
       <button mat-button>Item1</button>
+    </li>
+    <li>
       <button mat-button>Item2</button>
+    </li>
+    <li>
       <button mat-button>Item3</button>
-    </div>
-
-    <button mat-icon-button aria-label="Profile">
-      <fa-icon [icon]="faMoon"></fa-icon>
-    </button>
-    <button mat-icon-button aria-label="Profile">
-      <fa-icon [icon]="faSun"></fa-icon>
-    </button>
-    <button mat-icon-button aria-label="Profile">
-      <fa-icon [icon]="faUser"></fa-icon>
-    </button>
-    <button
-      (click)="showMenu = !showMenu"
-      mat-icon-button
-      class="d-sm-none"
-      aria-label="Profile"
-    >
-      <mat-icon>menu</mat-icon>
-    </button>
-  </div>
+    </li>
+  </ul>
+  <ul class="header__icons">
+    <li>
+      <button mat-icon-button aria-label="Nigth Mode">
+        <fa-icon [icon]="faMoon"></fa-icon>
+      </button>
+    </li>
+    <li>
+      <button mat-icon-button aria-label="Ligth Mode">
+        <fa-icon [icon]="faSun"></fa-icon>
+      </button>
+    </li>
+    <li>
+      <button mat-icon-button aria-label="Profile">
+        <fa-icon [icon]="faUser"></fa-icon>
+      </button>
+    </li>
+    <li class="d-sm-none">
+      <button
+        (click)="showMenu = !showMenu"
+        class="header__icons__toggle-button"
+        mat-icon-button
+        aria-label="Profile"
+      >
+        @if (!showMenu) {
+        <mat-icon>menu</mat-icon>
+        } @else {
+        <mat-icon>close</mat-icon>
+        }
+      </button>
+    </li>
+  </ul>
 </mat-toolbar>
-@if (showMenu) {
-<div class="d-sm-none header__menu-responsive">
-  <mat-list class="header__menu-list">
-    <mat-list-item>
-      <button mat-button>Item1</button>
-    </mat-list-item>
-    <mat-list-item>
-      <button mat-button>Item2</button>
-    </mat-list-item>
-    <mat-list-item>
-      <button mat-button>Item3</button>
-    </mat-list-item>
-  </mat-list>
-</div>
-}
