@@ -1,20 +1,43 @@
 <mat-toolbar class="header">
-  <span>OneWay</span>
-  <span class="example-spacer"></span>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>
+  <span class="header__logo mb-1">oneway</span>
+  <div class="header__icons">
+    <div class="d-none d-sm-block" clas="header__button-row">
+      <button mat-button>Item1</button>
+      <button mat-button>Item2</button>
+      <button mat-button>Item3</button>
+    </div>
+
+    <button mat-icon-button aria-label="Profile">
+      <fa-icon [icon]="faMoon"></fa-icon>
+    </button>
+    <button mat-icon-button aria-label="Profile">
+      <fa-icon [icon]="faSun"></fa-icon>
+    </button>
+    <button mat-icon-button aria-label="Profile">
+      <fa-icon [icon]="faUser"></fa-icon>
+    </button>
+    <button
+      (click)="showMenu = !showMenu"
+      mat-icon-button
+      class="d-sm-none"
+      aria-label="Profile"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
   </div>
-  <button mat-icon-button class="example-icon" aria-label="Profile">
-    <fa-icon [icon]="faUser"></fa-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Profile">
-    <fa-icon [icon]="faMoon"></fa-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Profile">
-    <fa-icon [icon]="faSun"></fa-icon>
-  </button>
 </mat-toolbar>
+@if (showMenu) {
+<div class="d-sm-none header__menu-responsive">
+  <mat-list class="header__menu-list">
+    <mat-list-item>
+      <button mat-button>Item1</button>
+    </mat-list-item>
+    <mat-list-item>
+      <button mat-button>Item2</button>
+    </mat-list-item>
+    <mat-list-item>
+      <button mat-button>Item3</button>
+    </mat-list-item>
+  </mat-list>
+</div>
+}

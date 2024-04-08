@@ -1,2 +1,32 @@
 @import "variables";
 
+.header {
+  justify-content: space-between;
+}
+
+.header__logo {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 800;
+  background: linear-gradient(to top left, #618354, #94b57b);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.header__button button,
+.header__button a {
+  margin-right: 8px;
+}
+
+.header__icons {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.header__menu-responsive {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 52px);
+  background: #f8f9f5;
+}

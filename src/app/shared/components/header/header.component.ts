@@ -5,6 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser, faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-header',
@@ -14,12 +15,14 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatIconModule,
     FontAwesomeModule,
-    MatMenuModule
+    MatMenuModule,
+    MatListModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  showMenu = false;
   faUser = faUser;
   faMoon = faMoon;
   faSun = faSun;
