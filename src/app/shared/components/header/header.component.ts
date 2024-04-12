@@ -22,6 +22,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  isNightMode = false;
   showMenu = false;
   faUser = faUser;
   faMoon = faMoon;
