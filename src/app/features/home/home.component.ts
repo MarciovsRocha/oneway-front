@@ -1,4 +1,5 @@
 import { HeaderComponent } from '../../shared/components/header/header.component';
+import { RotativeCardComponent } from '../../shared/components/rotative-card/rotative-card.component';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,6 +7,6 @@ import { Component } from '@angular/core';
   standalone: true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, RotativeCardComponent],
 })
 export class HomeComponent {}
