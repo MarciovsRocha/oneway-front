@@ -25,9 +25,13 @@
         }
       </li>
       <li>
-        <button mat-icon-button aria-label="Profile">
+        <button [matMenuTriggerFor]="menu" mat-icon-button aria-label="Profile">
           <fa-icon [icon]="faUser"></fa-icon>
         </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
       </li>
     }
    
