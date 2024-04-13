@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RotativeCardComponent } from './rotative-card.component';
+import { CarouselCardComponent } from './carousel-card.component';
 
-describe('RotativeCardComponent', () => {
-  let component: RotativeCardComponent;
-  let fixture: ComponentFixture<RotativeCardComponent>;
+describe('CarouselCardComponent', () => {
+  let component: CarouselCardComponent;
+  let fixture: ComponentFixture<CarouselCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RotativeCardComponent]
+      imports: [CarouselCardComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(RotativeCardComponent);
+    fixture = TestBed.createComponent(CarouselCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
