@@ -1,27 +1,28 @@
 <mat-toolbar class="header" [ngClass]="{ mobile: showMenu }">
-  <span class="header__logo mb-1">oneway</span>
-  <ul class="header__icons buttons">
-    <li>
-      <button mat-button>Item1</button>
-    </li>
-    <li>
-      <button mat-button>Item2</button>
-    </li>
-    <li>
-      <button mat-button>Item3</button>
-    </li>
-  </ul>
-  <ul class="header__icons">
-    @if (!showMenu) {
+  <div class="header__container container">
+    <span class="header__logo mb-1">oneway</span>
+    <ul class="header__icons buttons">
+      <li>
+        <button mat-button>Item1</button>
+      </li>
+      <li>
+        <button mat-button>Item2</button>
+      </li>
+      <li>
+        <button mat-button>Item3</button>
+      </li>
+    </ul>
+    <ul class="header__icons">
+      @if (!isMobile) {
       <li (click)="isNightMode = !isNightMode">
         @if (!isNightMode) {
-          <button mat-icon-button aria-label="Night Mode">
-            <fa-icon [icon]="faMoon"></fa-icon>
-          </button>
+        <button mat-icon-button aria-label="Night Mode">
+          <fa-icon [icon]="faMoon"></fa-icon>
+        </button>
         } @else {
-          <button mat-icon-button aria-label="Light Mode">
-            <fa-icon [icon]="faSun"></fa-icon>
-          </button>
+        <button mat-icon-button aria-label="Light Mode">
+          <fa-icon [icon]="faSun"></fa-icon>
+        </button>
         }
       </li>
       <li>
@@ -33,22 +34,22 @@
           <button mat-menu-item>Item 2</button>
         </mat-menu>
       </li>
-    }
-   
-
-    <li class="d-sm-none">
-      <button
-        (click)="showMenu = !showMenu"
-        class="header__icons__toggle-button"
-        mat-icon-button
-        aria-label="Profile"
-      >
-      @if (!showMenu) {
-        <mat-icon>menu</mat-icon>
-      } @else {
-        <mat-icon mat-icon>close</mat-icon>
       }
-      </button>
-    </li>
-  </ul>
+
+      <li class="d-sm-none">
+        <button
+          (click)="showMenu = !showMenu"
+          class="header__icons__toggle-button"
+          mat-icon-button
+          aria-label="Profile"
+        >
+          @if (!showMenu) {
+          <mat-icon>menu</mat-icon>
+          } @else {
+          <mat-icon mat-icon>close</mat-icon>
+          }
+        </button>
+      </li>
+    </ul>
+  </div>
 </mat-toolbar>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,15 +16,25 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     FontAwesomeModule,
     MatMenuModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  innerWidth: number = window.innerWidth;
   isNightMode = false;
   showMenu = false;
   faUser = faUser;
   faMoon = faMoon;
   faSun = faSun;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.innerWidth = window.innerWidth;
+  }
+
+  get isMobile() { 
+    return this.innerWidth <= 576
+  }
 }
