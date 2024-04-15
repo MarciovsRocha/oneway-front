@@ -1,5 +1,40 @@
+@import "variables";
+
 .home__custom-carousel {
   ::ng-deep .swiper {
     border-radius: 0.6rem;
   }
+}
+
+.home__title {
+  font-size: 2rem;
+  margin: 6.2rem 0;
+  color: #ffffff;
+
+  b {
+    color: #f9ffa6;
+  }
+}
+
+.home__background-image {
+  border-radius: $border-radius-default;
+  width: 85%;
+  height: 21.25rem;
+  z-index: -100;
+  position: absolute;
+  top: 14.0625rem;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: url("../../../assets/images/home_background.jpg");
+  background-repeat: no-repeat;
+  background-position: center -760px;
+  background-size: 1660px;
+}
+
+.home__search {
+  margin-bottom: 6.5rem;
 }
