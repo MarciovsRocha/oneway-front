@@ -25,8 +25,10 @@ export class CarouselCardComponent {
   breakpoints = {
     0: { slidesPerView: 1 },
     576: { slidesPerView: 1, spaceBetween: 16 },
-    768: { slidesPerView: 2, spaceBetween: 16 },
-    1024: { slidesPerView: 4, spaceBetween: 10 },
+    768: { slidesPerView: 2, spaceBetween: 10 },
+    992: { slidesPerView: 3, spaceBetween: 10 },
+    1024: { slidesPerView: 3, spaceBetween: 20 },
+    1200: { slidesPerView: 4, spaceBetween: 20 },
   };
 
   products = [
