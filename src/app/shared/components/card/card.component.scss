@@ -1,4 +1,40 @@
-.example-header-image {
+@use "@angular/material" as mat;
+@import 'custom-theme-config';
+@import 'variables';
+
+.custom-card, .example-card {
+  margin-bottom: 2.5rem !important;
+}
+
+.mat-mdc-card-title {
+  color: mat.get-theme-color($theme, on-primary-container);
+}
+
+.mat-mdc-card-image {
   background-image: url("https://bartenderstore.com.br/wp-content/uploads/2023/05/no-image.jpg");
   background-size: cover;
+}
+
+.custom-img {
+  height: 200px;
+  width: auto;
+  background-size: cover;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+button {
+  background-color: $green-color-primary;
+}
+
+button, button:hover, .mat-mdc-card {
+  box-shadow: none;
+}
+
+.tag {
+  padding: 0.3rem 0.7rem;
+  background-color: mat.get-theme-color($theme, secondary-container);
+  color: mat.get-theme-color($theme, on-primary-container);
+  border-radius: 0.5rem;
 }

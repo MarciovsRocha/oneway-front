@@ -1,16 +1,25 @@
-<swiper
-  [breakpoints]="breakpoints"
-  [navigation]="true"
-  [centeredSlides]="true"
-  [loop]="true"
-  [slideToClickedSlide]="true"
-  [pagination]="{ clickable: true }"
-  [scrollbar]="{ draggable: true }"
-  (slideChange)="onSlideChange()"
->
-  @for (slide of products; track slide) {
-  <ng-template swiperSlide>
-    <app-card class="custom-card"></app-card>
-  </ng-template>
-  }
-</swiper>
+<div class="carousel-card">
+  <swiper
+    #swiper
+    [breakpoints]="breakpoints"
+    [navigation]="false"
+    [centeredSlides]="true"
+    [loop]="true"
+    [slideToClickedSlide]="true"
+    [pagination]="{ clickable: true }"
+    [scrollbar]="{ draggable: true }"
+    (slideChange)="onSlideChange()"
+  >
+    @for (slide of products; track slide) {
+    <ng-template swiperSlide>
+      <app-card class="custom-card"></app-card>
+    </ng-template>
+    }
+  </swiper>
+  <div (click)="slidePrev()" class="carousel-button-prev" aria-label="Light Mode">
+    <fa-icon [icon]="faChevronLeft"></fa-icon>
+  </div>
+  <div (click)="slideNext()" class="carousel-button-next">
+    <fa-icon [icon]="faChevronRight"></fa-icon>
+  </div>
+</div>
