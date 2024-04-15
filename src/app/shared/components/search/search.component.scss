@@ -30,14 +30,14 @@
 
 .container__buttons {
   width: 100%;
-  max-width: 980px;
+  max-width: 68.75rem;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
 .search__input-where {
   width: 100%;
-  max-width: 21.875rem;
+  max-width: 20rem;
 }
 
 button {
@@ -51,18 +51,34 @@ button:active button:focus {
   box-shadow: none;
 }
 
+@media (max-width: 1400px) {
+  .search__input-where,
+  .mat-mdc-form-fiel {
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+}
+
 @media (max-width: 1200px) {
+  .search__input-where,
+  .mat-mdc-form-fiel {
+    width: 100% !important;
+    max-width: 350px !important;
+  }
+}
+
+@media (max-width: 992px) {
   .search__input-where {
-    width: 100%;
-    max-width: min-content;
+    width: 100% !important;
+    max-width: 90% !important;
   }
 }
 
 @media (max-width: 768px) {
   .search {
     padding: 1.5rem;
-
-    .search__input-where, .mat-mdc-form-field {
+    .search__input-where,
+    .mat-mdc-form-field {
       width: 100% !important;
       max-width: 100% !important;
     }

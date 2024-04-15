@@ -2,15 +2,12 @@
   <form [formGroup]="searchGroup" class="example-form flex-center">
     <div class="container__buttons flex-center">
       <mat-form-field class="search__input-where">
-        <mat-label>Vai para onde?</mat-label>
+        <mat-label>A partir de onde?</mat-label>
         <input matInput />
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Tipo</mat-label>
-        <mat-select>
-          <mat-option value="one">Item 1</mat-option>
-          <mat-option value="two">Item 2</mat-option>
-        </mat-select>
+      <mat-form-field class="search__input-where">
+        <mat-label>E para onde?</mat-label>
+        <input matInput />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Quando?</mat-label>
@@ -28,12 +25,7 @@
         ></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
-      <button
-        mat-fab
-        extended
-        color="primary"
-        aria-label="Botão de busca"
-      >
+      <button mat-fab extended color="primary" aria-label="Botão de busca">
         <mat-icon>search</mat-icon>
         Buscar
       </button>
