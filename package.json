@@ -28,6 +28,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "bootstrap": "^5.3.3",
     "rxjs": "~7.8.0",
+    "swiper": "^8.4.7",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },

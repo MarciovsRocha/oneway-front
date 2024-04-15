@@ -9,4 +9,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'oneway'
+}

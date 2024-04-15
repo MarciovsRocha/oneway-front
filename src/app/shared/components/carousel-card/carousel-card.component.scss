@@ -1,0 +1,63 @@
+@use "@angular/material" as mat;
+@import 'custom-theme-config';
+@import "variables";
+@import "swiper/scss";
+@import "swiper/scss/navigation";
+@import "swiper/scss/pagination";
+
+.carousel-card {
+  position: relative;
+}
+
+.custom-card {
+  width: 18.75rem;
+}
+
+.card-body {
+  width: 18rem;
+}
+.swiper {
+  width: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.carousel-button-prev {
+  left: 10px;
+  right: auto;
+}
+.carousel-button-next {
+  right: 10px;
+  left: auto;
+}
+
+.mat-icon.carousel-slide {
+  font-size: 60px;
+  width: 60px;
+  height: 60px;
+}
+
+.carousel-button-prev,
+.carousel-button-next {
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 40px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: calc(0px - var(--swiper-navigation-size) / 2);
+  color: mat.get-theme-color($theme, secondary);
+  cursor: pointer;
+}
+
+.swiper-pagination-bullet-active {
+  background: $color-medium-dark;
+}

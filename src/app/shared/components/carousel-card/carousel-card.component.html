@@ -1,0 +1,25 @@
+<div class="carousel-card">
+  <swiper
+    #swiper
+    [breakpoints]="breakpoints"
+    [navigation]="false"
+    [centeredSlides]="true"
+    [loop]="true"
+    [slideToClickedSlide]="true"
+    [pagination]="{ clickable: true }"
+    [scrollbar]="{ draggable: true }"
+    (slideChange)="onSlideChange()"
+  >
+    @for (slide of products; track slide) {
+    <ng-template swiperSlide>
+      <app-card class="custom-card"></app-card>
+    </ng-template>
+    }
+  </swiper>
+  <div (click)="slidePrev()" class="carousel-button-prev" aria-label="Botão seta para a esquerda">
+    <fa-icon [icon]="faChevronLeft"></fa-icon>
+  </div>
+  <div (click)="slideNext()" class="carousel-button-next" aria-label="Botão seta para a direita">
+    <fa-icon [icon]="faChevronRight"></fa-icon>
+  </div>
+</div>

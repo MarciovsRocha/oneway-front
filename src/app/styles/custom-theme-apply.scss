@@ -1,0 +1,9 @@
+@use "@angular/material" as mat;
+@use "@angular/material-experimental" as matx;
+@import 'custom-theme-config';
+
+body {
+  @include mat.all-component-themes($theme);
+  @include matx.color-variants-back-compat($theme);
+  @include mat.typography-hierarchy($theme, $back-compat: true);
+}

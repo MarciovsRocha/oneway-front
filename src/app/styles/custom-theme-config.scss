@@ -1,0 +1,17 @@
+@use "@angular/material" as mat;
+@use "@angular/material-experimental" as matx;
+@use "sass:map";
+
+@include mat.core();
+
+$m3-base-config: (
+  color: (
+    primary: matx.$m3-green-palette,
+    tertiary: matx.$m3-blue-palette,
+  ),
+  density: (
+    scale: -1,
+  ),
+);
+
+$theme: matx.define-theme($m3-base-config);
