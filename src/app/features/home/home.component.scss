@@ -17,12 +17,13 @@
 }
 
 .home__background-image {
-  border-radius: $border-radius-default;
-  width: 85%;
-  height: 21.25rem;
+  border-radius: 1rem !important;
+  width: 100%;
+  max-width: 91.875rem;
+  height: 22.5rem;
   z-index: -100;
   position: absolute;
-  top: 14.0625rem;
+  top: 15rem;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -31,10 +32,11 @@
   transform: translate(-50%, -50%);
   background: url("../../../assets/images/home_background.jpg");
   background-repeat: no-repeat;
-  background-position: center -760px;
-  background-size: 1660px;
+  background-position-y: -36.25rem;
+  background-position-x: left;
+  background-size: 105.625rem;
 }
 
 .home__search {
-  margin-bottom: 6.5rem;
+  margin-bottom: 5rem;
 }
