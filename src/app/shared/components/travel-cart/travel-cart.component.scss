@@ -1,0 +1,73 @@
+@import "variables";
+
+.travel-cart {
+  position: fixed;
+  z-index: 1000;
+  right: 3rem;
+  bottom: 1.5rem;
+
+  .box {
+    font-size: 2.5rem;
+    background: none;
+    color: $color-box;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: inherit;
+  }
+}
+
+.mat-badge-content {
+  background-color: $color-yellow-ligth;
+  color: #000000;
+  font-style: bolder;
+  font-size: 0.8rem !important;
+  width: 1.65rem !important;
+  height: 1.65rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item__image {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: cover;
+  border-radius: 50%;
+  object-position: center;
+}
+
+.custom-icon {
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  right: 0;
+}
+
+.menu-list {
+  list-style-type: none;
+  padding: 0;
+  padding-top: 5px;
+}
+
+.item {
+  padding: 1rem 0.5rem;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #00000012;
+}
+
+.item__title {
+  margin-bottom: -5px !important;
+  font-weight: 500;
+}
+
+.item__elements {
+  gap: 10px;
+}
+
+.item-remove {
+  color: $color-medium-grey;
+}
