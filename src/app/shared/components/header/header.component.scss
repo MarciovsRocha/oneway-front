@@ -1,7 +1,7 @@
 @import "variables";
 
 .header {
-  height: 55px;
+  height: $header-height;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   z-index: 100;
@@ -14,9 +14,14 @@
 }
 
 .header__logo {
+  cursor: pointer;
   font-family: "Montserrat Alternates", sans-serif;
   font-weight: 800;
-  background: linear-gradient(to top left, $color-medium-dark, $color-medium-light);
+  background: linear-gradient(
+    to top left,
+    $color-medium-dark,
+    $color-medium-light
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -42,6 +47,23 @@
   width: 100%;
   height: calc(100% - 52px);
   background: #f8f9f5;
+}
+
+.btn-session {
+  height: 45px !important;
+  div {
+    gap: 10px;
+
+    fa-icon {
+      font-size: 20px;
+      color: var(--mdc-icon-button-icon-color)
+    }
+    p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
 }
 
 @media only screen and (max-width: 576px) {

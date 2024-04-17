@@ -1,0 +1,83 @@
+@use "@angular/material" as mat;
+@import "custom-theme-config";
+@import "variables";
+
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - $header-height);
+
+  section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 40rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin-right: 30px;
+      border-radius: 1rem;
+    }
+  }
+
+  .form-section {
+    flex-grow: 0.3;
+    padding: 0 35px;
+
+    .autenticate-card {
+      width: 100%;
+
+      .custom-title {
+        font-family: "Montserrat Alternates", sans-serif !important;
+        font-weight: 800;
+        margin: 1rem 0;
+        color: $color-medium-light;
+      }
+    }
+
+    .btn-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: 30px;
+
+      .divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+
+        font-size: 14px;
+        color: $color-medium-grey;
+        font-weight: 400;
+        text-transform: uppercase;
+
+        div {
+          flex-grow: 1;
+          height: 2px;
+          background-color: $color-medium-grey;
+        }
+      }
+      button {
+        width: 100%;
+        height: 3.25rem;
+        border-radius: $border-radius-default;
+
+        &.btn-primary:not(:disabled) {
+          background-color: $color-action;
+          color: mat.get-theme-color($theme, on-primary-container);
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
-<mat-toolbar class="header" [ngClass]="{ mobile: showMenu }">
+<mat-toolbar class="header flex-center" [ngClass]="{ mobile: showMenu }">
   <div class="header__container container">
-    <span class="header__logo mb-1">oneway</span>
+    <span (click)="router.navigate([''])" class="header__logo mb-1">oneway</span>
     <ul class="header__icons buttons">
       <li>
         <button mat-button>Item 1</button>
@@ -26,8 +26,17 @@
         }
       </li>
       <li>
-        <button [matMenuTriggerFor]="menu" mat-icon-button aria-label="Profile">
-          <fa-icon [icon]="faUser"></fa-icon>
+        <button
+          class="btn-session"
+          (click)="router.navigate(['signup'])"
+          [matMenuTriggerFor]="menu"
+          mat-button
+          aria-label="Profile"
+        >
+          <div class="flex-center">
+            <fa-icon [icon]="faUser"></fa-icon>
+            <p>Iniciar Sessão</p>
+          </div>
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item>Item 1</button>

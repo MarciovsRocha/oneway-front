@@ -12,19 +12,6 @@
     .mat-mdc-form-field-subscript-wrapper {
       display: none;
     }
-    .mdc-text-field.mdc-text-field--filled {
-      border-radius: $border-radius-default !important;
-      background-color: $color-light-grey;
-    }
-
-    .mdc-text-field--filled:not(.mdc-text-field--disabled)
-      .mdc-line-ripple::before,
-    .mdc-text-field--filled:not(.mdc-text-field--disabled):not(
-        .mdc-text-field--focused
-      ):hover
-      .mdc-line-ripple::before {
-      border-bottom-color: transparent;
-    }
   }
 }
 

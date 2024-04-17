@@ -1,0 +1,34 @@
+<main>
+  <section class="main-section d-none d-lg-flex">
+    <img src="/assets/images/autenticate_background.jpg" />
+  </section>
+  <section class="form-section">
+    <mat-card class="autenticate-card">
+      <mat-card-header>
+        <mat-card-title class="custom-title">{{ title }}</mat-card-title>
+        <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="py-2">
+        <ng-content></ng-content>
+        <div class="btn-wrapper">
+          <button
+            mat-flat-button
+            class="btn-primary"
+            (click)="submit()"
+            [disabled]="disablePrimaryBtn"
+          >
+            {{ primaryBtnText }}
+          </button>
+          <div class="divider">
+            <div></div>
+            <span>ou</span>
+            <div></div>
+          </div>
+          <button mat-stroked-button (click)="navigate()">
+            {{ secondaryBtnText }}
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</main>
