@@ -10,12 +10,13 @@ import { SignupResponse } from '../types/signup-response.type';
 export class AuthenticateService {
   constructor(private httpClient: HttpClient) {}
 
-  login(name: string, password: string) {
+  login(email: string, password: string) {
     return this.httpClient
-      .post<LoginResponse>('/login', { name, password })
+      .post<LoginResponse>('/login', { email, password })
       .pipe(
         tap((value) => {
           sessionStorage.setItem('auth-token', value.token);
+          sessionStorage.setItem('email', value.email);
           sessionStorage.setItem('username', value.name);
         })
       );

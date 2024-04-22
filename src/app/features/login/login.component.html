@@ -1,0 +1,40 @@
+<app-header />
+<app-default-autenticate-layout 
+    [title]="'Autenticar'"
+    [primaryBtnText]="'Iniciar sessão'"
+    [secondaryBtnText]="'Cadastre-se'"
+    [disablePrimaryBtn]="!loginForm.valid"
+    (submit)="submit()"
+    (navigate)="navigate()"
+
+    >
+  <form [formGroup]="loginForm">
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="email"
+        [errorStateMatcher]="matcher"
+        placeholder="Ex. oneway@example.com"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Sua senha</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        [type]="hide1 ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide1 = !hide1"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide1"
+      >
+        <mat-icon>{{ hide1 ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</app-default-autenticate-layout>
