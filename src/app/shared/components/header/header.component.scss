@@ -1,10 +1,19 @@
 @import "variables";
 
-.header {
+header {
+  height: $header-height;
+  width: 100%;
+  position: relative;
+}
+
+.header__mat-toolbar {
   height: $header-height;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   z-index: 100;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .header__container {
