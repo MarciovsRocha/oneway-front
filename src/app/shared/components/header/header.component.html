@@ -25,25 +25,28 @@
             <fa-icon [icon]="faSun"></fa-icon>
           </button>
           }
-        </li>
-        <li>
-          <button
-            class="btn-session"
-            (click)="router.navigate(['signup'])"
-            [matMenuTriggerFor]="menu"
-            mat-button
-            aria-label="Profile"
-          >
-            <div class="flex-center">
-              <fa-icon [icon]="faUser"></fa-icon>
-              <p>Iniciar Sessão</p>
-            </div>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
-          </mat-menu>
-        </li>
+        </li>    
+        }
+        @if (!showMenu) {
+          <li>
+            <button
+              class="btn-session"
+              (click)="router.navigate(['signup'])"
+              [matMenuTriggerFor]="menu"
+              mat-button
+              aria-label="Profile"
+            >
+              <div class="flex-center">
+                <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
+                <p>Iniciar Sessão</p>
+              </div>
+            </button>
+            
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Item 1</button>
+              <button mat-menu-item>Item 2</button>
+            </mat-menu>
+          </li>
         }
 
         <li class="d-sm-none">
