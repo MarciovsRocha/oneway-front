@@ -10,16 +10,26 @@
     [scrollbar]="{ draggable: true }"
     (slideChange)="onSlideChange()"
   >
-    @for (slide of products; track slide) {
+    @for (produto of produtos; track produto) {
     <ng-template swiperSlide>
-      <app-card class="custom-card"></app-card>
+      <app-card class="custom-card" 
+      [produto]="produto"
+      [filtroImagem]="filtroImagem" />
     </ng-template>
     }
   </swiper>
-  <div (click)="slidePrev()" class="carousel-button-prev" aria-label="Botão seta para a esquerda">
+  <div
+    (click)="slidePrev()"
+    class="carousel-button-prev"
+    aria-label="Botão seta para a esquerda"
+  >
     <fa-icon [icon]="faChevronLeft"></fa-icon>
   </div>
-  <div (click)="slideNext()" class="carousel-button-next" aria-label="Botão seta para a direita">
+  <div
+    (click)="slideNext()"
+    class="carousel-button-next"
+    aria-label="Botão seta para a direita"
+  >
     <fa-icon [icon]="faChevronRight"></fa-icon>
   </div>
 </div>
