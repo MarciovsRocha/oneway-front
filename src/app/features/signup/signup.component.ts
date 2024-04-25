@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthenticateService } from '../../services/authenticate.service';
+import { AuthService } from '../../services/auth.service';
 import {
   FormGroup,
   FormControl,
@@ -74,7 +74,7 @@ export class SignupComponent {
 
   constructor(
     private router: Router,
-    private authenticateService: AuthenticateService,
+    private authService: AuthService,
     private toastService: ToastrService
   ) {
     this.signupForm = new FormGroup({
@@ -94,8 +94,7 @@ export class SignupComponent {
   }
 
   submit() {
-    console.log("oi")
-    this.authenticateService
+    this.authService
       .signup(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password)
       .subscribe({
         next: () => this.toastService.success('Cadastrado com sucesso!'),

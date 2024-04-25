@@ -9,6 +9,11 @@ import { TravelCartComponent } from '../../shared/components/travel-cart/travel-
   standalone: true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  imports: [HeaderComponent, TravelCartComponent, SearchComponent, MatTabGroupCardsComponent],
+  imports: [
+    HeaderComponent,
+    TravelCartComponent,
+    SearchComponent,
+    MatTabGroupCardsComponent,
+  ],
 })
 export class HomeComponent {}

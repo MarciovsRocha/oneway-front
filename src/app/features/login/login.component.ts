@@ -5,49 +5,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthenticateService } from '../../services/authenticate.service';
+import { AuthService } from '../../services/auth.service';
 import {
   FormGroup,
   FormControl,
   Validators,
-  FormGroupDirective,
-  NgForm,
   ReactiveFormsModule,
-  ValidatorFn,
-  AbstractControl,
-  ValidationErrors,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
-import { matchValidator } from '../../validators/form-validators';
 
 interface LoginForm {
   email: FormControl;
   password: FormControl;
 }
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(
-      control &&
-      control.invalid &&
-      (control.dirty || control.touched || isSubmitted)
-    );
-  }
-}
-
-export const confirmPasswordValidator: ValidatorFn = (
-  control: AbstractControl
-): ValidationErrors | null => {
-  return control.value.password === control.value.passwordConfirm
-    ? null
-    : { PasswordNoMatch: true };
-};
 
 @Component({
   selector: 'app-login',
@@ -66,12 +37,11 @@ export const confirmPasswordValidator: ValidatorFn = (
 })
 export class LoginComponent {
   loginForm!: FormGroup<LoginForm>;
-  matcher = new MyErrorStateMatcher();
   hide1 = true;
 
   constructor(
     private router: Router,
-    private authenticateService: AuthenticateService,
+    private authService: AuthService,
     private toastService: ToastrService
   ) {
     this.loginForm = new FormGroup({
@@ -82,7 +52,7 @@ export class LoginComponent {
 
   submit() {
 
-    this.authenticateService
+    this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe({
         next: () => this.toastService.success('Logado com sucesso!'),
