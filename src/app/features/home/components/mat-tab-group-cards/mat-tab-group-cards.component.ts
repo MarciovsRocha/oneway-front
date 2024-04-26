@@ -36,7 +36,7 @@ export class MatTabGroupCardsComponent implements OnInit {
 
 
   getProdutos() {
-    this.produtoService.produto().subscribe({
+    this.produtoService.getAll().subscribe({
       next: (resultado: Produto[]) => {
         this.produtos = resultado;
       },

@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -7,6 +7,7 @@ import { faUser, faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { MatMenuModule, MatMenuPanel } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +23,8 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  nomeUsuario: string | null = null;
   innerWidth: number = window.innerWidth;
   isAuthenticated = false;
   isNightMode = false;
@@ -32,8 +34,13 @@ export class HeaderComponent {
   faSun = faSun;
 
   constructor(
+    private authService: AuthService,
     protected router: Router,
   ) {}
+
+  ngOnInit(): void {
+    this.nomeUsuario = sessionStorage.getItem('nome');
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -42,5 +49,11 @@ export class HeaderComponent {
 
   get isMobile() { 
     return this.innerWidth <= 576
+  }
+
+  onLogout() {
+    this.authService.logout()
+    this.nomeUsuario = null;
+    this.router.navigateByUrl('/')
   }
 }

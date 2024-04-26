@@ -29,23 +29,33 @@
         }
         @if (!showMenu) {
           <li>
+            @if(nomeUsuario) {
+              <button
+                class="btn-session"
+                [matMenuTriggerFor]="menu"
+                mat-button
+                aria-label="Profile"
+              >
+                <div class="flex-center">
+                  <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
+                  <p>{{ nomeUsuario }}</p>
+                </div>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button (click)="onLogout()" mat-menu-item>Logout</button>
+              </mat-menu>
+            } @else {
             <button
-              class="btn-session"
-              (click)="router.navigate(['signup'])"
-              [matMenuTriggerFor]="menu"
-              mat-button
+              (click)="router.navigate(['login'])"
+              class="btn-session" mat-button
               aria-label="Profile"
             >
               <div class="flex-center">
                 <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
-                <p>Iniciar Sessão</p>
+                <p>{{ 'Iniciar Sessão' }}</p>
               </div>
             </button>
-            
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>Item 1</button>
-              <button mat-menu-item>Item 2</button>
-            </mat-menu>
+          }
           </li>
         }
 

@@ -6,7 +6,6 @@
     [disablePrimaryBtn]="!loginForm.valid"
     (submit)="submit()"
     (navigate)="navigate()"
-
     >
   <form [formGroup]="loginForm">
     <mat-form-field>
@@ -16,6 +15,7 @@
         matInput
         formControlName="email"
         placeholder="Ex. oneway@example.com"
+        (keyup.enter)="submit()"
       />
     </mat-form-field>
     <mat-form-field>
@@ -24,6 +24,7 @@
         matInput
         formControlName="password"
         [type]="hide1 ? 'password' : 'text'"
+        (keyup.enter)="submit()"
       />
       <button
         mat-icon-button

@@ -1,0 +1,12 @@
+<app-header />
+<main class="container-fluid">
+  <section class="container">
+    @if (nomeUsuario){
+        <h1 class="start__title">
+            Olá <b>{{ nomeUsuario }}</b>!
+        </h1>
+    }
+    <h2 [class]="nomeUsuario ? 'start__subtitle': 'start__title'">Em breve teremos novidade...</h2>
+    <div class="start__background-image" aria-label="Imagem de fundo"></div>
+  </section>
+</main>
