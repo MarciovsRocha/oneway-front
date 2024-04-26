@@ -16,6 +16,7 @@
         matInput
         formControlName="name"
         placeholder="Rafael Felipe"
+        (keyup.enter)="submit()"
       />
     </mat-form-field>
     <mat-form-field>
@@ -26,6 +27,7 @@
         formControlName="email"
         [errorStateMatcher]="matcher"
         placeholder="Ex. oneway@example.com"
+        (keyup.enter)="submit()"
       />
       @if (signupForm.controls.email.hasError('email') &&
       !signupForm.controls.email.hasError('required')) {
@@ -38,6 +40,7 @@
         matInput
         formControlName="password"
         [type]="hide1 ? 'password' : 'text'"
+        (keyup.enter)="submit()"
       />
       <button
         mat-icon-button
@@ -59,6 +62,7 @@
         matInput
         formControlName="passwordConfirm"
         [type]="hide2 ? 'password' : 'text'"
+        (keyup.enter)="submit()"
       />
       <button
         mat-icon-button

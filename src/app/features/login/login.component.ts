@@ -55,11 +55,17 @@ export class LoginComponent {
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe({
-        next: () => this.toastService.success('Logado com sucesso!'),
-        error: () =>
-          this.toastService.error(
-            'Erro inesperado! Tente novamente mais tarde'
-          ),
+        next: () => { 
+          this.toastService.success('Logado com sucesso!')
+          this.router.navigate(['start']);
+        },
+        error: (error) =>{
+          let errorMessage = 'Erro ao autenticar o usuário.';
+          if (error.error) {
+            errorMessage = error.error;
+          }
+          this.toastService.error(errorMessage);
+        }
       });
   }
 

@@ -21,6 +21,7 @@ import { Router } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
 import { matchValidator } from '../../validators/form-validators';
+import { User } from '../../models/user';
 
 interface SignupForm {
   name: FormControl;
@@ -83,25 +84,37 @@ export class SignupComponent {
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
-        matchValidator('passwordConfirm',true)
+        matchValidator('passwordConfirm', true),
       ]),
       passwordConfirm: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
-        matchValidator('password')
+        matchValidator('password'),
       ]),
     });
   }
 
   submit() {
     this.authService
-      .signup(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password)
+      .signup(
+        new User(
+          this.signupForm.value.name,
+          this.signupForm.value.email,
+          this.signupForm.value.password
+        )
+      )
       .subscribe({
-        next: () => this.toastService.success('Cadastrado com sucesso!'),
-        error: () =>
-          this.toastService.error(
-            'Erro inesperado! Tente novamente mais tarde'
-          ),
+        next: () =>  { 
+          this.toastService.success('Cadastrado com sucesso!')
+          this.navigate()
+        },
+        error: (error) => {
+          let errorMessage = 'Erro ao cadastrar usuário.';
+          if (error.error) {
+            errorMessage = error.error;
+          }
+          this.toastService.error(errorMessage);
+        },
       });
   }
 

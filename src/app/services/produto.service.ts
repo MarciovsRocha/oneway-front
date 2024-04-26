@@ -12,7 +12,7 @@ export class ProdutoService {
   private apiUrl: string = environment.apiUrl;
   private endpoint: string = '/produto';
 
-  produto() {
+  getAll() {
     return this.httpClient.get<Produto[]>(`${this.apiUrl}${this.endpoint}`)
       .pipe(tap((value) => {
           console.log("value", value)
