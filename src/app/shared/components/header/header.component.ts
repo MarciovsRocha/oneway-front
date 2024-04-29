@@ -7,7 +7,7 @@ import { faUser, faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { MatMenuModule, MatMenuPanel } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../core/auth.service';
 
 @Component({
   selector: 'app-header',

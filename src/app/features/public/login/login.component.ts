@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { DefaultAutenticateLayoutComponent } from '../../shared/components/default-autenticate-layout/default-autenticate-layout.component';
-import { HeaderComponent } from '../../shared/components/header/header.component';
+import { DefaultAutenticateLayoutComponent } from '../../../shared/components/default-autenticate-layout/default-autenticate-layout.component';
+import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../core/auth.service';
 import {
   FormGroup,
   FormControl,
