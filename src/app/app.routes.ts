@@ -4,6 +4,7 @@ import { SignupComponent } from './features/public/signup/signup.component';
 import { LoginComponent } from './features/public/login/login.component';
 import { StartComponent } from './features/logged-in/start/start.component';
 import { ProductRegistrationComponent } from './features/logged-in/product-registration/product-registration.component';
+import { ProductListComponent } from './features/logged-in/product-list/product-list.component';
 
 export const routes: Routes = [
   {
@@ -24,8 +25,12 @@ export const routes: Routes = [
   },
   {
     path: 'products',
+    component: ProductListComponent,
     children: [
-      { path: ':id', component: ProductRegistrationComponent }
+      ...['', ':id'].map((path) => ({
+        path,
+        component: ProductRegistrationComponent,
+      })),
     ],
   },
 ];

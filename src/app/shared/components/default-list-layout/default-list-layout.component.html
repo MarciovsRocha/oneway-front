@@ -1,0 +1,18 @@
+<main>
+  <section class="form-section">
+    <mat-card class="autenticate-card">
+      <mat-card-header>
+        <mat-card-title class="custom-title">{{ title }}</mat-card-title>
+        <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="py-2">
+        <ng-content></ng-content>
+        <div class="d-flex w-100 justify-content-center align-items-center">
+          <button (click)="submit()" class="btn-back" mat-flat-button>
+            {{ primaryBtnText }}
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</main>

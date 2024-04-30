@@ -1,0 +1,13 @@
+@import "variables";
+
+main {
+    height: calc(100% - $header-height) ;
+}
+
+table {
+  width: 100%;
+}
+
+button {
+  margin: 16px 8px;
+}

@@ -16,17 +16,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProdutoService } from '../../../services/produto.service';
-
-interface Product {
-  titulo: string,
-  categoria: string,
-  preco: number,
-  descricao: string,
-  pais: string,
-  cidade: string,
-  estado: string,
-  files: File[]
-}
+import { Produto } from '../../../models/produto';
 
 @Component({
   selector: 'app-product-registration',
@@ -61,7 +51,7 @@ export class ProductRegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private toastService: ToastrService,
-    private product: ProdutoService, 
+    private produto: ProdutoService, 
   ) {
     this.textAppendTitle = this.id && this.id > 0 ? 'Editar' : 'Cadastrar'
     this.productForm = new FormGroup({
@@ -103,8 +93,8 @@ export class ProductRegistrationComponent implements OnInit {
   }
 
   submit() {
-    const product: Product = this.productForm.value;
-    this.product
+    const product: Produto = this.productForm.value;
+    this.produto
       .saveOrUpdate(product)
       .subscribe({
         next: () => { 

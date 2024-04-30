@@ -1,0 +1,21 @@
+<app-header />
+<main class="container">
+  <app-default-list-layout [title]="'Lista de Produtos'" [primaryBtnText]="'Voltar'">
+    <mat-form-field class="w-100">
+      <mat-label>Filtro</mat-label>
+      <input matInput (keyup)="applyFilter($event)" />
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource">
+      @for (column of displayedColumns; track column) {
+      <ng-container [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </ng-container>
+      }
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+    </table>
+  </app-default-list-layout>
+</main>
