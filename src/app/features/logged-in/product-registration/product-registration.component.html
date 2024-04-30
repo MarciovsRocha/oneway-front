@@ -1,0 +1,85 @@
+<app-header />
+<app-default-registration-layout
+  [title]="textAppendTitle + '  Produto'"
+  [primaryBtnText]="textAppendTitle"
+  [disablePrimaryBtn]="!productForm.valid"
+>
+  <form [formGroup]="productForm">
+    <mat-form-field class="product__field">
+      <mat-label>Título</mat-label>
+      <input
+        formControlName="titulo"
+        type="text"
+        matInput
+        placeholder="Rafael Felipe"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="product__field">
+      <mat-label>Categoria</mat-label>
+      <mat-select formControlName="categoria">
+        @for (categoria of listaCategorias; track categoria) {
+        <mat-option [value]="categoria">{{ categoria }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="product__field" floatLabel="always">
+      <input
+        formControlName="preco"
+        matInput
+        currencyMask
+        [options]="{ prefix: '', thousands: '.', decimal: ',' }"
+        placeholder="120.00"
+      />
+      <span matTextPrefix>R$&nbsp;</span>
+    </mat-form-field>
+
+    <mat-form-field class="product__field">
+      <mat-label>Descrição</mat-label>
+      <textarea formControlName="descricao" matInput rows="4"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="product__field">
+      <mat-label>País</mat-label>
+      <mat-select formControlName="pais">
+        @for (pais of paises; track pais) {
+        <mat-option [value]="pais">{{ pais }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-50 pe-2">
+      <mat-label>Cidade</mat-label>
+      <mat-select formControlName="cidade">
+        @for (cidade of cidades; track cidade) {
+        <mat-option [value]="cidade">{{ cidade }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-50 ps-e2">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        @for (estado of estados; track estado) {
+        <mat-option [value]="estado">{{ estado }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="product__field">
+      <mat-label>Imagens</mat-label>
+      <button mat-icon-button matPrefix (click)="f_input.click()">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+      <input type="text" readonly matInput [formControl]="displayInput" />
+      <input
+        type="file"
+        #f_input
+        multiple
+        hidden
+        (change)="handleFileInputChange($event)"
+      />
+    </mat-form-field>
+  </form>
+</app-default-registration-layout>

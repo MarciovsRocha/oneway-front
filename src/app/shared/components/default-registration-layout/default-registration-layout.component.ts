@@ -12,5 +12,14 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './default-registration-layout.component.scss'
 })
 export class DefaultRegistrationLayoutComponent {
+  @Input() title: string = '';
+  @Input() subtitle: string = '';
+  @Input() primaryBtnText: string = '';
+  @Input() disablePrimaryBtn: boolean = true;
 
+  @Output('submit') onSubmit = new EventEmitter();
+
+  submit() {
+    this.onSubmit.emit();
+  }
 }

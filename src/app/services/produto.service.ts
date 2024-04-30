@@ -19,4 +19,12 @@ export class ProdutoService {
         })
       );
   }
+
+  saveOrUpdate(product: any) {
+    return this.httpClient.post<any>(`${this.apiUrl}${this.endpoint}`, product)
+      .pipe(tap((value) => {
+          console.log("value", value)
+        })
+      );
+  }
 }
