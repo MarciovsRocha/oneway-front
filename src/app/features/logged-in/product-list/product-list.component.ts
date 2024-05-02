@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Produto } from '../../../models/produto';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ProdutoService } from '../../../services/produto.service';
 
 const ELEMENT_DATA: Produto[] = [
@@ -58,6 +58,10 @@ export class ProductListComponent {
   }
 
   edit(element: Produto) {
-    this.router.navigate([`product/detail/${element.id}`]);
+
+    this.router.navigate([`product/detail`], {
+      state: {
+        data: element,
+      },});
   }
 }

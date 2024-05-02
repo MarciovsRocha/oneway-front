@@ -28,7 +28,6 @@ export const routes: Routes = [
     children: [
       { path: '', component: ProductListComponent },
       { path: 'detail', component: ProductRegistrationComponent },
-      { path: 'detail/:id', component: ProductRegistrationComponent }
     ],
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

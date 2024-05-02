@@ -7,5 +7,5 @@ export class Produto  {
   pais?: string;
   cidade?: string;
   estado?: string;
-  files?: File[]
+  files?: File[];
 };

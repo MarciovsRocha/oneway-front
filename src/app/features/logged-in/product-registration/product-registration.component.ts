@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProdutoService } from '../../../services/produto.service';
 import { Produto } from '../../../models/produto';
@@ -39,6 +39,8 @@ export class ProductRegistrationComponent implements OnInit {
   @Input() id!: number;
   productForm!: FormGroup<any>;
   
+  product: Produto
+
   listaCategorias: string[] = ['Hospedagem', 'Transporte', 'Pontos Turísticos'];
   paises: string[] = [];
   cidades: string[] = [];
@@ -52,7 +54,9 @@ export class ProductRegistrationComponent implements OnInit {
     private router: Router,
     private toastService: ToastrService,
     private produto: ProdutoService, 
+    private route: ActivatedRoute,
   ) {
+    this.product = this.router.getCurrentNavigation()?.extras.state?.['data'];
     this.textAppendTitle = this.id && this.id > 0 ? 'Editar' : 'Cadastrar'
     this.productForm = new FormGroup({
       titulo: new FormControl('', [Validators.required]),
@@ -68,6 +72,7 @@ export class ProductRegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.textAppendTitle = this.id && this.id > 0 ? 'Editar' : 'Cadastrar'
+
   }
 
   handleFileInputChange(event: any): void {
