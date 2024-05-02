@@ -3,12 +3,12 @@ import { HomeComponent } from './features/home/home.component';
 import { SignupComponent } from './features/public/signup/signup.component';
 import { LoginComponent } from './features/public/login/login.component';
 import { StartComponent } from './features/logged-in/start/start.component';
-import { ProductRegistrationComponent } from './features/logged-in/product-registration/product-registration.component';
 import { ProductListComponent } from './features/logged-in/product-list/product-list.component';
+import { ProductRegistrationComponent } from './features/logged-in/product-registration/product-registration.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
   },
   {
@@ -24,13 +24,12 @@ export const routes: Routes = [
     component: StartComponent,
   },
   {
-    path: 'products',
-    component: ProductListComponent,
+    path: 'product',
     children: [
-      ...['', ':id'].map((path) => ({
-        path,
-        component: ProductRegistrationComponent,
-      })),
+      { path: '', component: ProductListComponent },
+      { path: 'detail', component: ProductRegistrationComponent },
+      { path: 'detail/:id', component: ProductRegistrationComponent }
     ],
   },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
