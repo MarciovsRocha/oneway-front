@@ -11,3 +11,8 @@ table {
 button {
   margin: 16px 8px;
 }
+
+.teste::ng-deep.mat-column-acao {
+    text-align: center !important;
+    width: 200px !important;
+}
