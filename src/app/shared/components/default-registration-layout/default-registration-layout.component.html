@@ -1,0 +1,25 @@
+<main>
+  <section class="form-section">
+    <mat-card class="autenticate-card">
+      <mat-card-header>
+        <mat-card-title class="custom-title">
+          <button (click)="back()" mat-icon-button class="m-1" aria-label="Night Mode">
+            <fa-icon [icon]="faAngleLeft"></fa-icon></button
+          >{{ title }}
+        </mat-card-title>
+        <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="py-2">
+        <ng-content></ng-content>
+        <button
+          (click)="submit()"
+          class="btn-action btn-primary"
+          mat-flat-button
+          [disabled]="disablePrimaryBtn"
+        >
+          {{ primaryBtnText }}
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</main>

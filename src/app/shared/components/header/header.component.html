@@ -3,15 +3,11 @@
     <div class="header__container container">
       <span (click)="router.navigate([''])" class="header__logo mb-1">oneway</span>
       <ul class="header__icons buttons">
-        <li>
-          <button mat-button>Item 1</button>
-        </li>
-        <li>
-          <button mat-button>Item 2</button>
-        </li>
-        <li>
-          <button mat-button>Item 3</button>
-        </li>
+        @for (btn of listBtn; track btn) {
+          <li>
+            <button [routerLink]="btn.route" mat-button>{{btn.name}}</button>
+          </li>
+        }
       </ul>
       <ul class="header__icons">
         @if (!isMobile) {

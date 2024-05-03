@@ -1,4 +1,11 @@
 export class Produto  {
   id!: number;
-  preco!: number;
+  titulo?: string;
+  categoria?: string;
+  preco?: number;
+  descricao?: string;
+  pais?: string;
+  cidade?: string;
+  estado?: string;
+  files?: File[];
 };

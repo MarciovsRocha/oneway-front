@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { DefaultAutenticateLayoutComponent } from '../../shared/components/default-autenticate-layout/default-autenticate-layout.component';
-import { HeaderComponent } from '../../shared/components/header/header.component';
+import { DefaultAutenticateLayoutComponent } from '../../../shared/components/default-autenticate-layout/default-autenticate-layout.component';
+import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../core/auth.service';
 import {
   FormGroup,
   FormControl,
@@ -20,8 +20,8 @@ import {
 import { Router } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
-import { matchValidator } from '../../validators/form-validators';
-import { User } from '../../models/user';
+import { matchValidator } from '../../../validators/form-validators';
+import { User } from '../../../models/user';
 
 interface SignupForm {
   name: FormControl;
