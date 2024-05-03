@@ -38,8 +38,8 @@ import { Produto } from '../../../models/produto';
 export class ProductRegistrationComponent implements OnInit {
   @Input() id!: number;
   productForm!: FormGroup<any>;
-  
-  product: Produto
+
+  product: Produto;
 
   listaCategorias: string[] = ['Hospedagem', 'Transporte', 'Pontos Turísticos'];
   paises: string[] = [];
@@ -53,11 +53,11 @@ export class ProductRegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private toastService: ToastrService,
-    private produto: ProdutoService, 
-    private route: ActivatedRoute,
+    private produto: ProdutoService,
+    private route: ActivatedRoute
   ) {
     this.product = this.router.getCurrentNavigation()?.extras.state?.['data'];
-    this.textAppendTitle = this.id && this.id > 0 ? 'Editar' : 'Cadastrar'
+    this.textAppendTitle = this.id && this.id > 0 ? 'Editar' : 'Cadastrar';
     this.productForm = new FormGroup({
       titulo: new FormControl('', [Validators.required]),
       categoria: new FormControl('', [Validators.required]),
@@ -71,25 +71,34 @@ export class ProductRegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.textAppendTitle = this.id && this.id > 0 ? 'Editar' : 'Cadastrar'
+    this.textAppendTitle = this.id && this.id > 0 ? 'Editar' : 'Cadastrar';
+    if (this.product) this.loadDataForm(this.product);
+  }
 
+  loadDataForm(product: Produto) {
+    this.productForm.get('titulo').setValue(product.titulo);
+    this.productForm.get('categoria').setValue(product.categoria);
+    this.productForm.get('preco').setValue(product.preco);
+    this.productForm.get('descricao').setValue(product.descricao);
+    this.productForm.get('pais').setValue(product.pais);
+    this.productForm.get('estado').setValue(product.estado);
+    this.productForm.get('cidade').setValue(product.cidade);
   }
 
   handleFileInputChange(event: any): void {
-      const files: File[] = event.target.files;
-      this.file_store = files;
-      if (files.length) {
-        const f = files[0];
-        const count = files.length > 1 ? `(+${files.length - 1} files)` : '';
-        this.displayInput.patchValue(`${f.name}${count}`);
-      } else {
-        this.displayInput.patchValue('');
-      }
-    
+    const files: File[] = event.target.files;
+    this.file_store = files;
+    if (files.length) {
+      const f = files[0];
+      const count = files.length > 1 ? `(+${files.length - 1} files)` : '';
+      this.displayInput.patchValue(`${f.name}${count}`);
+    } else {
+      this.displayInput.patchValue('');
+    }
   }
 
   handleSubmit(): void {
-    let file_list = []
+    let file_list = [];
     this.productForm.controls['files'].setValue([]);
     for (let i = 0; i < this.file_store.length; i++) {
       file_list.push(this.file_store[i].name);
@@ -99,17 +108,15 @@ export class ProductRegistrationComponent implements OnInit {
 
   submit() {
     const product: Produto = this.productForm.value;
-    this.produto
-      .saveOrUpdate(product)
-      .subscribe({
-        next: () => { 
-          this.toastService.success('Realizado com Sucesso')
-          this.router.navigate(['start']);
-        },
-        error: (error) =>{
-          let errorMessage = 'Erro ao inesperado';
-          this.toastService.error(errorMessage);
-        }
-      });
+    this.produto.saveOrUpdate(product).subscribe({
+      next: () => {
+        this.toastService.success('Realizado com Sucesso');
+        this.router.navigate(['start']);
+      },
+      error: (error) => {
+        let errorMessage = 'Erro ao inesperado';
+        this.toastService.error(errorMessage);
+      },
+    });
   }
 }
