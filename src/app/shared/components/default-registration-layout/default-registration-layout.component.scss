@@ -30,7 +30,14 @@ main {
         font-family: "Montserrat Alternates", sans-serif !important;
         font-weight: 800;
         margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: $color-medium-light;
+        
+        button {
+          color: $color-medium-light;
+        }
       }
     }
 

@@ -3,6 +3,8 @@
   [title]="textAppendTitle + '  Produto'"
   [primaryBtnText]="textAppendTitle"
   [disablePrimaryBtn]="!productForm.valid"
+  (submit)="submit()"
+  (back)="back()"
 >
   <form [formGroup]="productForm">
     <mat-form-field class="product__field">

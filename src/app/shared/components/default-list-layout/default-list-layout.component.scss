@@ -31,10 +31,11 @@ main {
       }
     }
 
-    .btn-back {
+    .btn-back, .btn-new-item {
       border-radius: $border-radius-default;
-      // background-color: $color-medium-grey;
-      // color: mat.get-theme-color($theme, on-primary-container);
+    }
+    .btn-back {
+      background-color: $color-medium-light;
     }
   }
 }

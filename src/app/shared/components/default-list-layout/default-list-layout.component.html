@@ -7,9 +7,12 @@
       </mat-card-header>
       <mat-card-content class="py-2">
         <ng-content></ng-content>
-        <div class="d-flex w-100 justify-content-center align-items-center">
-          <button (click)="submit()" class="btn-back" mat-flat-button>
-            {{ primaryBtnText }}
+        <div class="d-flex w-100 justify-content-center align-items-center gap-1">
+          <button (click)="back()" class="btn-back" mat-flat-button>
+            {{ backBtnText }}
+          </button>
+          <button (click)="newItem()" class="btn-new-item" mat-flat-button>
+            {{ newItemBtnText }}
           </button>
         </div>
       </mat-card-content>

@@ -14,11 +14,17 @@ import { MatIcon } from '@angular/material/icon';
 export class DefaultListLayoutComponent {
   @Input() title: string = '';
   @Input() subtitle: string = '';
-  @Input() primaryBtnText: string = '';
+  @Input() newItemBtnText: string = '';
+  @Input() backBtnText: string = '';
 
-  @Output('submit') onSubmit = new EventEmitter();
+  @Output('newItem') onNewItem = new EventEmitter();
+  @Output('back') onBack = new EventEmitter();
 
-  submit() {
-    this.onSubmit.emit();
+  back() {
+    this.onBack.emit();
+  }
+
+  newItem() {
+    this.onNewItem.emit();
   }
 }

@@ -119,4 +119,8 @@ export class ProductRegistrationComponent implements OnInit {
       },
     });
   }
+
+  back() {
+    this.router.navigate(['product']);
+  }
 }
