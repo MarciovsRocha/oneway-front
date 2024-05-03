@@ -94,7 +94,6 @@ const ELEMENT_DATA: Produto[] = [
 export class ProductListComponent {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   displayedColumns: string[] = [
-    'id',
     'titulo',
     'categoria',
     'preco',
