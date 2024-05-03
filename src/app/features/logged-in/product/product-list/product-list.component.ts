@@ -1,6 +1,6 @@
 import { Component, OnInit, computed } from '@angular/core';
-import { HeaderComponent } from '../../../shared/components/header/header.component';
-import { DefaultListLayoutComponent } from '../../../shared/components/default-list-layout/default-list-layout.component';
+import { HeaderComponent } from '../../../../shared/components/header/header.component';
+import { DefaultListLayoutComponent } from '../../../../shared/components/default-list-layout/default-list-layout.component';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -8,9 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Produto } from '../../../models/produto';
+import { Produto } from '../../../../models/produto';
 import { Router } from '@angular/router';
-import { ProdutoService } from '../../../services/produto.service';
+import { ProdutoService } from '../../../../services/produto.service';
 
 const ELEMENT_DATA: Produto[] = [
   {

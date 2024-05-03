@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DefaultRegistrationLayoutComponent } from '../../../shared/components/default-registration-layout/default-registration-layout.component';
-import { HeaderComponent } from '../../../shared/components/header/header.component';
+import { DefaultRegistrationLayoutComponent } from '../../../../shared/components/default-registration-layout/default-registration-layout.component';
+import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import {
   FormControl,
   FormGroup,
@@ -15,8 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ProdutoService } from '../../../services/produto.service';
-import { Produto } from '../../../models/produto';
+import { ProdutoService } from '../../../../services/produto.service';
+import { Produto } from '../../../../models/produto';
 
 @Component({
   selector: 'app-product-registration',
@@ -90,7 +90,7 @@ export class ProductRegistrationComponent implements OnInit {
     this.file_store = files;
     if (files.length) {
       const f = files[0];
-      const count = files.length > 1 ? `(+${files.length - 1} files)` : '';
+      const count = files.length > 1 ? `(+${files.length - 1} arquivo(s))` : '';
       this.displayInput.patchValue(`${f.name}${count}`);
     } else {
       this.displayInput.patchValue('');
