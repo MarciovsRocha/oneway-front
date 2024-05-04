@@ -5,6 +5,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
 import { Produto } from '../../../models/produto';
+import { Hotel } from '../../../models/Hotel';
 
 @Component({
   selector: 'app-card',
@@ -14,6 +15,6 @@ import { Produto } from '../../../models/produto';
   styleUrl: './card.component.scss',
 })
 export class CardComponent {
-  @Input() produto: Produto = new Produto();
+  @Input() produto: Hotel = new Hotel();
   @Input() filtroImagem: string = ""
 }

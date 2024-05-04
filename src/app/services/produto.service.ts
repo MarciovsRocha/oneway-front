@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Produto } from '../models/produto';
+import { Hotel } from '../models/Hotel';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,10 @@ import { Produto } from '../models/produto';
 export class ProdutoService {
   constructor(private httpClient: HttpClient) {}
   private apiUrl: string = environment.apiUrl;
-  private endpoint: string = '/produto';
+  private endpoint: string = '/api/v1/hotel';
 
   getAll() {
-    return this.httpClient.get<Produto[]>(`${this.apiUrl}${this.endpoint}`)
+    return this.httpClient.get<Hotel[]>(`${this.apiUrl}${this.endpoint}`)
       .pipe(tap((value) => {
           console.log("value", value)
         })

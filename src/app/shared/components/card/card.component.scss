@@ -2,6 +2,9 @@
 @import 'custom-theme-config';
 @import 'variables';
 
+.example-card {
+  min-height: 350px;
+}
 .custom-card, .example-card {
   margin-bottom: 2.5rem !important;
 }

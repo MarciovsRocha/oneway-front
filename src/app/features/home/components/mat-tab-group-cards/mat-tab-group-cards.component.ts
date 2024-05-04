@@ -4,6 +4,7 @@ import { CarouselCardComponent } from '../../../../shared/components/carousel-ca
 import { Produto } from '../../../../models/produto';
 import { ToastrService } from 'ngx-toastr';
 import { ProdutoService } from '../../../../services/produto.service';
+import { Hotel } from '../../../../models/Hotel';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { ProdutoService } from '../../../../services/produto.service';
 export class MatTabGroupCardsComponent implements OnInit {
   listaCategorias: string[] = ['Hospedagem', 'Transporte', 'Pontos Turísticos']
   filtroImagem: string = this.listaCategorias[0];
-  produtos: Produto[] = [];
+  produtos: Hotel[] = [];
 
   constructor(
     private produtoService: ProdutoService,

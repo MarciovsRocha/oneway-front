@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Produto } from '../../../models/produto';
+import { Hotel } from '../../../models/Hotel';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, Virtual]);
 
@@ -19,7 +20,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, Virtual]);
   encapsulation: ViewEncapsulation.None,
 })
 export class CarouselCardComponent {
-  @Input() produtos: Produto[] = []
+  @Input() produtos: Hotel[] = []
   @Input() filtroImagem: string = ""
   
   faChevronLeft = faChevronLeft;
