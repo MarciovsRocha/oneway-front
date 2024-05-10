@@ -6,8 +6,8 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Produto } from '../../../models/produto';
-import { Hotel } from '../../../models/Hotel';
+import { Produto } from '../../../shared/models/produto';
+import { Hotel } from '../../../shared/models/Hotel';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, Virtual]);
 

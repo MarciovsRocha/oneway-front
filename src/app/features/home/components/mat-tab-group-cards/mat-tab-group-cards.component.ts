@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatTabChangeEvent, MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { CarouselCardComponent } from '../../../../shared/components/carousel-card/carousel-card.component';
-import { Produto } from '../../../../models/produto';
+import { Produto } from '../../../../shared/models/produto';
 import { ToastrService } from 'ngx-toastr';
-import { ProdutoService } from '../../../../services/produto.service';
-import { Hotel } from '../../../../models/Hotel';
+import { ProdutoService } from '../../../../shared/services/produto.service';
+import { Hotel } from '../../../../shared/models/Hotel';
 
 
 @Component({

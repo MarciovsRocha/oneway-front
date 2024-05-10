@@ -15,8 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ProdutoService } from '../../../../services/produto.service';
-import { Produto } from '../../../../models/produto';
+import { ProdutoService } from '../../../../shared/services/produto.service';
+import { Produto } from '../../../../shared/models/produto';
 
 @Component({
   selector: 'app-product-registration',

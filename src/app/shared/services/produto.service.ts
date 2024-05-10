@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { Produto } from '../models/produto';
-import { Hotel } from '../models/Hotel';
+import { environment } from '../../../environments/environment';
+import { Produto } from '../../shared/models/produto';
+import { Hotel } from '../../shared/models/Hotel';
 
 @Injectable({
   providedIn: 'root'

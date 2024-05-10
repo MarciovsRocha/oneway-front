@@ -8,9 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Produto } from '../../../../models/produto';
+import { Produto } from '../../../../shared/models/produto';
 import { Router } from '@angular/router';
-import { ProdutoService } from '../../../../services/produto.service';
+import { ProdutoService } from '../../../../shared/services/produto.service';
 
 const ELEMENT_DATA: Produto[] = [
   {

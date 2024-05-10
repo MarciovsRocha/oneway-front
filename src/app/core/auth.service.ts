@@ -4,7 +4,7 @@ import { LoginResponse } from '../types/login-response.type';
 import { Observable, tap } from 'rxjs';
 import { SignupResponse } from '../types/signup-response.type';
 import { environment } from '../../environments/environment';
-import { User } from '../models/user';
+import { User } from '../shared/models/user';
 
 @Injectable({
   providedIn: 'root',

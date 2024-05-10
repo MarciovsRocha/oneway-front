@@ -4,8 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
-import { Produto } from '../../../models/produto';
-import { Hotel } from '../../../models/Hotel';
+import { Produto } from '../../../shared/models/produto';
+import { Hotel } from '../../../shared/models/Hotel';
 
 @Component({
   selector: 'app-card',
