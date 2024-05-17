@@ -1,13 +1,13 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { LoaderService } from '../../../core/loader.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
   selector: 'app-loading',
   standalone: true,
-  imports: [],
+  imports: [NgxSpinnerModule],
   templateUrl: './loading.component.html',
   styleUrl: './loading.component.scss',
-  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class LoadingComponent {
   constructor(public loader: LoaderService) { }
