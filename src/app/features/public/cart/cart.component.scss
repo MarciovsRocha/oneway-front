@@ -27,6 +27,22 @@ section {
   }
 }
 
+mdc-progress-linear {
+  height: $progress-bar-height;
+
+  .mdc-container {
+    height: $progress-bar-height;
+
+    .mdc-bar {
+      height: $progress-bar-height;
+    }
+
+    .mdc-dashed:before {
+      height: $progress-bar-height;
+    }
+  }
+}
+
 .product {
   &__header {
     font-weight: bold;

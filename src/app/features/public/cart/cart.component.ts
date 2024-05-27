@@ -7,6 +7,7 @@ import { HeaderComponent } from '../../../shared/components/header/header.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-cart',
@@ -21,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatProgressBarModule,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
