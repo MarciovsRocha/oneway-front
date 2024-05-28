@@ -13,8 +13,10 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { Hotel } from '../../../shared/models/Hotel';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -31,8 +33,8 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
     MatIconModule,
     MatProgressBarModule,
     FontAwesomeModule,
-    MatButtonModule, 
-    MatDialogModule
+    MatButtonModule,
+    MatDialogModule,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
@@ -42,9 +44,13 @@ export class CartComponent {
   cartSubscription: Subscription;
 
   faTrashCan = faTrashCan;
+  faAngleLeft = faAngleLeft;
 
-  constructor(private cartService: CartService,
-   public dialog: MatDialog) {}
+  constructor(
+    private cartService: CartService,
+    public dialog: MatDialog,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.cartSubscription = this.cartService.cart$.subscribe((cart) => {
@@ -60,5 +66,9 @@ export class CartComponent {
         this.cartService.removeFromCart(productId);
       }
     });
+  }
+
+  back() {
+    this.router.navigate(['']);
   }
 }

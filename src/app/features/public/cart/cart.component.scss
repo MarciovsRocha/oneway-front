@@ -26,14 +26,6 @@ section {
       color: $color-medium-light;
     }
   }
-
-  .btn-back,
-  .btn-new-item {
-    border-radius: $border-radius-default;
-  }
-  .btn-back {
-    background-color: $color-medium-light;
-  }
 }
 
 .product {
@@ -82,4 +74,8 @@ section {
 .button-custom:not(:disabled) {
   background-color: $color-primary !important;
   color: $color-dark !important;
+}
+
+.btn-back {
+  color: $color-medium-light;
 }

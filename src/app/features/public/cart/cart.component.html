@@ -3,9 +3,16 @@
   <section class="form-section container">
     <mat-card class="autenticate-card">
       <mat-card-header class="justify-content-center">
-        <mat-card-title class="custom-title text-center"
-          >Carrinho</mat-card-title
-        >
+        <mat-card-title class="custom-title text-center d-flex align-items-center">
+          <button
+            (click)="back()"
+            mat-icon-button
+            class="btn-back m-1"
+            aria-label="Voltar"
+          >
+            <fa-icon [icon]="faAngleLeft"></fa-icon></button
+          >Carrinho
+        </mat-card-title>
         <mat-card-subtitle> </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="py-2 px-5">
@@ -46,13 +53,18 @@
               R$ {{ product.precoMedioDiaria.toFixed(2) }}
             </div>
             <div class="col-1 text-center">
-              <button (click)="removeFromCart(product.id)" mat-icon-button class="m-1" aria-label="Remove Product">
+              <button
+                (click)="removeFromCart(product.id)"
+                mat-icon-button
+                class="m-1"
+                aria-label="Remove Product"
+              >
                 <fa-icon [icon]="faTrashCan"></fa-icon>
               </button>
             </div>
           </div>
           } @empty {
-            <p class="text-center pt-3">Carrinho vazio!</p>
+          <p class="text-center pt-3">Carrinho vazio!</p>
           }
         </div>
         <div class="row mt-5">
@@ -64,7 +76,11 @@
             </mat-form-field>
           </div>
           <div class="col d-flex align-items-end">
-            <button [disabled]="cart.length == 0" mat-flat-button class="button-custom">
+            <button
+              [disabled]="cart.length == 0"
+              mat-flat-button
+              class="button-custom"
+            >
               Finalizar compras
             </button>
           </div>
