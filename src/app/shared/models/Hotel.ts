@@ -4,4 +4,6 @@ export class Hotel {
   descricao?: string;
   precoMedioDiaria?: number;
   id_Cidade?: number;
+
+  image?: string;
 }

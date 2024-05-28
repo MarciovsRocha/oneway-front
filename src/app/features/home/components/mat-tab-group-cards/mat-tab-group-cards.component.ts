@@ -5,6 +5,7 @@ import { Produto } from '../../../../shared/models/produto';
 import { ToastrService } from 'ngx-toastr';
 import { ProdutoService } from '../../../../shared/services/produto.service';
 import { Hotel } from '../../../../shared/models/Hotel';
+import { CartService } from '../../../../shared/services/cart.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class MatTabGroupCardsComponent implements OnInit {
 
   constructor(
     private produtoService: ProdutoService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private cartService: CartService
   ) {}
 
     
@@ -44,7 +46,12 @@ export class MatTabGroupCardsComponent implements OnInit {
       error: (err: any) => {
         console.log('Erro', err);
         this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.produtos = this.produtoService.getAllMocked();
       },
     });
+  }
+
+  addToCart(product: any): void {
+    this.cartService.addToCart(product);
   }
 }

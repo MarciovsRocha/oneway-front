@@ -14,7 +14,8 @@
     <ng-template swiperSlide>
       <app-card class="custom-card" 
       [produto]="produto"
-      [filtroImagem]="filtroImagem" />
+      [filtroImagem]="filtroImagem"
+      (notify)="onNotify($event)" />
     </ng-template>
     }
   </swiper>

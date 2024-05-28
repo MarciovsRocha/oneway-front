@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -17,4 +17,15 @@ import { Hotel } from '../../../shared/models/Hotel';
 export class CardComponent {
   @Input() produto: Hotel = new Hotel();
   @Input() filtroImagem: string = ""
+  @Output() notify: EventEmitter<Hotel> = new EventEmitter<Hotel>();
+  image = 'https://bartenderstore.com.br/wp-content/uploads/2023/05/no-image.jpg'
+
+  ngOnInit() {
+    this.image = 'https://picsum.photos/seed/'+ this.filtroImagem + this.produto.id + '/300/300'
+  }
+
+  onButtonClick(object: Hotel): void {
+    object.image = this.image
+    this.notify.emit(object);
+  }
 }

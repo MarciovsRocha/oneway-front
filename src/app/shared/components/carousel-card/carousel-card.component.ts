@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { SwiperComponent, SwiperModule } from 'swiper/angular';
 import SwiperCore, { Navigation, Pagination, Scrollbar, Virtual } from 'swiper';
 import { CardComponent } from '../card/card.component';
@@ -22,6 +22,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, Virtual]);
 export class CarouselCardComponent {
   @Input() produtos: Hotel[] = []
   @Input() filtroImagem: string = ""
+  @Output() notify: EventEmitter<void> = new EventEmitter<void>();
   
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
@@ -43,5 +44,9 @@ export class CarouselCardComponent {
   }
   slidePrev() {
     this.swiper?.swiperRef.slidePrev();
+  }
+
+  onNotify(object: any): void {
+    this.notify.emit(object);
   }
 }

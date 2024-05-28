@@ -6,45 +6,67 @@
         <mat-card-title class="custom-title text-center"
           >Carrinho</mat-card-title
         >
-        <mat-card-subtitle>
-         
-        </mat-card-subtitle>
+        <mat-card-subtitle> </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="py-2 px-5">
         <div class="col my-4">
-          <mat-progress-bar class="cart__progress-bar" mode="determinate" value="70"></mat-progress-bar>
+          <mat-progress-bar
+            class="cart__progress-bar"
+            mode="determinate"
+            value="70"
+          ></mat-progress-bar>
         </div>
-        
+
         <div class="product">
           <div class="row product__header d-flex align-items-center">
-            <div class="col-6">Produto</div>
+            <div class="col-5">Produto</div>
             <div class="col-2">Categoria</div>
             <div class="col-2">Quantidade</div>
             <div class="col-2">Subtotal</div>
+            <div class="col-1 text-center">Ação</div>
           </div>
-          @for (item of ['', '']; track item) {
+          @for (product of cart; track product) {
           <div class="row product__row d-flex align-items-center">
-            <div class="col-6">Havai</div>
+            <div class="col-5">
+              <div class="product__row__description d-flex align-items-center">
+                <img
+                  [src]="product?.image"
+                  alt="Photo of a Shiba Inu"
+                  class="custom-img"
+                />
+                <div class="ms-3">
+                  <h4>{{ product?.nome }}</h4>
+                  <p>{{ product?.descricao }}</p>
+                </div>
+              </div>
+            </div>
             <div class="col-2">Hospedagem</div>
             <div class="col-2">2</div>
-            <div class="col-2">R$80</div>
+            <div class="col-2">
+              R$ {{ product.precoMedioDiaria.toFixed(2) }}
+            </div>
+            <div class="col-1 text-center">
+              <button (click)="removeFromCart(product.id)" mat-icon-button class="m-1" aria-label="Remove Product">
+                <fa-icon [icon]="faTrashCan"></fa-icon>
+              </button>
+            </div>
           </div>
+          } @empty {
+            <p class="text-center pt-3">Carrinho vazio!</p>
           }
         </div>
         <div class="row mt-5">
-          <div class="col">
-            <h4>Tem cupom?</h4>
+          <div class="coupon col">
+            <h3>Tem cupom?</h3>
             <p>Adicione seu código para um desconto instântaneo</p>
             <mat-form-field>
-              <input
-                type="text"
-                matInput
-                placeholder="Código"
-              />
+              <input type="text" matInput placeholder="Código" />
             </mat-form-field>
           </div>
-          <div class="col">
-
+          <div class="col d-flex align-items-end">
+            <button [disabled]="cart.length == 0" mat-flat-button class="button-custom">
+              Finalizar compras
+            </button>
           </div>
         </div>
       </mat-card-content>

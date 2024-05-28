@@ -1,7 +1,7 @@
 <mat-card class="example-card" matRipple>
   <img
     mat-card-image
-    [src]="filtroImagem ? 'https://picsum.photos/seed/'+ filtroImagem + produto.id + '/300/300' : 'https://bartenderstore.com.br/wp-content/uploads/2023/05/no-image.jpg'"
+    [src]="image"
     alt="Photo of a Shiba Inu"
     class="custom-img"
   />
@@ -20,6 +20,7 @@
       mat-mini-fab
       color="primary"
       aria-label="Botão para adicionar"
+      (click)="onButtonClick(produto)"
     >
       <mat-icon>add</mat-icon>
     </button>

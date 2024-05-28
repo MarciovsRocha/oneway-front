@@ -1,5 +1,15 @@
 @import "variables";
 
+.custom-img {
+  max-height: 12.5rem;
+  height: 100%;
+  width: 120px;
+  background-size: cover;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 0.6rem;
+}
+
 section {
   height: 100%;
   width: 100%;
@@ -13,7 +23,6 @@ section {
     .custom-title {
       font-family: "Montserrat Alternates", sans-serif !important;
       font-weight: 800;
-      margin-bottom: 1rem;
       color: $color-medium-light;
     }
   }
@@ -24,22 +33,6 @@ section {
   }
   .btn-back {
     background-color: $color-medium-light;
-  }
-}
-
-mdc-progress-linear {
-  height: $progress-bar-height;
-
-  .mdc-container {
-    height: $progress-bar-height;
-
-    .mdc-bar {
-      height: $progress-bar-height;
-    }
-
-    .mdc-dashed:before {
-      height: $progress-bar-height;
-    }
   }
 }
 
@@ -58,5 +51,35 @@ mdc-progress-linear {
     border-bottom-width: 2px;
     border-color: $color-border-light;
     border-style: solid;
+
+    &__description {
+      h4 {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
   }
+}
+
+.coupon {
+  h3 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.button-custom {
+  margin-bottom: 1.25rem;
+  padding: 1rem 2rem;
+  border-radius: $border-radius-default;
+  width: 100%;
+  height: 3.25rem;
+}
+.button-custom:not(:disabled) {
+  background-color: $color-primary !important;
+  color: $color-dark !important;
 }
