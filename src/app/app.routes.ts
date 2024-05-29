@@ -7,6 +7,7 @@ import { ProductListComponent } from './features/logged-in/product/product-list/
 import { ProductRegistrationComponent } from './features/logged-in/product/product-registration/product-registration.component';
 import { CartComponent } from './features/public/cart/cart.component';
 import { HomeAdmComponent } from './features/logged-in/home-adm/home-adm.component';
+import { TypeUserComponent } from './features/logged-in/type-user/type-user.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,10 @@ export const routes: Routes = [
     component: CartComponent,
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: 'type-user',
+    component: TypeUserComponent,
+  },
   {
     path: 'home-adm',
     component: HomeAdmComponent,
