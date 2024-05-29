@@ -1,5 +1,5 @@
 <app-header />
-<main>
+<main class="home-dashboard">
   <section class="container">
     <div class="row mt-4">
       @for (item of headerData; track item){
@@ -18,16 +18,42 @@
         <mat-card>
           <mat-card-header>
             <mat-card-title>Produtos</mat-card-title>
+            <mat-card-subtitle>Total cadastrados</mat-card-subtitle>
           </mat-card-header>
-          <mat-card-content></mat-card-content>
+          <mat-card-content>
+            <div id="chart" style="text-align: center">
+              <apx-chart
+                [series]="chartDonutOptions.series"
+                [chart]="chartDonutOptions.chart"
+                [dataLabels]="chartDonutOptions.dataLabels"
+                [legend]="chartDonutOptions.legend"
+                [labels]="chartDonutOptions.labels"
+                [responsive]="chartDonutOptions.responsive"
+                [colors]="chartDonutOptions.colors"
+              ></apx-chart>
+            </div>
+          </mat-card-content>
         </mat-card>
       </div>
       <div class="col">
         <mat-card>
           <mat-card-header>
-            <mat-card-title></mat-card-title>
+            <mat-card-title>Cidade</mat-card-title>
+            <mat-card-subtitle>Mais compradas</mat-card-subtitle>
           </mat-card-header>
-          <mat-card-content></mat-card-content>
+          <mat-card-content>
+            <div id="chartBar" style="text-align: center">
+              <apx-chart
+                [series]="chartBarOptions.series"
+                [chart]="chartBarOptions.chart"
+                [dataLabels]="chartBarOptions.dataLabels"
+                [plotOptions]="chartBarOptions.plotOptions"
+                [xaxis]="chartBarOptions.xaxis"
+                [colors]="chartBarOptions.colors"
+                [tooltip]="chartBarOptions.tooltip"
+              ></apx-chart>
+            </div>
+          </mat-card-content>
         </mat-card>
       </div>
     </div>
