@@ -8,6 +8,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,7 @@ import { AuthService } from '../../../core/auth.service';
     FontAwesomeModule,
     MatMenuModule,
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -45,10 +46,14 @@ export class HeaderComponent implements OnInit {
   faMoon = faMoon;
   faSun = faSun;
 
-  constructor(private authService: AuthService, protected router: Router) {}
+  constructor(
+    private authService: AuthService,
+    protected router: Router,
+    protected themeService: ThemeService
+  ) {}
 
   ngOnInit(): void {
-    this.loadSession()
+    this.loadSession();
   }
 
   loadSession() {
@@ -72,7 +77,11 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authService.logout();
     this.nomeUsuario = null;
-    this.loadSession()
+    this.loadSession();
     this.router.navigateByUrl('/');
+  }
+
+  toggleTheme() {
+    this.themeService.updateTheme();
   }
 }

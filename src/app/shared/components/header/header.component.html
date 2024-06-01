@@ -1,58 +1,64 @@
 <header>
-  <mat-toolbar class="header__mat-toolbar flex-center" [ngClass]="{ mobile: showMenu }">
+  <mat-toolbar
+    class="header__mat-toolbar flex-center"
+    [ngClass]="{ mobile: showMenu }"
+  >
     <div class="header__container container">
-      <span (click)="router.navigate([''])" class="header__logo mb-1">oneway</span>
+      <span (click)="router.navigate([''])" class="header__logo mb-1"
+        >oneway</span
+      >
       <ul class="header__icons buttons">
         @for (btn of listBtn; track btn) {
-          <li>
-            <button [routerLink]="btn.route" mat-button>{{btn.name}}</button>
-          </li>
+        <li>
+          <button [routerLink]="btn.route" mat-button>{{ btn.name }}</button>
+        </li>
         }
       </ul>
       <ul class="header__icons">
         @if (!isMobile) {
-        <li (click)="isNightMode = !isNightMode">
-          @if (!isNightMode) {
-          <button mat-icon-button aria-label="Night Mode">
-            <fa-icon [icon]="faMoon"></fa-icon>
-          </button>
-          } @else {
+        <li (click)="toggleTheme()">
+          @if (themeService.themeSignal() === 'dark') {
           <button mat-icon-button aria-label="Light Mode">
             <fa-icon [icon]="faSun"></fa-icon>
           </button>
+
+          } @else {
+          <button mat-icon-button aria-label="Night Mode">
+            <fa-icon [icon]="faMoon"></fa-icon>
+          </button>
           }
-        </li>    
-        }
-        @if (!showMenu) {
-          <li>
-            @if(nomeUsuario) {
-              <button
-                class="btn-session"
-                [matMenuTriggerFor]="menu"
-                mat-button
-                aria-label="Profile"
-              >
-                <div class="flex-center">
-                  <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
-                  <p>{{ nomeUsuario }}</p>
-                </div>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button (click)="onLogout()" mat-menu-item>Logout</button>
-              </mat-menu>
-            } @else {
-            <button
-              (click)="router.navigate(['login'])"
-              class="btn-session" mat-button
-              aria-label="Profile"
-            >
-              <div class="flex-center">
-                <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
-                <p>{{ 'Iniciar Sessão' }}</p>
-              </div>
-            </button>
+        </li>
+        } @if (!showMenu) {
+        <li>
+          @if(nomeUsuario) {
+          <button
+            class="btn-session"
+            [matMenuTriggerFor]="menu"
+            mat-button
+            aria-label="Profile"
+          >
+            <div class="flex-center">
+              <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
+              <p>{{ nomeUsuario }}</p>
+            </div>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button (click)="onLogout()" mat-menu-item>Logout</button>
+          </mat-menu>
+          } @else {
+          <button
+            (click)="router.navigate(['login'])"
+            class="btn-session"
+            mat-button
+            aria-label="Profile"
+          >
+            <div class="flex-center">
+              <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
+              <p>{{ "Iniciar Sessão" }}</p>
+            </div>
+          </button>
           }
-          </li>
+        </li>
         }
 
         <li class="d-sm-none">

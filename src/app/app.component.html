@@ -1,2 +1,4 @@
-<app-loading/>
-<router-outlet/>
+<div [ngClass]="themeService.themeSignal()">
+  <app-loading />
+  <router-outlet />
+</div>
