@@ -5,25 +5,6 @@
 @import "swiper/scss/navigation";
 @import "swiper/scss/pagination";
 
-::ng-deep {
-  .light {
-    .carousel-component {
-      .carousel-button-prev,
-      .carousel-button-next {
-        color: mat.get-theme-color($themeLight, secondary);
-      }
-    }
-  }
-  .dark {
-    .carousel-component {
-      .carousel-button-prev,
-      .carousel-button-next {
-        color: mat.get-theme-color($themeDark, secondary);
-      }
-    }
-  }
-}
-
 .carousel-card {
   position: relative;
 }
@@ -72,8 +53,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: mat.get-theme-color($themeLight, secondary);
   margin-top: calc(0px - var(--swiper-navigation-size) / 2);
   cursor: pointer;
+}
+
+.swiper-pagination-bullet {
+  background: #CCCCCC;
+  opacity: 100%;
 }
 
 .swiper-pagination-bullet-active {

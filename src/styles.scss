@@ -1,3 +1,5 @@
+@use "@angular/material" as mat;
+@import "custom-theme-config";
 @import "variables";
 
 .dark {
@@ -38,4 +40,11 @@ html {
   ):hover
   .mdc-line-ripple::before {
   border-bottom-color: transparent !important;
+}
+
+.toast-container .ngx-toastr {
+  box-shadow: 0 0 12px #000000;
+}
+.toast-error {
+  background-color: mat.get-theme-color($themeDark, on-error);
 }
