@@ -2,6 +2,22 @@
 @import "custom-theme-config";
 @import "variables";
 
+::ng-deep .light {
+  .form-section .btn-wrapper button {
+    &.btn-primary:not(:disabled) {
+      color: mat.get-theme-color($themeLight, on-primary-container);
+    }
+  }
+}
+
+::ng-deep .dark {
+  .form-section .btn-wrapper button {
+    &.btn-primary:not(:disabled) {
+      color: mat.get-theme-color($themeDark, on-primary-container);
+    }
+  }
+}
+
 main {
   display: flex;
   flex-direction: row;
@@ -76,7 +92,6 @@ main {
 
         &.btn-primary:not(:disabled) {
           background-color: $color-action;
-          color: mat.get-theme-color($theme, on-primary-container);
         }
       }
     }

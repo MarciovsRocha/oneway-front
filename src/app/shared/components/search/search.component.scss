@@ -2,9 +2,20 @@
 @import "custom-theme-config";
 @import "variables";
 
+::ng-deep .light {
+  .search {
+    background-color: mat.get-theme-color($themeLight, surface);
+  }
+}
+
+::ng-deep .dark {
+  .search {
+    background-color: mat.get-theme-color($themeDark, surface);
+  }
+}
+
 .search {
   width: 100%;
-  background-color: mat.get-theme-color($theme, surface);
   padding: 1rem 2rem;
   border-radius: $border-radius-default;
 
@@ -21,7 +32,8 @@
   gap: 0.75rem;
 }
 
-.search__input-where, .search__input-date {
+.search__input-where,
+.search__input-date {
   width: 100% !important;
   max-width: 100% !important;
 }

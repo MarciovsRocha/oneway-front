@@ -1,9 +1,23 @@
 @use "@angular/material" as mat;
-@import 'custom-theme-config';
+@import "custom-theme-config";
 @import "variables";
 @import "swiper/scss";
 @import "swiper/scss/navigation";
 @import "swiper/scss/pagination";
+
+::ng-deep .light {
+  .carousel-button-prev,
+  .carousel-button-next {
+    color: mat.get-theme-color($themeLight, secondary);
+  }
+}
+
+::ng-deep .dark {
+  .carousel-button-prev,
+  .carousel-button-next {
+    color: mat.get-theme-color($themeDark, secondary);
+  }
+}
 
 .carousel-card {
   position: relative;
@@ -54,7 +68,6 @@
   align-items: center;
   justify-content: center;
   margin-top: calc(0px - var(--swiper-navigation-size) / 2);
-  color: mat.get-theme-color($theme, secondary);
   cursor: pointer;
 }
 
