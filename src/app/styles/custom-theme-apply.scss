@@ -1,17 +1,22 @@
 @use "@angular/material" as mat;
 @use "@angular/material-experimental" as matx;
 @import "custom-theme-config";
+@import "variables";
 
 .theme {
+  position: relative;
+  z-index: 0;
+  height: 100vh;
   @include mat.all-component-themes($themeLight);
   @include matx.color-variants-back-compat($themeLight);
   @include mat.typography-hierarchy($themeLight, $back-compat: true);
 
   &.dark {
+    background-color: #11120e;  
     @include mat.all-component-colors($themeDark);
 
     p {
-      color: #e2e3dc
+      color: $color-text-dark-theme
     }
   }
 }

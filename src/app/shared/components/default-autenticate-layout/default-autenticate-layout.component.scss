@@ -10,14 +10,6 @@
   }
 }
 
-::ng-deep .dark {
-  .form-section .btn-wrapper button {
-    &.btn-primary:not(:disabled) {
-      color: mat.get-theme-color($themeDark, on-primary-container);
-    }
-  }
-}
-
 main {
   display: flex;
   flex-direction: row;
