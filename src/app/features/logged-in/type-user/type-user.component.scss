@@ -1,5 +1,15 @@
 @import "variables";
 
+::ng-deep {
+  .light {
+    .type-user-component {
+      button {
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+
 mat-card-header {
   display: flex;
   justify-content: center;
@@ -14,7 +24,6 @@ mat-card-title {
 }
 
 button {
-  background-color: $color-primary;
   height: 3.25rem;
 }
 

@@ -1,6 +1,9 @@
 @import "variables";
 
 .dark {
+  .mat-mdc-form-field-text-prefix {
+    color: $color-light-grey !important;
+  }
   .mdc-text-field.mdc-text-field--filled {
     background-color: $color-input-dark !important;
   }

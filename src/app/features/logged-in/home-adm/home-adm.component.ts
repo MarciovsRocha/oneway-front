@@ -12,7 +12,7 @@ import {
   ApexNonAxisChartSeries,
   ApexPlotOptions,
   ApexResponsive,
-  ApexTitleSubtitle,
+  ApexStroke,
   ApexTooltip,
   ApexXAxis,
   ChartComponent,
@@ -27,6 +27,8 @@ export type ChartDonutOptions = {
   legend: ApexLegend;
   labels: any;
   colors: any;
+  stroke: ApexStroke;
+  tooltip: ApexTooltip;
 };
 
 export type ChartBarOptions = {
@@ -81,9 +83,19 @@ export class HomeAdmComponent {
         height: 320,
         width: 500,
         type: 'donut',
+        fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
+      },
+      stroke: {
+        show: false,
+        width: 0,
       },
       dataLabels: {
         enabled: true,
+        style: {
+          fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
+          fontSize: '14px',
+          fontWeight: 'bold',
+        },
       },
       labels: ['Hospedagem', 'Transporte', 'Pontos Turísticos'],
       responsive: [
@@ -107,8 +119,14 @@ export class HomeAdmComponent {
         horizontalAlign: 'right',
         offsetY: 0,
         height: 230,
+        fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
+        fontSize: '14px',
       },
       colors: ['#beeba0', '#aac99d', '#618354'],
+      tooltip: {
+        theme: 'dark',
+        fillSeriesColor: false,
+      }
     };
 
     this.chartBarOptions = {
@@ -120,32 +138,45 @@ export class HomeAdmComponent {
       chart: {
         type: 'bar',
         height: 275,
+        fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
       },
       plotOptions: {
         bar: {
           horizontal: true,
         },
-      }, 
+      },
       colors: ['#beeba0', '#aac99d', '#618354'],
       dataLabels: {
         enabled: false,
       },
       xaxis: {
         categories: ['Curitiba', 'São Paulo', 'Blumenau'],
+        title: {
+          style: {
+            fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
+            fontSize: '14px',
+            fontWeight: 'bold',
+          },
+        },
+        labels: {
+          style: {
+            fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
+          },
+        }
       },
       tooltip: {
-        theme: "dark",
+        theme: 'dark',
         x: {
-          show: false
+          show: false,
         },
         y: {
           title: {
-            formatter: function() {
-              return "";
-            }
-          }
-        }
-      }
+            formatter: function () {
+              return '';
+            },
+          },
+        },
+      },
     };
   }
 }

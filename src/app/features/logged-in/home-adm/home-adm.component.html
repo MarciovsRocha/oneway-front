@@ -1,5 +1,5 @@
 <app-header />
-<main class="home-dashboard">
+<main class="home-dashboard home-adm-component">
   <section class="container">
     <div class="row mt-4">
       @for (item of headerData; track item){
@@ -30,6 +30,8 @@
                 [labels]="chartDonutOptions.labels"
                 [responsive]="chartDonutOptions.responsive"
                 [colors]="chartDonutOptions.colors"
+                [stroke]="chartDonutOptions.stroke"
+                [tooltip]="chartDonutOptions.tooltip"
               ></apx-chart>
             </div>
           </mat-card-content>
