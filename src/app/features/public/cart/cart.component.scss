@@ -1,5 +1,29 @@
 @import "variables";
 
+::ng-deep {
+  .dark {
+    .cart-component {
+      .product__header span,
+      h1,
+      h2,
+      h3,
+      h4,
+      p {
+        color: $color-text-dark-theme;
+      }
+    }
+  }
+}
+
+span,
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
 .custom-img {
   max-height: 12.5rem;
   height: 100%;

@@ -2,10 +2,14 @@
 @import "custom-theme-config";
 @import "variables";
 
-::ng-deep .light {
-  .form-section .btn-wrapper button {
-    &.btn-primary:not(:disabled) {
-      color: mat.get-theme-color($themeLight, on-primary-container);
+::ng-deep {
+  .light {
+    .default-aunteticate-layout-component {
+      .form-section .btn-wrapper button {
+        &.btn-primary:not(:disabled) {
+          color: mat.get-theme-color($themeLight, on-primary-container);
+        }
+      }
     }
   }
 }
@@ -41,7 +45,7 @@ main {
 
     .autenticate-card {
       width: 100%;
-			padding: 1rem 0;
+      padding: 1rem 0;
 
       .custom-title {
         font-family: "Montserrat Alternates", sans-serif !important;

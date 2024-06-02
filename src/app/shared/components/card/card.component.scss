@@ -1,33 +1,43 @@
 @use "@angular/material" as mat;
-@import 'custom-theme-config';
-@import 'variables';
+@import "custom-theme-config";
+@import "variables";
 
-::ng-deep .light {
-  .mat-mdc-card-title {
-    color: mat.get-theme-color($themeLight, on-primary-container);
+::ng-deep {
+  .light {
+    .card-component {
+      button {
+        background-color: $color-primary;
+      }
+
+      .mat-mdc-card-title {
+        color: mat.get-theme-color($themeLight, on-primary-container);
+      }
+
+      .tag {
+        background-color: mat.get-theme-color($themeLight, secondary-container);
+        color: mat.get-theme-color($themeLight, on-primary-container);
+      }
+    }
   }
+  .dark {
+    .card-component {
+      .mat-mdc-card-title {
+        color: mat.get-theme-color($themeDark, on-primary-container);
+      }
 
-  .tag {
-    background-color: mat.get-theme-color($themeLight, secondary-container);
-    color: mat.get-theme-color($themeLight, on-primary-container);
+      .tag {
+        background-color: mat.get-theme-color($themeDark, secondary-container);
+        color: mat.get-theme-color($themeDark, on-primary-container);
+      }
+    }
   }
 }
 
-::ng-deep .dark {
-  .mat-mdc-card-title {
-    color: mat.get-theme-color($themeDark, on-primary-container);
-  }
-
-  .tag {
-    background-color: mat.get-theme-color($themeDark, secondary-container);
-    color: mat.get-theme-color($themeDark, on-primary-container);
-  }
-}
-
-.example-card {
+.card-component {
   min-height: 350px;
 }
-.custom-card, .example-card {
+.custom-card,
+.card-component {
   margin-bottom: 2.5rem !important;
 }
 
@@ -45,11 +55,9 @@
   border-radius: 15px;
 }
 
-button {
-  background-color: $color-primary;
-}
-
-button, button:hover, .mat-mdc-card {
+button,
+button:hover,
+.mat-mdc-card {
   box-shadow: none;
 }
 

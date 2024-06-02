@@ -13,6 +13,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  themeService: ThemeService = inject(ThemeService);
   title = 'oneway'
 }

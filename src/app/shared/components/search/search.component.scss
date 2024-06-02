@@ -2,15 +2,24 @@
 @import "custom-theme-config";
 @import "variables";
 
-::ng-deep .light {
-  .search {
-    background-color: mat.get-theme-color($themeLight, surface);
+::ng-deep {
+  .light {
+    .search-component {
+      &.search {
+        background-color: mat.get-theme-color($themeLight, surface);
+      }
+      .btn-search {
+        background-color: $color-primary;
+      }
+    }
   }
-}
 
-::ng-deep .dark {
-  .search {
-    background-color: mat.get-theme-color($themeDark, surface);
+  .dark {
+    .search-component {
+      &.search {
+        background-color: mat.get-theme-color($themeDark, surface);
+      }
+    }
   }
 }
 
@@ -39,7 +48,6 @@
 }
 
 button {
-  background-color: $color-primary;
   height: 3.25rem;
 }
 

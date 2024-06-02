@@ -1,4 +1,4 @@
-<div class="search">
+<div class="search search-component">
   <form [formGroup]="searchGroup" class="example-form flex-center">
     <div class="container__buttons flex-center">
       <mat-form-field class="search__input-where">
@@ -25,7 +25,7 @@
         ></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
-      <button mat-fab extended color="primary" aria-label="Botão de busca">
+      <button mat-fab extended color="primary" class="btn-search" aria-label="Botão de busca">
         <mat-icon>search</mat-icon>
         Buscar
       </button>

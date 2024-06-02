@@ -5,17 +5,22 @@
 @import "swiper/scss/navigation";
 @import "swiper/scss/pagination";
 
-::ng-deep .light {
-  .carousel-button-prev,
-  .carousel-button-next {
-    color: mat.get-theme-color($themeLight, secondary);
+::ng-deep {
+  .light {
+    .carousel-component {
+      .carousel-button-prev,
+      .carousel-button-next {
+        color: mat.get-theme-color($themeLight, secondary);
+      }
+    }
   }
-}
-
-::ng-deep .dark {
-  .carousel-button-prev,
-  .carousel-button-next {
-    color: mat.get-theme-color($themeDark, secondary);
+  .dark {
+    .carousel-component {
+      .carousel-button-prev,
+      .carousel-button-next {
+        color: mat.get-theme-color($themeDark, secondary);
+      }
+    }
   }
 }
 

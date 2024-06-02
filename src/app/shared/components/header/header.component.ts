@@ -1,11 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit, Renderer2 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser, faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { MatMenuModule } from '@angular/material/menu';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth.service';
 import { ThemeService } from '../../services/theme.service';
@@ -47,12 +47,15 @@ export class HeaderComponent implements OnInit {
   faSun = faSun;
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
     private authService: AuthService,
     protected router: Router,
     protected themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
+    this.renderer.setAttribute(this.document.body, 'class', this.themeService.themeSignal());
     this.loadSession();
   }
 
@@ -83,5 +86,6 @@ export class HeaderComponent implements OnInit {
 
   toggleTheme() {
     this.themeService.updateTheme();
+    this.renderer.setAttribute(this.document.body, 'class', this.themeService.themeSignal());
   }
 }

@@ -1,5 +1,5 @@
 <app-header />
-<main class="mt-4">
+<main class="cart-component mt-4">
   <section class="form-section container">
     <mat-card class="autenticate-card">
       <mat-card-header class="justify-content-center">
@@ -26,11 +26,11 @@
 
         <div class="product">
           <div class="row product__header d-flex align-items-center">
-            <div class="col-5">Produto</div>
-            <div class="col-2">Categoria</div>
-            <div class="col-2">Quantidade</div>
-            <div class="col-2">Subtotal</div>
-            <div class="col-1 text-center">Ação</div>
+            <div class="col-5"><span>Produto</span> </div>
+            <div class="col-2"><span>Categoria</span></div>
+            <div class="col-2"><span>Quantidade</span></div>
+            <div class="col-2"><span>Subtotal</span></div>
+            <div class="col-1 text-center"><span>Ação</span></div>
           </div>
           @for (product of cart; track product) {
           <div class="row product__row d-flex align-items-center">
@@ -47,10 +47,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-2">Hospedagem</div>
-            <div class="col-2">2</div>
+            <div class="col-2"><p>Hospedagem</p></div>
+            <div class="col-2"><p>2</p></div>
             <div class="col-2">
-              R$ {{ product.precoMedioDiaria.toFixed(2) }}
+              <p>R$ {{ product.precoMedioDiaria.toFixed(2) }}</p>
             </div>
             <div class="col-1 text-center">
               <button
@@ -71,7 +71,7 @@
           <div class="coupon col">
             <h3>Tem cupom?</h3>
             <p>Adicione seu código para um desconto instântaneo</p>
-            <mat-form-field>
+            <mat-form-field class="mt-2">
               <input type="text" matInput placeholder="Código" />
             </mat-form-field>
           </div>

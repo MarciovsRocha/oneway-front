@@ -3,10 +3,7 @@
 @import "custom-theme-config";
 @import "variables";
 
-.theme {
-  position: relative;
-  z-index: 0;
-  height: 100vh;
+body {
   @include mat.all-component-themes($themeLight);
   @include matx.color-variants-back-compat($themeLight);
   @include mat.typography-hierarchy($themeLight, $back-compat: true);
@@ -14,6 +11,8 @@
   &.dark {
     background-color: #11120e;  
     @include mat.all-component-colors($themeDark);
+    @include matx.color-variants-back-compat($themeDark);
+    @include mat.typography-hierarchy($themeDark, $back-compat: true);
 
     p {
       color: $color-text-dark-theme
