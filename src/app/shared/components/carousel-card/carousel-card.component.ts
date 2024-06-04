@@ -6,8 +6,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Produto } from '../../../shared/models/produto';
-import { Hotel } from '../../../shared/models/Hotel';
+import { Product } from '../../models/product';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, Virtual]);
 
@@ -20,7 +19,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, Virtual]);
   encapsulation: ViewEncapsulation.None,
 })
 export class CarouselCardComponent {
-  @Input() produtos: Hotel[] = []
+  @Input() produtos: Product[] = []
   @Input() filtroImagem: string = ""
   @Output() notify: EventEmitter<void> = new EventEmitter<void>();
   

@@ -9,7 +9,7 @@
     <mat-form-field class="product__field">
       <mat-label>Título</mat-label>
       <input
-        formControlName="titulo"
+        formControlName="nome"
         type="text"
         matInput
         placeholder="Rafael Felipe"
@@ -18,7 +18,7 @@
 
     <mat-form-field class="product__field">
       <mat-label>Categoria</mat-label>
-      <mat-select formControlName="categoria">
+      <mat-select formControlName="tipo">
         @for (categoria of listaCategorias; track categoria) {
         <mat-option [value]="categoria">{{ categoria }}</mat-option>
         }

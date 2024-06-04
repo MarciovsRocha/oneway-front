@@ -10,13 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CartService } from '../../../shared/services/cart.service';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { Hotel } from '../../../shared/models/Hotel';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
+import { Product } from '../../../shared/models/product';
 
 @Component({
   selector: 'app-cart',
@@ -40,7 +40,7 @@ import { Router } from '@angular/router';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  cart: Hotel[];
+  cart: Product[];
   cartSubscription: Subscription;
 
   faTrashCan = faTrashCan;

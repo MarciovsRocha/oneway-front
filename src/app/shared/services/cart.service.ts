@@ -1,31 +1,31 @@
 import { Injectable, inject } from '@angular/core';
-import { Hotel } from '../models/Hotel';
 import { BehaviorSubject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private products: Hotel[]
+  private products: Product[]
 
   private cartKey = 'shoppingCart';
-  private cart: Hotel[] = this.getCartFromStorage();
+  private cart: Product[] = this.getCartFromStorage();
 
-  private cartSubject = new BehaviorSubject<Hotel[]>(this.cart);
+  private cartSubject = new BehaviorSubject<Product[]>(this.cart);
   cart$ = this.cartSubject.asObservable();
   toastService = inject(ToastrService);
 
-  getProducts(): Hotel[] {
+  getProducts(): Product[] {
     return this.products;
   }
 
-  getCartFromStorage(): Hotel[] {
+  getCartFromStorage(): Product[] {
     const cart = localStorage.getItem(this.cartKey);
     return cart ? JSON.parse(cart) : [];
   }
 
-  addToCart(product: Hotel): void {
+  addToCart(product: Product): void {
     const item = this.cart.find(p => p.id === product.id);
     if (!item) {
       this.cart.push(product);
@@ -45,7 +45,7 @@ export class CartService {
     }
   }
 
-  getCart(): Hotel[] {
+  getCart(): Product[] {
     return this.cart;
   }
 }

@@ -13,9 +13,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
 import { CartService } from '../../services/cart.service';
-import { Hotel } from '../../models/Hotel';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-travel-cart',
@@ -32,7 +32,7 @@ import { Router } from '@angular/router';
   styleUrl: './travel-cart.component.scss',
 })
 export class TravelCartComponent {
-  cart: Hotel[] = [];
+  cart: Product[] = [];
   private cartSubscription: Subscription;
   faBoxOpen = faBoxOpen;
 
@@ -63,7 +63,7 @@ export class TravelCartComponent {
   imports: [MatButtonModule, MatListModule, MatCardModule, MatIconModule, MatRippleModule],
 })
 export class InsideTravelCart implements OnInit {
-  cart: Hotel[]
+  cart: Product[]
   cartSubscription: Subscription;
 
   constructor(
