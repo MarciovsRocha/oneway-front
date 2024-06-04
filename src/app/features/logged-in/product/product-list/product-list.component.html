@@ -19,8 +19,8 @@
         (selectedTabChange)="onTabChange($event)"
         #tabGroup
       >
-        @for (categoria of listaCategorias; track categoria) {
-        <mat-tab [label]="categoria"></mat-tab>
+        @for (type of productTypeList; track type) {
+        <mat-tab [label]="type"></mat-tab>
         }
       </mat-tab-group>
     </div>

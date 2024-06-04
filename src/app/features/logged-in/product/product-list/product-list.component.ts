@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { ProductService } from '../../../../shared/services/product.service';
 import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { ToastrService } from 'ngx-toastr';
+import { ProductType } from '../../../../shared/enum/product-type.enum';
 
 @Component({
   selector: 'app-product-list',
@@ -32,7 +33,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './product-list.component.scss',
 })
 export class ProductListComponent implements OnInit {
-  listaCategorias: string[] = ['Hospedagem', 'Transporte', 'Pontos Turísticos'];
+  productTypeList: string[] = ProductType.getAllTypesTexts();
   dataListToTable: any[] = [];
   dataSource = new MatTableDataSource([]);
   displayedColumns: string[] = [
@@ -58,7 +59,7 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getProdutos(0);
+    this.getProdutos(1);
   }
 
   applyFilter(event: Event) {
@@ -86,7 +87,7 @@ export class ProductListComponent implements OnInit {
     return list.map((product) => ({
       id: product.id,
       nome: product.nome,
-      tipo: product.idTipo,
+      tipo: ProductType.getTypeText(product.id_Tipo),
       preco: 'R$ ' + product.precoMedioDiaria,
       pais: product.cidade.estado.pais.nome,
       estado: product.cidade.estado.nome,
@@ -114,6 +115,6 @@ export class ProductListComponent implements OnInit {
   }
 
   onTabChange(event: MatTabChangeEvent) {
-    this.getProdutos(event.index);
+    this.getProdutos(event.index+1);
   }
 }

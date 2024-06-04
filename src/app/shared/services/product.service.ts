@@ -9,13 +9,13 @@ import { Product } from '../models/product';
 export class ProductService {
   constructor(private httpClient: HttpClient) {}
   private apiUrl: string = environment.apiUrl;
-  private endpoint: string = '/api/v1/hotel';
+  private endpoint: string = '/api/v1/produto';
 
   private productsTypeHotel: Product[] = [
     {
       id: 1,
       nome: 'Hotel 1',
-      idTipo: 1,
+      id_Tipo: 1,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -34,7 +34,7 @@ export class ProductService {
     {
       id: 2,
       nome: 'Hotel 2',
-      idTipo: 1,
+      id_Tipo: 1,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -53,7 +53,7 @@ export class ProductService {
     {
       id: 3,
       nome: 'Hotel 3',
-      idTipo: 1,
+      id_Tipo: 1,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -72,7 +72,7 @@ export class ProductService {
     {
       id: 4,
       nome: 'Hotel 4',
-      idTipo: 1,
+      id_Tipo: 1,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -94,7 +94,7 @@ export class ProductService {
     {
       id: 5,
       nome: 'Transporte 1',
-      idTipo: 2,
+      id_Tipo: 2,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -113,7 +113,7 @@ export class ProductService {
     {
       id: 6,
       nome: 'Transporte 2',
-      idTipo: 2,
+      id_Tipo: 2,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -132,7 +132,7 @@ export class ProductService {
     {
       id: 7,
       nome: 'Transporte 3',
-      idTipo: 2,
+      id_Tipo: 2,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -151,7 +151,7 @@ export class ProductService {
     {
       id: 8,
       nome: 'Transporte 4',
-      idTipo: 2,
+      id_Tipo: 2,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -173,7 +173,7 @@ export class ProductService {
     {
       id: 9,
       nome: 'Ponto Turístico 1',
-      idTipo: 3,
+      id_Tipo: 3,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -192,7 +192,7 @@ export class ProductService {
     {
       id: 10,
       nome: 'Ponto Turístico 2',
-      idTipo: 3,
+      id_Tipo: 3,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -211,7 +211,7 @@ export class ProductService {
     {
       id: 11,
       nome: 'Ponto Turístico 3',
-      idTipo: 3,
+      id_Tipo: 3,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -230,7 +230,7 @@ export class ProductService {
     {
       id: 12,
       nome: 'Ponto Turístico 4',
-      idTipo: 3,
+      id_Tipo: 3,
       precoMedioDiaria: 150.2,
       descricao: 'teste teste teste',
       cidade: {
@@ -254,7 +254,7 @@ export class ProductService {
 
   getAllByType(id: number) {
     return this.httpClient.get<Product[]>(
-      `${this.apiUrl}${this.endpoint}/${id}`
+      `${this.apiUrl}${this.endpoint}/type=${id}`
     );
   }
 
@@ -268,11 +268,11 @@ export class ProductService {
 
   getAllByTypeMocked(id: number) {
     switch (id) {
-      case 0:
-        return this.productsTypeHotel;
       case 1:
-        return this.productsTypeTransport;
+        return this.productsTypeHotel;
       case 2:
+        return this.productsTypeTransport;
+      case 3:
         return this.productsTypeAttraction;
       default:
         return [];

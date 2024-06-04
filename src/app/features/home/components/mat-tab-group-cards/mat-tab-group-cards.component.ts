@@ -5,6 +5,7 @@ import { Product } from '../../../../shared/models/product';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from '../../../../shared/services/product.service';
 import { CartService } from '../../../../shared/services/cart.service';
+import { ProductType } from '../../../../shared/enum/product-type.enum';
 
 
 @Component({
@@ -15,8 +16,8 @@ import { CartService } from '../../../../shared/services/cart.service';
   styleUrl: './mat-tab-group-cards.component.scss',
 })
 export class MatTabGroupCardsComponent implements OnInit {
-  listaCategorias: string[] = ['Hospedagem', 'Transporte', 'Pontos Turísticos']
-  filtroImagem: string = this.listaCategorias[0];
+  productTypeList: string[] = ProductType.getAllTypesTexts()
+  filtroImagem: string = this.productTypeList[0];
   produtos: Product[] = [];
 
   constructor(
@@ -27,13 +28,14 @@ export class MatTabGroupCardsComponent implements OnInit {
 
     
   ngOnInit() {
-    this.getProdutos(0);
+    this.getProdutos(1);
   }
 
   onTabChange(event: MatTabChangeEvent) {
     const activeTabLabel = event.tab.textLabel;
     this.filtroImagem = activeTabLabel;
-    this.getProdutos(event.index);
+    console.log('event.index ', event.index)
+    this.getProdutos(event.index+1);
   }
 
 

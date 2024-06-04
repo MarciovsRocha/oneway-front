@@ -6,7 +6,7 @@ export class Product  {
   precoMedioDiaria?: number;
   idCidade?: number;
   descricao?: string;
-  idTipo?: number;
+  id_Tipo?: number;
   cidade?: City;
   
   files?: File[];

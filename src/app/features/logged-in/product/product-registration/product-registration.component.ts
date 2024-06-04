@@ -76,9 +76,8 @@ export class ProductRegistrationComponent implements OnInit {
   }
 
   loadDataForm(product: Product) {
-    console.log('product', product);
     this.productForm.get('nome').setValue(product.nome);
-    this.productForm.get('tipo').setValue(product.idTipo);
+    this.productForm.get('tipo').setValue(product.id_Tipo);
     this.productForm.get('preco').setValue(product.precoMedioDiaria);
     this.productForm.get('descricao').setValue(product.descricao);
     this.productForm.get('pais').setValue(product.cidade.estado.pais.nome);
