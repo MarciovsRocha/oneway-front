@@ -19,7 +19,7 @@ main {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: calc(100% - $header-height);
+  height: 100%;
 
   section {
     height: 100%;

@@ -53,6 +53,7 @@ export class LoginComponent {
   submit() {
     if (this.loginForm.value.email == 'easy@login.com') {
       sessionStorage.setItem('nome', 'Test Easy');
+      this.authService.updateData();
       this.toastService.success('Logado com sucesso!');
       this.router.navigate(['type-user']);
     } else {

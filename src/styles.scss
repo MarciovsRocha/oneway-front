@@ -18,9 +18,22 @@
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-body,
-html {
+body {
+  height: 100vh;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+}
+
+#content {
+  flex: 1
+}
+
+#footer {
+  margin-top: auto
 }
 
 .flex-center {

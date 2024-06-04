@@ -5,11 +5,13 @@ import { LoadingComponent } from './shared/components/loading/loading.component'
 import { ThemeService } from './shared/services/theme.service';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { TravelCartComponent } from './shared/components/travel-cart/travel-cart.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule ,LoadingComponent, FooterComponent, FontAwesomeModule, RouterOutlet],
+  imports: [CommonModule ,LoadingComponent, TravelCartComponent, HeaderComponent, FooterComponent, FontAwesomeModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

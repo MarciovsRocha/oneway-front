@@ -9,6 +9,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth.service';
 import { ThemeService } from '../../services/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -46,6 +47,8 @@ export class HeaderComponent implements OnInit {
   faMoon = faMoon;
   faSun = faSun;
 
+  private subscription: Subscription;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -56,11 +59,22 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.renderer.setAttribute(this.document.body, 'class', this.themeService.themeSignal());
-    this.loadSession();
+    this.subscription = this.authService.nomeUsuario$.subscribe(nome => {
+      this.nomeUsuario = nome;
+      this.updateMenu();
+    });
   }
 
   loadSession() {
     this.nomeUsuario = sessionStorage.getItem('nome');
+    if (this.nomeUsuario) {
+      this.listBtn = this.listBtnLoggedIn;
+    } else {
+      this.listBtn = this.listBtnPublic;
+    }
+  }
+
+  updateMenu() {
     if (this.nomeUsuario) {
       this.listBtn = this.listBtnLoggedIn;
     } else {
@@ -79,13 +93,17 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
-    this.nomeUsuario = null;
-    this.loadSession();
     this.router.navigateByUrl('/');
   }
 
   toggleTheme() {
     this.themeService.updateTheme();
     this.renderer.setAttribute(this.document.body, 'class', this.themeService.themeSignal());
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
