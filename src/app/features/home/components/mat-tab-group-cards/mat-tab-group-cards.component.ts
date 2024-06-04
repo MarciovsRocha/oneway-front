@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatTabChangeEvent, MatTabGroup, MatTabsModule } from '@angular/material/tabs';
+import { Component, OnInit } from '@angular/core';
+import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { CarouselCardComponent } from '../../../../shared/components/carousel-card/carousel-card.component';
 import { Product } from '../../../../shared/models/product';
 import { ToastrService } from 'ngx-toastr';
@@ -27,25 +27,25 @@ export class MatTabGroupCardsComponent implements OnInit {
 
     
   ngOnInit() {
-    this.getProdutos();
+    this.getProdutos(0);
   }
 
   onTabChange(event: MatTabChangeEvent) {
     const activeTabLabel = event.tab.textLabel;
     this.filtroImagem = activeTabLabel;
-    this.getProdutos();
+    this.getProdutos(event.index);
   }
 
 
-  getProdutos() {
-    this.produtoService.getAll().subscribe({
+  getProdutos(id: number) {
+    this.produtoService.getAllByType(id).subscribe({
       next: (resultado: Product[]) => {
         this.produtos = resultado;
       },
       error: (err: any) => {
         console.log('Erro', err);
         this.toastService.error('Erro inesperado! Tente novamente mais tarde');
-        this.produtos = this.produtoService.getAllMocked();
+        this.produtos = this.produtoService.getAllByTypeMocked(id);
       },
     });
   }

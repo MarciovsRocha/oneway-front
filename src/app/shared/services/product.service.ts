@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Product } from '../models/product';
 
@@ -12,7 +11,7 @@ export class ProductService {
   private apiUrl: string = environment.apiUrl;
   private endpoint: string = '/api/v1/hotel';
 
-  private products: Product[] = [
+  private productsTypeHotel: Product[] = [
     {
       id: 1,
       nome: 'Hotel 1',
@@ -91,27 +90,192 @@ export class ProductService {
     },
   ];
 
+  private productsTypeTransport: Product[] = [
+    {
+      id: 5,
+      nome: 'Transporte 1',
+      idTipo: 2,
+      precoMedioDiaria: 150.2,
+      descricao: 'teste teste teste',
+      cidade: {
+        id: 1,
+        nome: 'Curitiba',
+        estado: {
+          id: 1,
+          nome: 'Paraná',
+          pais: {
+            id: 1,
+            nome: 'Brasil',
+          },
+        },
+      },
+    },
+    {
+      id: 6,
+      nome: 'Transporte 2',
+      idTipo: 2,
+      precoMedioDiaria: 150.2,
+      descricao: 'teste teste teste',
+      cidade: {
+        id: 1,
+        nome: 'Curitiba',
+        estado: {
+          id: 1,
+          nome: 'Paraná',
+          pais: {
+            id: 1,
+            nome: 'Brasil',
+          },
+        },
+      },
+    },
+    {
+      id: 7,
+      nome: 'Transporte 3',
+      idTipo: 2,
+      precoMedioDiaria: 150.2,
+      descricao: 'teste teste teste',
+      cidade: {
+        id: 1,
+        nome: 'Curitiba',
+        estado: {
+          id: 1,
+          nome: 'Paraná',
+          pais: {
+            id: 1,
+            nome: 'Brasil',
+          },
+        },
+      },
+    },
+    {
+      id: 8,
+      nome: 'Transporte 4',
+      idTipo: 2,
+      precoMedioDiaria: 150.2,
+      descricao: 'teste teste teste',
+      cidade: {
+        id: 1,
+        nome: 'Curitiba',
+        estado: {
+          id: 1,
+          nome: 'Paraná',
+          pais: {
+            id: 1,
+            nome: 'Brasil',
+          },
+        },
+      },
+    },
+  ];
+
+  private productsTypeAttraction: Product[] = [
+    {
+      id: 9,
+      nome: 'Ponto Turístico 1',
+      idTipo: 3,
+      precoMedioDiaria: 150.2,
+      descricao: 'teste teste teste',
+      cidade: {
+        id: 1,
+        nome: 'Curitiba',
+        estado: {
+          id: 1,
+          nome: 'Paraná',
+          pais: {
+            id: 1,
+            nome: 'Brasil',
+          },
+        },
+      },
+    },
+    {
+      id: 10,
+      nome: 'Ponto Turístico 2',
+      idTipo: 3,
+      precoMedioDiaria: 150.2,
+      descricao: 'teste teste teste',
+      cidade: {
+        id: 1,
+        nome: 'Curitiba',
+        estado: {
+          id: 1,
+          nome: 'Paraná',
+          pais: {
+            id: 1,
+            nome: 'Brasil',
+          },
+        },
+      },
+    },
+    {
+      id: 11,
+      nome: 'Ponto Turístico 3',
+      idTipo: 3,
+      precoMedioDiaria: 150.2,
+      descricao: 'teste teste teste',
+      cidade: {
+        id: 1,
+        nome: 'Curitiba',
+        estado: {
+          id: 1,
+          nome: 'Paraná',
+          pais: {
+            id: 1,
+            nome: 'Brasil',
+          },
+        },
+      },
+    },
+    {
+      id: 12,
+      nome: 'Ponto Turístico 4',
+      idTipo: 3,
+      precoMedioDiaria: 150.2,
+      descricao: 'teste teste teste',
+      cidade: {
+        id: 1,
+        nome: 'Curitiba',
+        estado: {
+          id: 1,
+          nome: 'Paraná',
+          pais: {
+            id: 1,
+            nome: 'Brasil',
+          },
+        },
+      },
+    },
+  ];
+
   getAll() {
-    return this.httpClient
-      .get<Product[]>(`${this.apiUrl}${this.endpoint}`)
-      .pipe(
-        tap((value) => {
-          console.log('value', value);
-        })
-      );
+    return this.httpClient.get<Product[]>(`${this.apiUrl}${this.endpoint}`);
+  }
+
+  getAllByType(id: number) {
+    return this.httpClient.get<Product[]>(
+      `${this.apiUrl}${this.endpoint}/${id}`
+    );
   }
 
   saveOrUpdate(product: any) {
-    return this.httpClient
-      .post<any>(`${this.apiUrl}${this.endpoint}`, product)
-      .pipe(
-        tap((value) => {
-          console.log('value', value);
-        })
-      );
+    return this.httpClient.post<any>(`${this.apiUrl}${this.endpoint}`, product);
   }
 
   getAllMocked() {
-    return this.products;
+    return this.productsTypeHotel;
+  }
+
+  getAllByTypeMocked(id: number) {
+    switch (id) {
+      case 0:
+        return this.productsTypeHotel;
+      case 1:
+        return this.productsTypeTransport;
+      case 2:
+        return this.productsTypeAttraction;
+      default:
+        return [];
+    }
   }
 }

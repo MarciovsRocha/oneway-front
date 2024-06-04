@@ -11,6 +11,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Product } from '../../../../shared/models/product';
 import { Router } from '@angular/router';
 import { ProductService } from '../../../../shared/services/product.service';
+import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-list',
@@ -24,12 +26,14 @@ import { ProductService } from '../../../../shared/services/product.service';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
+    MatTabsModule,
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
 })
-export class ProductListComponent implements OnInit{
-  dataListToTable: any[] = []
+export class ProductListComponent implements OnInit {
+  listaCategorias: string[] = ['Hospedagem', 'Transporte', 'Pontos Turísticos'];
+  dataListToTable: any[] = [];
   dataSource = new MatTableDataSource([]);
   displayedColumns: string[] = [
     'nome',
@@ -45,14 +49,16 @@ export class ProductListComponent implements OnInit{
   faTrashCan = faTrashCan;
   faPenToSquare = faPenToSquare;
 
-  data: Product[] = [];
+  products: Product[] = [];
 
-  constructor(private router: Router, private productService: ProductService) {}
-
+  constructor(
+    private toastService: ToastrService,
+    private router: Router,
+    private productService: ProductService
+  ) {}
 
   ngOnInit() {
-    this.data = this.productService.getAllMocked();
-    this.dataSource = new MatTableDataSource(this.convertListToTable(this.data))
+    this.getProdutos(0);
   }
 
   applyFilter(event: Event) {
@@ -63,7 +69,7 @@ export class ProductListComponent implements OnInit{
   edit(element: Product) {
     this.router.navigate([`product/detail`], {
       state: {
-        data: this.data.find(product => product.id === element.id),
+        data: this.products.find((product) => product.id === element.id),
       },
     });
   }
@@ -77,14 +83,37 @@ export class ProductListComponent implements OnInit{
   }
 
   convertListToTable(list: Product[]) {
-    return list.map(product => ({
+    return list.map((product) => ({
       id: product.id,
       nome: product.nome,
       tipo: product.idTipo,
       preco: 'R$ ' + product.precoMedioDiaria,
       pais: product.cidade.estado.pais.nome,
       estado: product.cidade.estado.nome,
-      cidade: product.cidade.nome
+      cidade: product.cidade.nome,
     }));
+  }
+
+  getProdutos(id: number) {
+    this.productService.getAllByType(id).subscribe({
+      next: (resultado: Product[]) => {
+        this.products = resultado;
+        this.dataSource = new MatTableDataSource(
+          this.convertListToTable(this.products)
+        );
+      },
+      error: (err: any) => {
+        console.log('Erro', err);
+        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.products = this.productService.getAllByTypeMocked(id);
+        this.dataSource = new MatTableDataSource(
+          this.convertListToTable(this.products)
+        );
+      },
+    });
+  }
+
+  onTabChange(event: MatTabChangeEvent) {
+    this.getProdutos(event.index);
   }
 }
