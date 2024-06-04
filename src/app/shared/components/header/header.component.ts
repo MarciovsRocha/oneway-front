@@ -1,13 +1,15 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit, Renderer2 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser, faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { MatMenuModule } from '@angular/material/menu';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth.service';
+import { ThemeService } from '../../services/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +21,7 @@ import { AuthService } from '../../../core/auth.service';
     FontAwesomeModule,
     MatMenuModule,
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -45,14 +47,34 @@ export class HeaderComponent implements OnInit {
   faMoon = faMoon;
   faSun = faSun;
 
-  constructor(private authService: AuthService, protected router: Router) {}
+  private subscription: Subscription;
+
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
+    private authService: AuthService,
+    protected router: Router,
+    protected themeService: ThemeService
+  ) {}
 
   ngOnInit(): void {
-    this.loadSession()
+    this.renderer.setAttribute(this.document.body, 'class', this.themeService.themeSignal());
+    this.subscription = this.authService.nomeUsuario$.subscribe(nome => {
+      this.nomeUsuario = nome;
+      this.updateMenu();
+    });
   }
 
   loadSession() {
     this.nomeUsuario = sessionStorage.getItem('nome');
+    if (this.nomeUsuario) {
+      this.listBtn = this.listBtnLoggedIn;
+    } else {
+      this.listBtn = this.listBtnPublic;
+    }
+  }
+
+  updateMenu() {
     if (this.nomeUsuario) {
       this.listBtn = this.listBtnLoggedIn;
     } else {
@@ -71,8 +93,17 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
-    this.nomeUsuario = null;
-    this.loadSession()
     this.router.navigateByUrl('/');
+  }
+
+  toggleTheme() {
+    this.themeService.updateTheme();
+    this.renderer.setAttribute(this.document.body, 'class', this.themeService.themeSignal());
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

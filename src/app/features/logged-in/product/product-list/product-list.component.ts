@@ -8,72 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Produto } from '../../../../models/produto';
+import { Product } from '../../../../shared/models/product';
 import { Router } from '@angular/router';
-import { ProdutoService } from '../../../../services/produto.service';
-
-const ELEMENT_DATA: Produto[] = [
-  {
-    id: 1,
-    titulo: 'Teste1',
-    categoria: 'Hospedagem',
-    preco: 150.2,
-    descricao: 'teste teste teste',
-    pais: 'Brasil',
-    estado: 'Paraná',
-    cidade: 'Curitiba',
-  },
-  {
-    id: 2,
-    titulo: 'Teste2',
-    categoria: 'Hospedagem',
-    preco: 150.2,
-    descricao: 'teste teste teste',
-    pais: 'Brasil',
-    estado: 'Paraná',
-    cidade: 'Curitiba',
-  },
-  {
-    id: 3,
-    titulo: 'Teste3',
-    categoria: 'Hospedagem',
-    preco: 150.2,
-    descricao: 'teste teste teste',
-    pais: 'Brasil',
-    estado: 'Paraná',
-    cidade: 'Curitiba',
-  },
-  {
-    id: 4,
-    titulo: 'Teste4',
-    categoria: 'Hospedagem',
-    preco: 150.2,
-    descricao: 'teste teste teste',
-    pais: 'Brasil',
-    estado: 'Paraná',
-    cidade: 'Curitiba',
-  },
-  {
-    id: 5,
-    titulo: 'Teste5',
-    categoria: 'Hospedagem',
-    preco: 150.2,
-    descricao: 'teste teste teste',
-    pais: 'Brasil',
-    estado: 'Paraná',
-    cidade: 'Curitiba',
-  },
-  {
-    id: 6,
-    titulo: 'Teste6',
-    categoria: 'Hospedagem',
-    preco: 150.2,
-    descricao: 'teste teste teste',
-    pais: 'Brasil',
-    estado: 'Paraná',
-    cidade: 'Curitiba',
-  },
-];
+import { ProductService } from '../../../../shared/services/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -91,11 +28,12 @@ const ELEMENT_DATA: Produto[] = [
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
 })
-export class ProductListComponent {
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+export class ProductListComponent implements OnInit{
+  dataListToTable: any[] = []
+  dataSource = new MatTableDataSource([]);
   displayedColumns: string[] = [
-    'titulo',
-    'categoria',
+    'nome',
+    'tipo',
     'preco',
     'pais',
     'estado',
@@ -107,19 +45,25 @@ export class ProductListComponent {
   faTrashCan = faTrashCan;
   faPenToSquare = faPenToSquare;
 
-  data: Produto[] = ELEMENT_DATA;
+  data: Product[] = [];
 
-  constructor(private router: Router, private produto: ProdutoService) {}
+  constructor(private router: Router, private productService: ProductService) {}
+
+
+  ngOnInit() {
+    this.data = this.productService.getAllMocked();
+    this.dataSource = new MatTableDataSource(this.convertListToTable(this.data))
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  edit(element: Produto) {
+  edit(element: Product) {
     this.router.navigate([`product/detail`], {
       state: {
-        data: element,
+        data: this.data.find(product => product.id === element.id),
       },
     });
   }
@@ -128,7 +72,19 @@ export class ProductListComponent {
     this.router.navigate(['start']);
   }
 
-  newProduct(){
+  newProduct() {
     this.router.navigate([`product/detail`]);
+  }
+
+  convertListToTable(list: Product[]) {
+    return list.map(product => ({
+      id: product.id,
+      nome: product.nome,
+      tipo: product.idTipo,
+      preco: 'R$ ' + product.precoMedioDiaria,
+      pais: product.cidade.estado.pais.nome,
+      estado: product.cidade.estado.nome,
+      cidade: product.cidade.nome
+    }));
   }
 }

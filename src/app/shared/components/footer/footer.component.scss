@@ -1,0 +1,49 @@
+@use "@angular/material" as mat;
+@import "custom-theme-config";
+@import "variables";
+
+::ng-deep {
+  .light {
+    .footer-component {
+      background-color: mat.get-theme-color($themeLight, surface);
+
+      footer {
+        border-top-color: $color-light-grey !important;
+      }
+
+      a,
+      p {
+        color: $color-dark;
+      }
+    }
+  }
+
+  .dark {
+    .footer-component {
+      background-color: mat.get-theme-color($themeDark, surface);
+
+      footer {
+        border-top-color: $color-text-dark-theme !important;
+      }
+      a,
+      p {
+        color: $color-text-dark-theme;
+      }
+    }
+  }
+}
+
+.logo {
+  cursor: pointer;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  background: linear-gradient(
+    to top left,
+    $color-medium-dark,
+    $color-medium-light
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

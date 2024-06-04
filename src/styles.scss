@@ -1,4 +1,15 @@
-@import 'variables';
+@use "@angular/material" as mat;
+@import "custom-theme-config";
+@import "variables";
+
+.dark {
+  .mat-mdc-form-field-text-prefix {
+    color: $color-light-grey !important;
+  }
+  .mdc-text-field.mdc-text-field--filled {
+    background-color: $color-input-dark !important;
+  }
+}
 
 * {
   margin: 0;
@@ -7,8 +18,22 @@
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-body, html {
+body {
+  height: 100vh;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+}
+
+#content {
+  flex: 1
+}
+
+#footer {
+  margin-top: auto
 }
 
 .flex-center {
@@ -22,11 +47,17 @@ body, html {
   background-color: $color-light-grey !important;
 }
 
-.mdc-text-field--filled:not(.mdc-text-field--disabled)
-  .mdc-line-ripple::before,
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before,
 .mdc-text-field--filled:not(.mdc-text-field--disabled):not(
     .mdc-text-field--focused
   ):hover
   .mdc-line-ripple::before {
   border-bottom-color: transparent !important;
+}
+
+.toast-container .ngx-toastr {
+  box-shadow: 0 0 12px #000000;
+}
+.toast-error {
+  background-color: mat.get-theme-color($themeDark, on-error);
 }

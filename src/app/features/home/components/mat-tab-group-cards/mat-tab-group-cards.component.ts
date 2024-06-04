@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatTabChangeEvent, MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { CarouselCardComponent } from '../../../../shared/components/carousel-card/carousel-card.component';
-import { Produto } from '../../../../models/produto';
+import { Product } from '../../../../shared/models/product';
 import { ToastrService } from 'ngx-toastr';
-import { ProdutoService } from '../../../../services/produto.service';
+import { ProductService } from '../../../../shared/services/product.service';
+import { CartService } from '../../../../shared/services/cart.service';
 
 
 @Component({
@@ -16,11 +17,12 @@ import { ProdutoService } from '../../../../services/produto.service';
 export class MatTabGroupCardsComponent implements OnInit {
   listaCategorias: string[] = ['Hospedagem', 'Transporte', 'Pontos Turísticos']
   filtroImagem: string = this.listaCategorias[0];
-  produtos: Produto[] = [];
+  produtos: Product[] = [];
 
   constructor(
-    private produtoService: ProdutoService,
-    private toastService: ToastrService
+    private produtoService: ProductService,
+    private toastService: ToastrService,
+    private cartService: CartService
   ) {}
 
     
@@ -37,13 +39,18 @@ export class MatTabGroupCardsComponent implements OnInit {
 
   getProdutos() {
     this.produtoService.getAll().subscribe({
-      next: (resultado: Produto[]) => {
+      next: (resultado: Product[]) => {
         this.produtos = resultado;
       },
       error: (err: any) => {
         console.log('Erro', err);
         this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.produtos = this.produtoService.getAllMocked();
       },
     });
+  }
+
+  addToCart(product: any): void {
+    this.cartService.addToCart(product);
   }
 }

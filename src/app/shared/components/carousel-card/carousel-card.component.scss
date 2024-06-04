@@ -1,5 +1,5 @@
 @use "@angular/material" as mat;
-@import 'custom-theme-config';
+@import "custom-theme-config";
 @import "variables";
 @import "swiper/scss";
 @import "swiper/scss/navigation";
@@ -53,9 +53,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: mat.get-theme-color($themeLight, secondary);
   margin-top: calc(0px - var(--swiper-navigation-size) / 2);
-  color: mat.get-theme-color($theme, secondary);
   cursor: pointer;
+}
+
+.swiper-pagination-bullet {
+  background: #CCCCCC;
+  opacity: 100%;
 }
 
 .swiper-pagination-bullet-active {

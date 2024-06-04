@@ -1,18 +1,17 @@
-<mat-card class="example-card" matRipple>
+<mat-card class="card-component" matRipple>
   <img
     mat-card-image
-    [src]="filtroImagem ? 'https://picsum.photos/seed/'+ filtroImagem + produto.id + '/300/300' : 'https://bartenderstore.com.br/wp-content/uploads/2023/05/no-image.jpg'"
+    [src]="image"
     alt="Photo of a Shiba Inu"
     class="custom-img"
   />
   <mat-card-header>
-    <mat-card-title>Lugar Primeiro</mat-card-title>
-    <mat-card-subtitle>R$ {{(produto.preco * 350).toFixed(2)}}</mat-card-subtitle>
+    <mat-card-title>{{ produto.nome }}</mat-card-title>
+    <mat-card-subtitle>R$ {{(produto.precoMedioDiaria).toFixed(2)}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="py-2">
     <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz
-      breeds of dog from Japan.
+      {{ produto.descricao }}
     </p>
   </mat-card-content>
   <mat-card-actions class="d-flex justify-content-between">
@@ -21,6 +20,7 @@
       mat-mini-fab
       color="primary"
       aria-label="Botão para adicionar"
+      (click)="onButtonClick(produto)"
     >
       <mat-icon>add</mat-icon>
     </button>

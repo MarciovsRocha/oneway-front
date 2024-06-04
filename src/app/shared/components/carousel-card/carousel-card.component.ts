@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { SwiperComponent, SwiperModule } from 'swiper/angular';
 import SwiperCore, { Navigation, Pagination, Scrollbar, Virtual } from 'swiper';
 import { CardComponent } from '../card/card.component';
@@ -6,7 +6,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Produto } from '../../../models/produto';
+import { Product } from '../../models/product';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, Virtual]);
 
@@ -19,8 +19,9 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, Virtual]);
   encapsulation: ViewEncapsulation.None,
 })
 export class CarouselCardComponent {
-  @Input() produtos: Produto[] = []
+  @Input() produtos: Product[] = []
   @Input() filtroImagem: string = ""
+  @Output() notify: EventEmitter<void> = new EventEmitter<void>();
   
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
@@ -42,5 +43,9 @@ export class CarouselCardComponent {
   }
   slidePrev() {
     this.swiper?.swiperRef.slidePrev();
+  }
+
+  onNotify(object: any): void {
+    this.notify.emit(object);
   }
 }

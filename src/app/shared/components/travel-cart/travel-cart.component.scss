@@ -1,4 +1,15 @@
+@use "@angular/material" as mat;
+@import "custom-theme-config";
 @import "variables";
+
+.button-custom {
+  padding: 1rem 2rem;
+  border-radius: $border-radius-default;
+  width: 100%;
+  height: 2.5rem;
+  background-color: $color-primary;
+  color: $color-dark;
+}
 
 .travel-cart {
   position: fixed;

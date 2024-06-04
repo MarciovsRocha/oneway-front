@@ -1,0 +1,62 @@
+<main class="home-dashboard home-adm-component">
+  <section class="container">
+    <div class="row mt-4">
+      @for (item of headerData; track item){
+      <div class="col">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ item?.title }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>{{ item?.value }}</mat-card-content>
+        </mat-card>
+      </div>
+      }
+    </div>
+    <div class="row mt-4">
+      <div class="col mb-4">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Produtos</mat-card-title>
+            <mat-card-subtitle>Total cadastrados</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div id="chart" style="text-align: center">
+              <apx-chart
+                [series]="chartDonutOptions.series"
+                [chart]="chartDonutOptions.chart"
+                [dataLabels]="chartDonutOptions.dataLabels"
+                [legend]="chartDonutOptions.legend"
+                [labels]="chartDonutOptions.labels"
+                [responsive]="chartDonutOptions.responsive"
+                [colors]="chartDonutOptions.colors"
+                [stroke]="chartDonutOptions.stroke"
+                [tooltip]="chartDonutOptions.tooltip"
+              ></apx-chart>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Cidade</mat-card-title>
+            <mat-card-subtitle>Mais compradas</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div id="chartBar" style="text-align: center">
+              <apx-chart
+                [series]="chartBarOptions.series"
+                [chart]="chartBarOptions.chart"
+                [dataLabels]="chartBarOptions.dataLabels"
+                [plotOptions]="chartBarOptions.plotOptions"
+                [xaxis]="chartBarOptions.xaxis"
+                [colors]="chartBarOptions.colors"
+                [tooltip]="chartBarOptions.tooltip"
+              ></apx-chart>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+</main>

@@ -53,15 +53,16 @@ export class LoginComponent {
   submit() {
     if (this.loginForm.value.email == 'easy@login.com') {
       sessionStorage.setItem('nome', 'Test Easy');
+      this.authService.updateData();
       this.toastService.success('Logado com sucesso!');
-      this.router.navigate(['start']);
+      this.router.navigate(['type-user']);
     } else {
       this.authService
         .login(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe({
           next: () => {
             this.toastService.success('Logado com sucesso!');
-            this.router.navigate(['start']);
+            this.router.navigate(['type-user']);
           },
           error: (error) => {
             let errorMessage = 'Erro ao autenticar o usuário.';

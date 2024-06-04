@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
 import { matchValidator } from '../../../validators/form-validators';
-import { User } from '../../../models/user';
+import { User } from '../../../shared/models/user';
 
 interface SignupForm {
   name: FormControl;

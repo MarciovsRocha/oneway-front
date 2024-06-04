@@ -1,4 +1,4 @@
-<div class="carousel-card" style="min-height: 400px;">
+<div class="carousel-card carousel-component" style="min-height: 400px;">
   <swiper
     #swiper
     [breakpoints]="breakpoints"
@@ -14,7 +14,8 @@
     <ng-template swiperSlide>
       <app-card class="custom-card" 
       [produto]="produto"
-      [filtroImagem]="filtroImagem" />
+      [filtroImagem]="filtroImagem"
+      (notify)="onNotify($event)" />
     </ng-template>
     }
   </swiper>

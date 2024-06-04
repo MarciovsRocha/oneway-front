@@ -4,7 +4,7 @@
 
 @include mat.core();
 
-$m3-base-config: (
+$m3-light-config: (
   color: (
     primary: matx.$m3-green-palette,
     tertiary: matx.$m3-blue-palette,
@@ -14,4 +14,14 @@ $m3-base-config: (
   ),
 );
 
-$theme: matx.define-theme($m3-base-config);
+$m3-dark-config: (
+  color: (
+    theme-type: dark,
+    primary: matx.$m3-green-palette,
+    tertiary: matx.$m3-blue-palette,
+  ),
+);
+
+
+$themeLight: matx.define-theme($m3-light-config);
+$themeDark: matx.define-theme($m3-dark-config);

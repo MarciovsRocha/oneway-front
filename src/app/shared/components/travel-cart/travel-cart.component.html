@@ -2,7 +2,7 @@
     <button
       (click)="openBottomSheet()"
       class="box"
-      matBadge="15"
+      [matBadge]="cart?.length"
       matBadgeSize="large"
       aria-label="Travel Box"
     >

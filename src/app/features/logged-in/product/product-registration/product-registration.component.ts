@@ -15,8 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ProdutoService } from '../../../../services/produto.service';
-import { Produto } from '../../../../models/produto';
+import { ProductService } from '../../../../shared/services/product.service';
+import { Product } from '../../../../shared/models/product';
 
 @Component({
   selector: 'app-product-registration',
@@ -39,7 +39,7 @@ export class ProductRegistrationComponent implements OnInit {
   @Input() id!: number;
   productForm!: FormGroup<any>;
 
-  product: Produto;
+  product: Product;
 
   listaCategorias: string[] = ['Hospedagem', 'Transporte', 'Pontos Turísticos'];
   paises: string[] = [];
@@ -53,14 +53,14 @@ export class ProductRegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private toastService: ToastrService,
-    private produto: ProdutoService,
+    private produto: ProductService,
     private route: ActivatedRoute
   ) {
     this.product = this.router.getCurrentNavigation()?.extras.state?.['data'];
     this.textAppendTitle = this.id && this.id > 0 ? 'Editar' : 'Cadastrar';
     this.productForm = new FormGroup({
-      titulo: new FormControl('', [Validators.required]),
-      categoria: new FormControl('', [Validators.required]),
+      nome: new FormControl('', [Validators.required]),
+      tipo: new FormControl('', [Validators.required]),
       preco: new FormControl('', [Validators.required]),
       descricao: new FormControl('', [Validators.required]),
       pais: new FormControl([], [Validators.required]),
@@ -75,14 +75,15 @@ export class ProductRegistrationComponent implements OnInit {
     if (this.product) this.loadDataForm(this.product);
   }
 
-  loadDataForm(product: Produto) {
-    this.productForm.get('titulo').setValue(product.titulo);
-    this.productForm.get('categoria').setValue(product.categoria);
-    this.productForm.get('preco').setValue(product.preco);
+  loadDataForm(product: Product) {
+    console.log('product', product);
+    this.productForm.get('nome').setValue(product.nome);
+    this.productForm.get('tipo').setValue(product.idTipo);
+    this.productForm.get('preco').setValue(product.precoMedioDiaria);
     this.productForm.get('descricao').setValue(product.descricao);
-    this.productForm.get('pais').setValue(product.pais);
-    this.productForm.get('estado').setValue(product.estado);
-    this.productForm.get('cidade').setValue(product.cidade);
+    this.productForm.get('pais').setValue(product.cidade.estado.pais.nome);
+    this.productForm.get('estado').setValue(product.cidade.estado.nome);
+    this.productForm.get('cidade').setValue(product.cidade.nome);
   }
 
   handleFileInputChange(event: any): void {
@@ -107,7 +108,7 @@ export class ProductRegistrationComponent implements OnInit {
   }
 
   submit() {
-    const product: Produto = this.productForm.value;
+    const product: Product = this.productForm.value;
     this.produto.saveOrUpdate(product).subscribe({
       next: () => {
         this.toastService.success('Realizado com Sucesso');

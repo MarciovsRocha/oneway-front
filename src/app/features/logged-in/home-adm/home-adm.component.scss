@@ -1,0 +1,37 @@
+@import "variables";
+
+::ng-deep {
+  .dark {
+    .home-adm-component {
+      .apexcharts-legend-text, .apexcharts-text {
+        color: $color-text-dark-theme !important;
+        fill: $color-text-dark-theme !important;
+      }
+    }
+  }
+}
+
+mat-card-title {
+  font-family: "Montserrat Alternates", sans-serif !important;
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: $color-medium-light;
+}
+
+mat-card-content {
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding-bottom: 1.5rem;
+  color: $color-dark-grey;
+}
+
+mat-card-subtitle {
+  color: $color-dark-grey;
+  margin-bottom: 1rem;
+}
+
+.home-dashboard ::ng-deep .apexcharts-legend {
+  text-align: start !important;
+}

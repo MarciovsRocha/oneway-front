@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
-import { Produto } from '../../../models/produto';
+import { Product } from '../../models/product';;
 
 @Component({
   selector: 'app-card',
@@ -14,6 +14,17 @@ import { Produto } from '../../../models/produto';
   styleUrl: './card.component.scss',
 })
 export class CardComponent {
-  @Input() produto: Produto = new Produto();
+  @Input() produto: Product = new Product();
   @Input() filtroImagem: string = ""
+  @Output() notify: EventEmitter<Product> = new EventEmitter<Product>();
+  image = 'https://bartenderstore.com.br/wp-content/uploads/2023/05/no-image.jpg'
+
+  ngOnInit() {
+    this.image = 'https://picsum.photos/seed/'+ this.filtroImagem + this.produto.id + '/300/300'
+  }
+
+  onButtonClick(object: Product): void {
+    object.image = this.image
+    this.notify.emit(object);
+  }
 }
