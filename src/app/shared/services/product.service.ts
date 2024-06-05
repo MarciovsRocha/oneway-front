@@ -258,8 +258,12 @@ export class ProductService {
     );
   }
 
-  saveOrUpdate(product: any) {
-    return this.httpClient.post<any>(`${this.apiUrl}${this.endpoint}`, product);
+  save(product: Product) {
+    return this.httpClient.post<Product>(`${this.apiUrl}${this.endpoint}`, product);
+  }
+
+  update(product: Product) {
+    return this.httpClient.put<Product>(`${this.apiUrl}${this.endpoint}`, product);
   }
 
   getAllMocked() {
@@ -277,5 +281,9 @@ export class ProductService {
       default:
         return [];
     }
+  }
+
+  delete(id: number) {
+    return this.httpClient.delete<any>(`${this.apiUrl}${this.endpoint}/id=${id}`);
   }
 }

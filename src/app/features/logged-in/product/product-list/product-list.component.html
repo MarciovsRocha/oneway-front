@@ -26,10 +26,10 @@
     </div>
     <div class="table-responsive mb-3">
       <table mat-table [dataSource]="dataSource">
-        @for (column of columnsWithoutAction; track column) {
-        <ng-container [matColumnDef]="column">
-          <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-          <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+        @for (column of columnsWithoutAction; track column.attribute; let i = $index) {
+        <ng-container [matColumnDef]="column.attribute">
+          <th mat-header-cell *matHeaderCellDef>{{ column.name }}</th>
+          <td mat-cell *matCellDef="let element">{{ element[column.attribute] }}</td>
         </ng-container>
         }
 
@@ -44,7 +44,7 @@
             >
               <fa-icon [icon]="faPenToSquare"></fa-icon>
             </button>
-            <button mat-icon-button class="m-1" aria-label="Night Mode">
+            <button (click)="delete(element?.id)" mat-icon-button class="m-1" aria-label="Ícone de lixeira">
               <fa-icon [icon]="faTrashCan"></fa-icon>
             </button>
           </td>
@@ -58,9 +58,14 @@
         <tr
           mat-row
           *matRowDef="let row; columns: columnsToDisplay"
-          class="teste"
         ></tr>
       </table>
+      @if (dataSource?.data?.length == 0) {
+        <p class="text-center pt-3">Nenhum registro encontrado</p>
+      }
+      @else if (dataSource?.filteredData?.length == 0) {
+        <p class="text-center pt-3">Nenhum registro filtrado encontrado</p>
+      }
     </div>
   </app-default-list-layout>
 </main>

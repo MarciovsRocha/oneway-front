@@ -4,7 +4,7 @@ import { Product } from "./product";
 
 export class State  {
   id!: number;
-  idPais?: number;
+  id_Pais?: number;
   nome?: string;
   pais?: Country;
   cidades?: City[]

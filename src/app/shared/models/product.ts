@@ -4,7 +4,7 @@ export class Product  {
   id!: number;
   nome?: string;
   precoMedioDiaria?: number;
-  idCidade?: number;
+  id_Cidade?: number;
   descricao?: string;
   id_Tipo?: number;
   cidade?: City;

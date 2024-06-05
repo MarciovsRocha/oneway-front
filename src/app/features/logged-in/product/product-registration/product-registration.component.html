@@ -20,8 +20,8 @@
     <mat-form-field class="product__field">
       <mat-label>Categoria</mat-label>
       <mat-select formControlName="tipo">
-        @for (categoria of listaCategorias; track categoria) {
-        <mat-option [value]="categoria">{{ categoria }}</mat-option>
+        @for (type of productTypeList; track type; let i = $index) {
+        <mat-option [value]="i+1">{{ type }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -44,27 +44,27 @@
 
     <mat-form-field class="product__field">
       <mat-label>País</mat-label>
-      <mat-select formControlName="pais">
-        @for (pais of paises; track pais) {
-        <mat-option [value]="pais">{{ pais }}</mat-option>
+      <mat-select (valueChange)="productForm?.get('estado')?.setValue('')" formControlName="pais">
+        @for (country of countryList; track country.id) {
+        <mat-option [value]="country.id">{{ country.nome }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="w-50 pe-2">
+    <mat-form-field class="w-50 pe-e2">
+      <mat-label>Estado</mat-label>
+      <mat-select (valueChange)="productForm?.get('cidade')?.setValue('')" formControlName="estado">
+        @for (state of stateListByCountry; track state.id) {
+        <mat-option [value]="state.id">{{ state.nome }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-50 ps-2">
       <mat-label>Cidade</mat-label>
       <mat-select formControlName="cidade">
-        @for (cidade of cidades; track cidade) {
-        <mat-option [value]="cidade">{{ cidade }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="w-50 ps-e2">
-      <mat-label>Estado</mat-label>
-      <mat-select formControlName="estado">
-        @for (estado of estados; track estado) {
-        <mat-option [value]="estado">{{ estado }}</mat-option>
+        @for (city of cityListByState; track city.id) {
+        <mat-option [value]="city.id">{{ city.nome }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
