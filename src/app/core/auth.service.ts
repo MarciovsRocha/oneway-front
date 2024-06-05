@@ -47,11 +47,17 @@ export class AuthService {
     sessionStorage.removeItem('auth-token');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('nome');
+    sessionStorage.removeItem('type');
     this.nomeUsuarioSubject.next(null);
     this.logoutEvent.emit();
   }
 
   updateData() {
     this.nomeUsuarioSubject.next(sessionStorage.getItem('nome'))
+  }
+
+  getUserType(): number {
+    let typeUser = sessionStorage.getItem('type')
+    return typeUser ? parseInt(sessionStorage.getItem('type')) : null;
   }
 }

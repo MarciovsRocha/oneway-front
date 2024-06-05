@@ -4,9 +4,9 @@ export class Product  {
   id!: number;
   nome?: string;
   precoMedioDiaria?: number;
-  idCidade?: number;
+  id_Cidade?: number;
   descricao?: string;
-  idTipo?: number;
+  id_Tipo?: number;
   cidade?: City;
   
   files?: File[];

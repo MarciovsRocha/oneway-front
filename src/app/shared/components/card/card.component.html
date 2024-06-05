@@ -1,19 +1,24 @@
 <mat-card class="card-component" matRipple>
-  <img
-    mat-card-image
-    [src]="image"
-    alt="Photo of a Shiba Inu"
-    class="custom-img"
-  />
-  <mat-card-header>
-    <mat-card-title>{{ produto.nome }}</mat-card-title>
-    <mat-card-subtitle>R$ {{(produto.precoMedioDiaria).toFixed(2)}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content class="py-2">
-    <p>
-      {{ produto.descricao }}
-    </p>
-  </mat-card-content>
+  <div>
+    <img
+      mat-card-image
+      [src]="image"
+      alt="Photo of a Shiba Inu"
+      class="custom-img"
+    />
+
+    <mat-card-header>
+      <mat-card-title>{{ produto.nome }}</mat-card-title>
+      <mat-card-subtitle
+        >R$ {{ produto.precoMedioDiaria.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content class="py-2">
+      <p class="card-description">
+        {{ produto.descricao }}
+      </p>
+    </mat-card-content>
+  </div>
   <mat-card-actions class="d-flex justify-content-between">
     <span class="tag">Tag teste</span>
     <button

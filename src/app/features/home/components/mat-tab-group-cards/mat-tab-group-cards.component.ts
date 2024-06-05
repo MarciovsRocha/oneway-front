@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatTabChangeEvent, MatTabGroup, MatTabsModule } from '@angular/material/tabs';
+import { Component, OnInit } from '@angular/core';
+import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { CarouselCardComponent } from '../../../../shared/components/carousel-card/carousel-card.component';
 import { Product } from '../../../../shared/models/product';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from '../../../../shared/services/product.service';
 import { CartService } from '../../../../shared/services/cart.service';
+import { ProductType } from '../../../../shared/enum/product-type.enum';
 
 
 @Component({
@@ -15,8 +16,8 @@ import { CartService } from '../../../../shared/services/cart.service';
   styleUrl: './mat-tab-group-cards.component.scss',
 })
 export class MatTabGroupCardsComponent implements OnInit {
-  listaCategorias: string[] = ['Hospedagem', 'Transporte', 'Pontos Turísticos']
-  filtroImagem: string = this.listaCategorias[0];
+  productTypeList: string[] = ProductType.getAllTypesTexts()
+  filtroImagem: string = this.productTypeList[0];
   produtos: Product[] = [];
 
   constructor(
@@ -27,25 +28,26 @@ export class MatTabGroupCardsComponent implements OnInit {
 
     
   ngOnInit() {
-    this.getProdutos();
+    this.getProdutos(1);
   }
 
   onTabChange(event: MatTabChangeEvent) {
     const activeTabLabel = event.tab.textLabel;
     this.filtroImagem = activeTabLabel;
-    this.getProdutos();
+    console.log('event.index ', event.index)
+    this.getProdutos(event.index+1);
   }
 
 
-  getProdutos() {
-    this.produtoService.getAll().subscribe({
+  getProdutos(id: number) {
+    this.produtoService.getAllByType(id).subscribe({
       next: (resultado: Product[]) => {
         this.produtos = resultado;
       },
       error: (err: any) => {
         console.log('Erro', err);
         this.toastService.error('Erro inesperado! Tente novamente mais tarde');
-        this.produtos = this.produtoService.getAllMocked();
+        this.produtos = this.produtoService.getAllByTypeMocked(id);
       },
     });
   }

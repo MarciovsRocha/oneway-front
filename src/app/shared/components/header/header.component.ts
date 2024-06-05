@@ -1,4 +1,10 @@
-import { Component, HostListener, Inject, OnInit, Renderer2 } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Inject,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -10,6 +16,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth.service';
 import { ThemeService } from '../../services/theme.service';
 import { Subscription } from 'rxjs';
+import { UserType } from '../../enum/user-type.enum';
 
 @Component({
   selector: 'app-header',
@@ -32,15 +39,6 @@ export class HeaderComponent implements OnInit {
   isAuthenticated = false;
   isNightMode = false;
   listBtn: any = [];
-  listBtnPublic = [
-    { name: 'Item1', route: '' },
-    { name: 'Item2', route: '' },
-    { name: 'Item3', route: '' },
-  ];
-  listBtnLoggedIn = [
-    { name: 'Inicio', route: '/start' },
-    { name: 'Lista Produtos', route: '/product' },
-  ];
 
   showMenu = false;
   faUser = faUser;
@@ -58,8 +56,12 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.renderer.setAttribute(this.document.body, 'class', this.themeService.themeSignal());
-    this.subscription = this.authService.nomeUsuario$.subscribe(nome => {
+    this.renderer.setAttribute(
+      this.document.body,
+      'class',
+      this.themeService.themeSignal()
+    );
+    this.subscription = this.authService.nomeUsuario$.subscribe((nome) => {
       this.nomeUsuario = nome;
       this.updateMenu();
     });
@@ -67,18 +69,38 @@ export class HeaderComponent implements OnInit {
 
   loadSession() {
     this.nomeUsuario = sessionStorage.getItem('nome');
-    if (this.nomeUsuario) {
-      this.listBtn = this.listBtnLoggedIn;
-    } else {
-      this.listBtn = this.listBtnPublic;
-    }
+    this.updateMenu()
   }
 
   updateMenu() {
-    if (this.nomeUsuario) {
-      this.listBtn = this.listBtnLoggedIn;
-    } else {
-      this.listBtn = this.listBtnPublic;
+    this.getMenu()
+  }
+
+  getMenu() {
+    this.listBtn = [{ name: 'Inicio', route: '/home' }];
+    let typeUser = this.authService.getUserType();
+    console.log('typeUser', typeUser)
+    switch (typeUser) {
+      case UserType.Cliente:
+        this.listBtn.push(
+          { name: 'Carrinho', route: '/cart' },
+          { name: 'Pedidos', route: '/start' },
+        );
+        break;
+      case UserType.Proprietario:
+        this.listBtn.push(
+          { name: 'Lista Produtos', route: '/product' },
+        );
+        break;
+      case UserType.Administrador:
+        this.listBtn.push(
+          { name: 'Dashboard', route: '/home-adm' },
+        );
+        break;
+      default:
+        console.log('oi')
+        this.listBtn.push({ name: 'Carrinho', route: '/cart' });
+        break;
     }
   }
 
@@ -98,7 +120,11 @@ export class HeaderComponent implements OnInit {
 
   toggleTheme() {
     this.themeService.updateTheme();
-    this.renderer.setAttribute(this.document.body, 'class', this.themeService.themeSignal());
+    this.renderer.setAttribute(
+      this.document.body,
+      'class',
+      this.themeService.themeSignal()
+    );
   }
 
   ngOnDestroy() {

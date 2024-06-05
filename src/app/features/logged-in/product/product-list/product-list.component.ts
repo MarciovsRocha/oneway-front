@@ -1,4 +1,4 @@
-import { Component, OnInit, computed } from '@angular/core';
+import { Component, OnInit, ViewChild, computed } from '@angular/core';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { DefaultListLayoutComponent } from '../../../../shared/components/default-list-layout/default-list-layout.component';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -11,6 +11,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Product } from '../../../../shared/models/product';
 import { Router } from '@angular/router';
 import { ProductService } from '../../../../shared/services/product.service';
+import { MatTabChangeEvent, MatTabGroup, MatTabsModule } from '@angular/material/tabs';
+import { ToastrService } from 'ngx-toastr';
+import { ProductType } from '../../../../shared/enum/product-type.enum';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+
+interface ColumnDisplay {
+  name: string;
+  attribute: string;
+}
 
 @Component({
   selector: 'app-product-list',
@@ -24,35 +34,42 @@ import { ProductService } from '../../../../shared/services/product.service';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
+    MatTabsModule,
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
 })
-export class ProductListComponent implements OnInit{
-  dataListToTable: any[] = []
+export class ProductListComponent implements OnInit {
+  @ViewChild('tabGroup') tabGroup!: MatTabGroup;
+
+  productTypeList: string[] = ProductType.getAllTypesTexts();
+  dataListToTable: any[] = [];
   dataSource = new MatTableDataSource([]);
-  displayedColumns: string[] = [
-    'nome',
-    'tipo',
-    'preco',
-    'pais',
-    'estado',
-    'cidade',
-    'acao',
+  displayedColumns: ColumnDisplay[] = [
+    { name: 'Nome', attribute: 'nome'},
+    { name: 'Tipo', attribute: 'tipo'},
+    { name: 'Preço Médio Diária', attribute: 'preco'},
+    { name: 'País', attribute: 'pais'},
+    { name: 'Estado', attribute: 'estado'},
+    { name: 'Cidade', attribute: 'cidade'},
+    { name: 'Ação', attribute: 'acao'},
   ];
-  columnsWithoutAction: string[] = this.displayedColumns.slice(0, -1);
-  columnsToDisplay: string[] = this.displayedColumns.slice();
+  columnsWithoutAction: ColumnDisplay[] = this.displayedColumns.slice(0, -1);
+  columnsToDisplay: string[] = this.displayedColumns.slice().map(column => column.attribute);
   faTrashCan = faTrashCan;
   faPenToSquare = faPenToSquare;
 
-  data: Product[] = [];
+  products: Product[] = [];
 
-  constructor(private router: Router, private productService: ProductService) {}
-
+  constructor(
+    private toastService: ToastrService,
+    private router: Router,
+    private productService: ProductService,
+    public dialog: MatDialog,
+  ) {}
 
   ngOnInit() {
-    this.data = this.productService.getAllMocked();
-    this.dataSource = new MatTableDataSource(this.convertListToTable(this.data))
+    this.getProdutos(1);
   }
 
   applyFilter(event: Event) {
@@ -63,7 +80,7 @@ export class ProductListComponent implements OnInit{
   edit(element: Product) {
     this.router.navigate([`product/detail`], {
       state: {
-        data: this.data.find(product => product.id === element.id),
+        data: this.products.find((product) => product.id === element.id),
       },
     });
   }
@@ -77,14 +94,55 @@ export class ProductListComponent implements OnInit{
   }
 
   convertListToTable(list: Product[]) {
-    return list.map(product => ({
+    return list.map((product) => ({
       id: product.id,
       nome: product.nome,
-      tipo: product.idTipo,
-      preco: 'R$ ' + product.precoMedioDiaria,
+      tipo: ProductType.getTypeText(product.id_Tipo),
+      preco: 'R$ ' + product.precoMedioDiaria.toLocaleString('pt-BR', { minimumFractionDigits: 2 }),
       pais: product.cidade.estado.pais.nome,
       estado: product.cidade.estado.nome,
-      cidade: product.cidade.nome
+      cidade: product.cidade.nome,
     }));
+  }
+
+  getProdutos(id: number) {
+    this.productService.getAllByType(id).subscribe({
+      next: (resultado: Product[]) => {
+        this.products = resultado;
+        this.dataSource = new MatTableDataSource(
+          this.convertListToTable(this.products)
+        );
+      },
+      error: (err: any) => {
+        console.log('Erro', err);
+        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.products = this.productService.getAllByTypeMocked(id);
+        this.dataSource = new MatTableDataSource(
+          this.convertListToTable(this.products)
+        );
+      },
+    });
+  }
+
+  onTabChange(event: MatTabChangeEvent) {
+    this.getProdutos(event.index+1);
+  }
+
+  delete(id: number): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.productService.delete(id).subscribe({
+          next: (result: any) => {
+            this.toastService.success('Sucesso ao realizar a operação!');
+            this.getProdutos(this.tabGroup.selectedIndex+1)
+          },
+          error: (err: any) => {
+            console.log('Erro', err);
+            this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+          },
+        });
+      }
+    });
   }
 }
