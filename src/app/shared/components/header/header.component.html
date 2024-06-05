@@ -28,38 +28,29 @@
           </button>
           }
         </li>
-        } @if (!showMenu) {
-        <li>
-          @if(nomeUsuario) {
-          <button
-            class="btn-session"
-            [matMenuTriggerFor]="menu"
-            mat-button
-            aria-label="Profile"
-          >
-            <div class="flex-center">
-              <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
-              <p>{{ nomeUsuario }}</p>
-            </div>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button (click)="onLogout()" mat-menu-item>Logout</button>
-          </mat-menu>
-          } @else {
-          <button
-            (click)="router.navigate(['login'])"
-            class="btn-session"
-            mat-button
-            aria-label="Profile"
-          >
-            <div class="flex-center">
-              <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
-              <p>{{ "Iniciar Sessão" }}</p>
-            </div>
-          </button>
-          }
-        </li>
         }
+        <li>
+          <div *ngIf="authService.user$ | async as user ; else showLoginButton">
+
+            <button
+              class="btn-session"
+              [matMenuTriggerFor]="menu"
+              mat-button
+              aria-label="Profile"
+            >
+              <div class="flex-center">
+                <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
+                <p>{{ user.name }}</p>
+              </div>
+            </button>
+            <mat-menu #menu="matMenu">
+              <app-logout-button/>
+            </mat-menu>
+          </div>
+          <ng-template #showLoginButton>
+            <app-login-button/>
+          </ng-template>
+        </li>
 
         <li class="d-sm-none">
           <button

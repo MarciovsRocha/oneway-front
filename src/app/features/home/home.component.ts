@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { SearchComponent } from '../../shared/components/search/search.component';
 import { MatTabGroupCardsComponent } from './components/mat-tab-group-cards/mat-tab-group-cards.component';
 import { TravelCartComponent } from '../../shared/components/travel-cart/travel-cart.component';
+import {AsyncPipe, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,10 @@ import { TravelCartComponent } from '../../shared/components/travel-cart/travel-
     TravelCartComponent,
     SearchComponent,
     MatTabGroupCardsComponent,
+    AsyncPipe,
+    NgIf,
   ],
 })
-export class HomeComponent {}
+export class HomeComponent {
+
+}
