@@ -1,0 +1,49 @@
+<main class="cart-component my-4">
+  <section class="form-section container">
+    <mat-card class="autenticate-card">
+      <mat-card-header class="justify-content-center">
+        <mat-card-title
+          class="custom-title text-center d-flex align-items-center"
+        >
+          <button
+            (click)="back()"
+            mat-icon-button
+            class="btn-back m-1"
+            aria-label="Voltar"
+          >
+            <fa-icon [icon]="faAngleLeft"></fa-icon></button
+          >Meus Pedidos
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="py-2 px-5">
+        <div class="product mt-2">
+          <div class="row product__row d-flex align-items-center" matRipple>
+            <div class="col-4">
+              <div class="product__row__description d-flex align-items-center">
+                <div class="ms-3">
+                  <h4>Pedido #1</h4>
+                  <p>Data da compra: 06/06/2024</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4"><p>Quantidade de itens: <span>5</span></p></div>
+            <div class="col">
+              <p>Total: R$ 1.000</p>
+            </div>
+            <div class="col text-center d-flex justify-content-end align-items-end">
+              <button
+        
+                mat-icon-button
+                class="m-1"
+                aria-label="Remove Product"
+              >
+                <fa-icon [icon]="faChevronRight"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</main>

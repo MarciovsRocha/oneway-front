@@ -8,6 +8,7 @@ import { ProductRegistrationComponent } from './features/logged-in/product/produ
 import { CartComponent } from './features/public/cart/cart.component';
 import { HomeAdmComponent } from './features/logged-in/home-adm/home-adm.component';
 import { TypeUserComponent } from './features/logged-in/type-user/type-user.component';
+import { OrdersComponent } from './features/logged-in/orders/orders.component';
 
 export const routes: Routes = [
   {
@@ -45,5 +46,9 @@ export const routes: Routes = [
   {
     path: 'home-adm',
     component: HomeAdmComponent,
+  },
+  {
+    path: 'orders',
+    component: OrdersComponent,
   },
 ];
