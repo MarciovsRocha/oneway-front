@@ -20,7 +20,10 @@
     </mat-card-content>
   </div>
   <mat-card-actions class="d-flex justify-content-between">
-    <span class="tag">Tag teste</span>
+    <div class="d-flex jusitfy-content-start align-items-center gap-2">
+      <span class="tag">{{produto?.cidade?.estado?.nome}}</span>
+      <span class="tag">{{produto?.cidade?.nome}}</span>
+    </div>
     <button
       mat-mini-fab
       color="primary"

@@ -103,3 +103,16 @@ section {
 .btn-back {
   color: $color-medium-light;
 }
+
+.cut-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 306px;
+}
+
+.address {
+  font-size: 0.75rem;
+  opacity: 50%;
+}

@@ -42,12 +42,13 @@
                 />
                 <div class="ms-3">
                   <h4>{{ product?.nome }}</h4>
-                  <p>{{ product?.descricao }}</p>
+                  <p class="cut-text">{{ product?.descricao }}</p>
+                  <p class="address mt-1">{{ product?.cidade?.estado?.pais?.nome }}, {{ product?.cidade?.estado?.nome }}, {{ product?.cidade?.nome }}</p>
                 </div>
               </div>
             </div>
-            <div class="col-2"><p>Hospedagem</p></div>
-            <div class="col-2"><p>2</p></div>
+            <div class="col-2"><p>{{ ProductType.getTypeText(product?.id_Tipo) }}</p></div>
+            <div class="col-2"><p>1</p></div>
             <div class="col-2">
               <p>R$ {{ product.precoMedioDiaria.toFixed(2) }}</p>
             </div>

@@ -17,6 +17,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
 import { Product } from '../../../shared/models/product';
+import { ProductType } from '../../../shared/enum/product-type.enum';
 
 @Component({
   selector: 'app-cart',
@@ -40,6 +41,7 @@ import { Product } from '../../../shared/models/product';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
+  ProductType = ProductType
   cart: Product[];
   cartSubscription: Subscription;
 
