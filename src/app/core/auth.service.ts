@@ -61,4 +61,8 @@ export class AuthService {
     let typeUser = sessionStorage.getItem('type')
     return typeUser ? parseInt(sessionStorage.getItem('type')) : null;
   }
+
+  isAutenticated(): boolean {
+    return this.nomeUsuarioSubject.value != null
+  }
 }

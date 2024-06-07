@@ -20,7 +20,7 @@ import { Product } from '../../../shared/models/product';
 import { ProductType } from '../../../shared/enum/product-type.enum';
 import { Order } from '../../../shared/models/order';
 import { ToastrService } from 'ngx-toastr';
-
+import { AuthService } from '../../../core/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -52,7 +52,7 @@ export class CartComponent {
   faTrashCan = faTrashCan;
   faAngleLeft = faAngleLeft;
   isFromOrder: boolean = false;
-  title: string = 'Carrinho'
+  title: string = 'Carrinho';
   cupom = new FormControl('');
 
   constructor(
@@ -61,6 +61,7 @@ export class CartComponent {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastrService,
+    private authService: AuthService
   ) {
     this.order = this.router.getCurrentNavigation()?.extras.state?.['data'];
   }
@@ -71,11 +72,10 @@ export class CartComponent {
     });
 
     if (this.isFromOrder) {
-      this.title = `Pedido #${this.order?.numero}`
-      this.products = this.order?.produtos || []
-      this.cupom.disable()
-      this.cupom.setValue(this.order?.cupom || '')
-      
+      this.title = `Pedido #${this.order?.numero}`;
+      this.products = this.order?.produtos || [];
+      this.cupom.disable();
+      this.cupom.setValue(this.order?.cupom || '');
     } else {
       this.cartSubscription = this.cartService.cart$.subscribe((cart) => {
         this.products = cart;
@@ -99,33 +99,36 @@ export class CartComponent {
     } else {
       this.router.navigate(['']);
     }
-    
   }
 
   finish() {
-    if (!this.isFromOrder) {
-      let orders: Order[] = JSON.parse(localStorage.getItem('orders')) || [];
-      let newOrder = new Order();
-      newOrder.produtos = this.products;
-      newOrder.dataCompra = new Date();
-      newOrder.total = this.getTotal(this.products);
-      newOrder.cupom = this.cupom.value
-      orders.push(newOrder);
-      localStorage.setItem('orders', JSON.stringify(orders));
-      this.toastService.success('Sucesso ao realizar a operação!');
-      this.cartService.cleanCart();
-      this.router.navigate(['']);
+    if (this.authService.isAutenticated()) {
+      if (!this.isFromOrder) {
+        let orders: Order[] = JSON.parse(localStorage.getItem('orders')) || [];
+        let newOrder = new Order();
+        newOrder.produtos = this.products;
+        newOrder.dataCompra = new Date();
+        newOrder.total = this.getTotal(this.products);
+        newOrder.cupom = this.cupom.value;
+        orders.push(newOrder);
+        localStorage.setItem('orders', JSON.stringify(orders));
+        this.toastService.success('Operação realizada com sucesso!');
+        this.cartService.cleanCart();
+        this.router.navigate(['']);
+      }
+    } else {
+      this.toastService.warning("Você precisar autenticar para realizar essa operação")
     }
   }
 
   getTotal(products: Product[]): number {
     if (products && products.length > 0) {
       let total = 0;
-      products.forEach(product => {
-        total += product.precoMedioDiaria
+      products.forEach((product) => {
+        total += product.precoMedioDiaria;
       });
-      return total
+      return total;
     }
-    return 0
+    return 0;
   }
 }

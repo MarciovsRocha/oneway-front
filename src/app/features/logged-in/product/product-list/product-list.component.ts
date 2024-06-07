@@ -134,7 +134,7 @@ export class ProductListComponent implements OnInit {
       if (result) {
         this.productService.delete(id).subscribe({
           next: (result: any) => {
-            this.toastService.success('Sucesso ao realizar a operação!');
+            this.toastService.success('Operação realizada com sucesso!');
             this.getProdutos(this.tabGroup.selectedIndex+1)
           },
           error: (err: any) => {
