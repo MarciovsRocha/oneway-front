@@ -79,7 +79,6 @@ export class HeaderComponent implements OnInit {
   getMenu() {
     this.listBtn = [{ name: 'Inicio', route: '/home' }];
     let typeUser = this.authService.getUserType();
-    console.log('typeUser', typeUser)
     switch (typeUser) {
       case UserType.Cliente:
         this.listBtn.push(
@@ -98,7 +97,6 @@ export class HeaderComponent implements OnInit {
         );
         break;
       default:
-        console.log('oi')
         this.listBtn.push({ name: 'Carrinho', route: '/cart' });
         break;
     }

@@ -34,7 +34,6 @@ export class MatTabGroupCardsComponent implements OnInit {
   onTabChange(event: MatTabChangeEvent) {
     const activeTabLabel = event.tab.textLabel;
     this.filtroImagem = activeTabLabel;
-    console.log('event.index ', event.index)
     this.getProdutos(event.index+1);
   }
 
