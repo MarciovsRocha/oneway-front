@@ -67,6 +67,18 @@
   text-overflow: ellipsis;
 }
 
+.card-address {
+  font-size: 0.75rem;
+  opacity: 80%;
+  padding: 0;
+  margin: 0;
+
+  max-width: 210px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
 button,
 button:hover,
 .mat-mdc-card {
@@ -76,4 +88,8 @@ button:hover,
 .tag {
   padding: 0.3rem 0.7rem;
   border-radius: 0.5rem;
+}
+
+.mdc-card__actions {
+  padding: 1rem;
 }
