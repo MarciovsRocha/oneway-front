@@ -17,19 +17,20 @@
         <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="py-2 px-5">
-        <div class="product mt-2">
-          <div class="row product__row d-flex align-items-center" matRipple>
+        <div class="product mt-2 d-flex gap-3 row">
+          @for (order of ordersDesc; track order; let i = $index) {
+          <div (click)="edit(order, orders.length - i)" class="row product__row d-flex align-items-center" matRipple>
             <div class="col-4">
               <div class="product__row__description d-flex align-items-center">
                 <div class="ms-3">
-                  <h4>Pedido #1</h4>
-                  <p>Data da compra: 06/06/2024</p>
+                  <h4>Pedido #{{orders.length - i}}</h4>
+                  <p>Data da compra: {{order?.dataCompra | date:'dd/MM/yyyy HH:mm'}}</p>
                 </div>
               </div>
             </div>
-            <div class="col-4"><p>Quantidade de itens: <span>5</span></p></div>
+            <div class="col-4"><p>Quantidade de itens: <span>{{order?.produtos?.length || 0}}</span></p></div>
             <div class="col">
-              <p>Total: R$ 1.000</p>
+              <p>Total: R$ {{(order?.total || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}}</p>
             </div>
             <div class="col text-center d-flex justify-content-end align-items-end">
               <button
@@ -42,6 +43,9 @@
               </button>
             </div>
           </div>
+          } @empty {
+            <p class="text-center p-3">Nenhum pedido encontrado!</p>
+          }
         </div>
       </mat-card-content>
     </mat-card>

@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Product } from '../../../shared/models/product';
+import { Order } from '../../../shared/models/order';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-orders',
@@ -29,22 +32,45 @@ import { Product } from '../../../shared/models/product';
     FontAwesomeModule,
     MatButtonModule,
     MatDialogModule,
+    CommonModule,
   ],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss',
 })
 export class OrdersComponent {
-  orders: Product[];
+  orders: Order[] = [];
 
   faChevronRight = faChevronRight;
   faAngleLeft = faAngleLeft;
-  
-  constructor(
-    public dialog: MatDialog,
-    private router: Router,
-  ) {}
+
+  constructor(public dialog: MatDialog, private router: Router) {}
+
+  ngOnInit() {
+    this.orders = JSON.parse(localStorage.getItem('orders')) || [];
+  }
 
   back() {
     this.router.navigate(['']);
+  }
+
+  edit(element: Order, orderNumber: number) {
+    if (element) element.numero = orderNumber;
+    console.log('element', element);
+    this.router.navigate([`orders/detail`], {
+      state: {
+        data: element,
+      },
+    });
+  }
+
+  get ordersDesc() {
+    if (this.orders && this.orders.length > 0) {
+      return this.orders.sort((a, b) => {
+        const dateA = new Date(a.dataCompra);
+        const dateB = new Date(b.dataCompra);
+        return dateB.getTime() - dateA.getTime();
+      });
+    }
+    return []
   }
 }

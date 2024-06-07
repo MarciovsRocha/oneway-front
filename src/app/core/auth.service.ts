@@ -48,6 +48,7 @@ export class AuthService {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('nome');
     sessionStorage.removeItem('type');
+    localStorage.removeItem('orders');
     this.nomeUsuarioSubject.next(null);
     this.logoutEvent.emit();
   }

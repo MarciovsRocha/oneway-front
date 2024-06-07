@@ -48,4 +48,10 @@ export class CartService {
   getCart(): Product[] {
     return this.cart;
   }
+
+  cleanCart(): void {
+    localStorage.setItem(this.cartKey, JSON.stringify([]));
+    this.cartSubject.next([]);
+  }
+  
 }

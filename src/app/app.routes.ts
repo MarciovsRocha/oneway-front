@@ -49,6 +49,9 @@ export const routes: Routes = [
   },
   {
     path: 'orders',
-    component: OrdersComponent,
+    children: [
+      { path: '', component: OrdersComponent },
+      { path: 'detail', component: CartComponent, data: { isFromOrder: true} },
+    ],
   },
 ];

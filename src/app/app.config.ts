@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  ApplicationConfig,
+  LOCALE_ID,
+  importProvidersFrom,
+} from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -8,6 +12,10 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { loadingInterceptor } from './core/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideToastr(),
     provideHttpClient(withInterceptors([loadingInterceptor])),
-    importProvidersFrom(NgxSpinnerModule.forRoot(({ type: 'ball-fussion' }))),
+    importProvidersFrom(NgxSpinnerModule.forRoot({ type: 'ball-fussion' })),
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
   ],
 };
