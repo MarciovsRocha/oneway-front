@@ -1,8 +1,18 @@
 @import "variables";
 
 ::ng-deep {
+  .light {
+    .order-component {
+      .product__row {
+        background-color: $color-order-light;
+        &:hover {
+          background-color: $color-order-light-hover;
+        }
+      }
+    }
+  }
   .dark {
-    .cart-component {
+    .order-component {
       .product__header span,
       h1,
       h2,
@@ -10,6 +20,13 @@
       h4,
       p {
         color: $color-text-dark-theme;
+      }
+
+      .product__row {
+        background-color: $color-order-dark;
+        &:hover {
+          background-color: $color-order-dark-hover;
+        }
       }
     }
   }
@@ -62,18 +79,16 @@ section {
     border-style: solid;
   }
   &__row {
-    height: 150px;
-    border-width: 0px;
-    border-bottom-width: 2px;
-    border-color: $color-border-light;
-    border-style: solid;
+    height: 110px;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: 150ms;
 
     &__description {
       h4 {
         font-weight: 500;
         margin-bottom: 0.5rem;
       }
-
       p {
         margin: 0;
       }
@@ -102,17 +117,4 @@ section {
 
 .btn-back {
   color: $color-medium-light;
-}
-
-.cut-text {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  max-width: 306px;
-}
-
-.address {
-  font-size: 0.75rem;
-  opacity: 50%;
 }

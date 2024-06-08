@@ -1,0 +1,30 @@
+@import "variables";
+
+::ng-deep {
+  .dark {
+    .not-found-component {
+      h1,
+      h2,
+      h3,
+      h4,
+      p {
+        color: $color-text-dark-theme;
+      }
+    }
+  }
+}
+
+a,
+a:visited,
+a:hover {
+  color: $color-medium-light;
+}
+
+.not-found-component {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+}

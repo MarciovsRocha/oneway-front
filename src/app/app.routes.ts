@@ -8,6 +8,8 @@ import { ProductRegistrationComponent } from './features/logged-in/product/produ
 import { CartComponent } from './features/public/cart/cart.component';
 import { HomeAdmComponent } from './features/logged-in/home-adm/home-adm.component';
 import { TypeUserComponent } from './features/logged-in/type-user/type-user.component';
+import { OrdersComponent } from './features/logged-in/orders/orders.component';
+import { NotFoundComponent } from './features/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -46,4 +48,12 @@ export const routes: Routes = [
     path: 'home-adm',
     component: HomeAdmComponent,
   },
+  {
+    path: 'orders',
+    children: [
+      { path: '', component: OrdersComponent },
+      { path: 'detail', component: CartComponent, data: { isFromOrder: true} },
+    ],
+  },
+  { path: '**', component: NotFoundComponent },
 ];
