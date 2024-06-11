@@ -3,12 +3,6 @@
 @import "variables";
 
 main {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: calc(100% - $header-height);
-
   section {
     height: 100%;
     display: flex;
