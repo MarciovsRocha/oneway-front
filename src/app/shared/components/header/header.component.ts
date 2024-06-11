@@ -82,8 +82,8 @@ export class HeaderComponent implements OnInit {
     switch (typeUser) {
       case UserType.Cliente:
         this.listBtn.push(
-          { name: 'Carrinho', route: '/cart' },
-          { name: 'Pedidos', route: '/orders' },
+          { name: 'Montar Pacote', route: '/package' },
+          { name: 'Minhas Viagens', route: '/travels' },
         );
         break;
       case UserType.Proprietario:
@@ -97,7 +97,7 @@ export class HeaderComponent implements OnInit {
         );
         break;
       default:
-        this.listBtn.push({ name: 'Carrinho', route: '/cart' });
+        this.listBtn.push({ name: 'Montar Pacote', route: '/package' });
         break;
     }
   }

@@ -19,27 +19,31 @@
           <mat-progress-bar
             class="cart__progress-bar"
             mode="determinate"
-            [value]="isFromOrder ? 100 : 70"
+            [value]="products.length == 0 ? 0 : (isFromOrder ? 100 : 70)"
           ></mat-progress-bar>
         </div>
 
         <div class="product">
-          <div class="row product__header d-flex align-items-center">
-            <div class="col-5"><span>Produto</span> </div>
-            <div class="col-2"><span>Categoria</span></div>
-            <div class="col-2"><span>Quantidade</span></div>
-            <div class="col-2"><span>Subtotal</span></div>
-            @if (!isFromOrder) {
-              <div class="col-1 text-center"><span>Ação</span></div>
-            }
-          </div>
+          @if (products.length == 0) {
+            <p class="text-center pt-3">Pacote vazio!</p>
+          } @else {
+            <div class="row product__header d-flex align-items-center">
+              <div class="col-5"><span>Produto</span> </div>
+              <div class="col-2"><span>Categoria</span></div>
+              <div class="col-2"><span>Quantidade</span></div>
+              <div class="col-2"><span>Subtotal</span></div>
+              @if (!isFromOrder) {
+                <div class="col-1 text-center"><span>Ação</span></div>
+              }
+            </div>
+          }
           @for (product of products; track product) {
           <div class="row product__row d-flex align-items-center">
             <div class="col-5">
               <div class="product__row__description d-flex align-items-center">
                 <img
                   [src]="product?.image"
-                  alt="Photo of a Shiba Inu"
+                  alt="Photo of product"
                   class="custom-img"
                 />
                 <div class="ms-3">
@@ -67,26 +71,17 @@
               </div>
             }
           </div>
-          } @empty {
-          <p class="text-center pt-3">Carrinho vazio!</p>
           }
         </div>
         <div class="row mt-5">
-          <div class="coupon col">
-          @if (isFromOrder) {
-            <h3>Cupom</h3>
-            <p>Caso tenha aplicado, será exibido:</p>
-            <mat-form-field class="mt-2">
-              <input type="text" matInput placeholder="Código" [formControl]="cupom"/>
-            </mat-form-field>
-          }@else {
-            <h3>Tem cupom?</h3>
-            <p>Adicione seu código para um desconto instântaneo</p>
-            <mat-form-field class="mt-2">
-              <input type="text" matInput placeholder="Código" [formControl]="cupom"/>
+          <div class="travel-name-field col">
+          @if (!isFromOrder) {
+            <h3>Que tal um nome para sua viagem?</h3>
+            <mat-form-field class="mt-2 travel-name-field-input">
+              <input type="text" matInput placeholder="Escreva aqui" [formControl]="name" maxlength="40"/>
             </mat-form-field>
           }
-        </div>
+          </div>
           <div class="col d-flex align-items-end">
             @if (!isFromOrder) {
               <button

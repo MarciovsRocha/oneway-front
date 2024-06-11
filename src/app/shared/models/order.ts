@@ -5,6 +5,6 @@ export class Order {
   numero: number;
   dataCompra: Date;
   total: number;
-  cupom: string;
+  name: string;
   produtos?: Product[]
 };

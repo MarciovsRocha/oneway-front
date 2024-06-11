@@ -36,7 +36,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'cart',
+    path: 'package',
     component: CartComponent,
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -49,7 +49,7 @@ export const routes: Routes = [
     component: HomeAdmComponent,
   },
   {
-    path: 'orders',
+    path: 'travels',
     children: [
       { path: '', component: OrdersComponent },
       { path: 'detail', component: CartComponent, data: { isFromOrder: true} },
