@@ -10,6 +10,8 @@ import { HomeAdmComponent } from './features/logged-in/home-adm/home-adm.compone
 import { TypeUserComponent } from './features/logged-in/type-user/type-user.component';
 import { OrdersComponent } from './features/logged-in/orders/orders.component';
 import { NotFoundComponent } from './features/not-found/not-found.component';
+import { LocationListComponent } from './features/logged-in/location/location-list/location-list.component';
+import { LocationRegistrationComponent } from './features/logged-in/location/location-registration/location-registration.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +35,13 @@ export const routes: Routes = [
     children: [
       { path: '', component: ProductListComponent },
       { path: 'detail', component: ProductRegistrationComponent },
+    ],
+  },
+  {
+    path: 'location',
+    children: [
+      { path: '', component: LocationListComponent },
+      { path: 'detail', component: LocationRegistrationComponent },
     ],
   },
   {

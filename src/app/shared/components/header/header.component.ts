@@ -89,11 +89,13 @@ export class HeaderComponent implements OnInit {
       case UserType.Proprietario:
         this.listBtn.push(
           { name: 'Lista Produtos', route: '/product' },
+          { name: 'Lista Localidades', route: '/location' },
         );
         break;
       case UserType.Administrador:
         this.listBtn.push(
           { name: 'Dashboard', route: '/home-adm' },
+          { name: 'Lista Localidades', route: '/location' },
         );
         break;
       default:

@@ -1,0 +1,73 @@
+<main class="container">
+  <app-default-list-layout
+    [title]="'Lista de Localidades'"
+    [backBtnText]="'Voltar'"
+    [newItemBtnText]="'Nova Localidade'"
+    (back)="back()"
+    (newItem)="newProduct()"
+  >
+    <mat-form-field class="w-100">
+      <mat-label>Filtro</mat-label>
+      <input #inputSearch matInput (keyup)="applyFilter($event)" />
+    </mat-form-field>
+
+    <div class="custom-tab-group mb-3">
+      <mat-tab-group
+        class="mb-3"
+        mat-stretch-tabs="false"
+        mat-align-tabs="start"
+        (selectedTabChange)="onTabChange($event)"
+        #tabGroup
+      >
+        @for (type of locationTypeList; track type) {
+        <mat-tab [label]="type"></mat-tab>
+        }
+      </mat-tab-group>
+    </div>
+    <div class="table-responsive mb-3">
+      <table mat-table [dataSource]="dataSource">
+        @for (column of columnsWithoutAction; track column.attribute; let i = $index) {
+        <ng-container [matColumnDef]="column.attribute">
+          <th mat-header-cell *matHeaderCellDef>{{ column.name }}</th>
+          <td mat-cell *matCellDef="let element">{{ element[column.attribute] }}</td>
+        </ng-container>
+        }
+
+        <ng-container matColumnDef="acao">
+          <th mat-header-cell *matHeaderCellDef>Ação</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              (click)="edit(element)"
+              mat-icon-button
+              class="m-1"
+              aria-label="Ícone Editar"
+            >
+              <fa-icon [icon]="faPenToSquare"></fa-icon>
+            </button>
+            @if (locationTypeSelected == 3) {
+              <button (click)="delete(element?.id)" mat-icon-button class="m-1" aria-label="Ícone de lixeira">
+                <fa-icon [icon]="faTrashCan"></fa-icon>
+              </button>
+            }
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="columnsToDisplay"
+          class="coluna-acao"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: columnsToDisplay"
+        ></tr>
+      </table>
+      @if (dataSource?.data?.length == 0) {
+        <p class="text-center pt-3">Nenhum registro encontrado</p>
+      }
+      @else if (dataSource?.filteredData?.length == 0) {
+        <p class="text-center pt-3">Nenhum registro filtrado encontrado</p>
+      }
+    </div>
+  </app-default-list-layout>
+</main>

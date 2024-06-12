@@ -14,4 +14,12 @@ export class CountryService {
   getAll() {
     return this.httpClient.get<Country[]>(`${this.apiUrl}${this.endpoint}`);
   }
+
+  save(country: Country) {
+    return this.httpClient.post<Country>(`${this.apiUrl}${this.endpoint}`, country);
+  }
+
+  update(country: Country) {
+    return this.httpClient.put<Country>(`${this.apiUrl}${this.endpoint}`, country);
+  }
 }
