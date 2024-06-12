@@ -65,4 +65,9 @@ export class AuthService {
   isAutenticated(): boolean {
     return this.nomeUsuarioSubject.value != null
   }
+
+  getAllUsers() {
+    return this.httpClient
+      .get<any>(`${this.apiUrl}${this.endpoint}`)
+  }
 }

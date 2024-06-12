@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,6 +18,12 @@ import {
   ChartComponent,
   NgApexchartsModule,
 } from 'ng-apexcharts';
+import { AuthService } from '../../../core/auth.service';
+import { User } from '../../../shared/models/user';
+import { ToastrService } from 'ngx-toastr';
+import { ProductService } from '../../../shared/services/product.service';
+import { Product } from '../../../shared/models/product';
+import { ProductType } from '../../../shared/enum/product-type.enum';
 
 export type ChartDonutOptions = {
   series: ApexNonAxisChartSeries;
@@ -55,30 +61,39 @@ export type ChartBarOptions = {
   templateUrl: './home-adm.component.html',
   styleUrl: './home-adm.component.scss',
 })
-export class HomeAdmComponent {
+export class HomeAdmComponent implements OnInit {
+  totalUsers = 0
+  totalProducts = 0
+  products: Product[] = []
   headerData = [
     {
+      id: 1,
       title: 'Total de Usuários',
-      value: 1000,
+      value: this.totalUsers,
     },
+    // {
+    //   title: 'Total de Compras',
+    //   value: 1000,
+    // },
     {
-      title: 'Total de Compras',
-      value: 1000,
-    },
-    {
+      id: 3,
       title: 'Total de Produtos',
-      value: 1000,
+      value: this.totalProducts,
     },
   ];
 
   @ViewChild('chartDonut') chartDonut: ChartComponent;
-  public chartDonutOptions: Partial<ChartDonutOptions>;
+  chartDonutOptions: Partial<ChartDonutOptions>;
   @ViewChild('chartBar') chartBar: ChartComponent;
-  public chartBarOptions: Partial<ChartBarOptions>;
+  chartBarOptions: Partial<ChartBarOptions>;
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private toastService: ToastrService,
+    private productService: ProductService
+  ) {
     this.chartDonutOptions = {
-      series: [44, 55, 13],
+      series: [],
       chart: {
         height: 320,
         width: 500,
@@ -178,5 +193,46 @@ export class HomeAdmComponent {
         },
       },
     };
+  }
+
+  ngOnInit(){
+    this.getTotalUsers()
+    this.getAllProducts()
+  }
+
+  getTotalUsers() {
+    this.authService.getAllUsers().subscribe({
+      next: (resultado: User[]) => {
+        this.totalUsers = resultado.length;
+        this.headerData.find(data => data.id == 1).value = this.totalUsers;
+      },
+      error: (err: any) => {
+        console.log('Erro', err);
+        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+      },
+    });
+  }
+
+  getAllProducts() {
+    this.productService.getAll().subscribe({
+      next: (resultado: Product[]) => {
+        this.products = resultado;
+        this.totalProducts = resultado.length;
+        this.headerData.find(data => data.id == 3).value = this.totalProducts;
+        this.updateDataDonutDash();
+      },
+      error: (err: any) => {
+        console.log('Erro', err);
+        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+      },
+    });
+  }
+
+   updateDataDonutDash() {
+    let result: number[] = [0, 0, 0]
+    result[0] = this.products.filter(product => product.id_Tipo == ProductType.Hospedagem).length || 0
+    result[1] = this.products.filter(product => product.id_Tipo == ProductType.Transporte).length || 0
+    result[2] = this.products.filter(product => product.id_Tipo == ProductType.PontosTuristicos).length || 0
+    this.chartDonutOptions.series = result
   }
 }
