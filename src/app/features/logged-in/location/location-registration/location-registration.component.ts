@@ -86,7 +86,7 @@ export class LocationRegistrationComponent implements OnInit {
     this.locationForm.get('nome').setValue(product.nome);
     switch (this.type) {
       case 2:
-        this.locationForm.get('pais').setValidators([Validators.required]);
+        this.locationForm.get('pais').setValidators(Validators.required);
         if (this.isEditProduct) {
           let state: State = this.stateList.find(
             (state) => (state.id == this.product.id)
@@ -144,13 +144,13 @@ export class LocationRegistrationComponent implements OnInit {
     switch (this.type) {
       case 1:
         let country: Country = new Country();
-        country.id = this.isEditProduct ? this.product.id : 0;
+        country.id = this.isEditProduct ? this.product.id : null;
         country.nome = this.locationForm.get('nome').value;
         country.estados = [];
         return country;
       case 2:
         const state: State = new State();
-        state.id = this.isEditProduct ? this.product.id : 0;
+        state.id = this.isEditProduct ? this.product.id : null;
         state.nome = this.locationForm.get('nome').value;
         state.cidades = [];
         let countrySelected: Country = this.countryList.find(
@@ -162,7 +162,7 @@ export class LocationRegistrationComponent implements OnInit {
         return state;
       case 3:
         const city: City = new City();
-        city.id = this.isEditProduct ? this.product.id : 0;
+        city.id = this.isEditProduct ? this.product.id : null;
         city.nome = this.locationForm.get('nome').value;
         city.produtos = [];
         let stateSelected: State = this.stateList.find(
