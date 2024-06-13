@@ -26,4 +26,8 @@ export class CityService {
   delete(id: number) {
     return this.httpClient.delete<any>(`${this.apiUrl}${this.endpoint}/id=${id}`);
   }
+
+  getTopCitiesByProductCount(top: number) {
+    return this.httpClient.get<any>(`${this.apiUrl}${this.endpoint}/produto/top=${top}`);
+  }
 }

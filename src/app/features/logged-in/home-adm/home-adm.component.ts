@@ -24,6 +24,10 @@ import { ToastrService } from 'ngx-toastr';
 import { ProductService } from '../../../shared/services/product.service';
 import { Product } from '../../../shared/models/product';
 import { ProductType } from '../../../shared/enum/product-type.enum';
+import ApexCharts from 'apexcharts';
+import { CityService } from '../../../shared/services/city.service';
+import { CityProductsDTO } from '../../../shared/helper/city-products-dto';
+import { ProductTypesDTO } from '../../../shared/helper/product-types-dto';
 
 export type ChartDonutOptions = {
   series: ApexNonAxisChartSeries;
@@ -62,9 +66,11 @@ export type ChartBarOptions = {
   styleUrl: './home-adm.component.scss',
 })
 export class HomeAdmComponent implements OnInit {
-  totalUsers = 0
-  totalProducts = 0
-  products: Product[] = []
+  totalUsers = 0;
+  totalProducts = 0;
+  products: Product[] = [];
+  topCities: CityProductsDTO[] = [];
+  productTypes: ProductTypesDTO[] = [];
   headerData = [
     {
       id: 1,
@@ -90,7 +96,8 @@ export class HomeAdmComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private toastService: ToastrService,
-    private productService: ProductService
+    private productService: ProductService,
+    private cityService: CityService,
   ) {
     this.chartDonutOptions = {
       series: [],
@@ -99,6 +106,19 @@ export class HomeAdmComponent implements OnInit {
         width: 500,
         type: 'donut',
         fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
+        animations: {
+          enabled: true,
+          easing: 'easeinout',
+          speed: 800,
+          animateGradually: {
+              enabled: true,
+              delay: 150
+          },
+          dynamicAnimation: {
+              enabled: true,
+              speed: 350
+          }
+      }
       },
       stroke: {
         show: false,
@@ -112,7 +132,7 @@ export class HomeAdmComponent implements OnInit {
           fontWeight: 'bold',
         },
       },
-      labels: ['Hospedagem', 'Transporte', 'Pontos Turísticos'],
+      labels: [],
       responsive: [
         {
           breakpoint: 480,
@@ -141,15 +161,11 @@ export class HomeAdmComponent implements OnInit {
       tooltip: {
         theme: 'dark',
         fillSeriesColor: false,
-      }
+      },
     };
 
     this.chartBarOptions = {
-      series: [
-        {
-          data: [400, 580, 1101],
-        },
-      ],
+      series: [],
       chart: {
         type: 'bar',
         height: 275,
@@ -165,7 +181,7 @@ export class HomeAdmComponent implements OnInit {
         enabled: false,
       },
       xaxis: {
-        categories: ['Curitiba', 'São Paulo', 'Blumenau'],
+        categories: [],
         title: {
           style: {
             fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
@@ -177,7 +193,7 @@ export class HomeAdmComponent implements OnInit {
           style: {
             fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
           },
-        }
+        },
       },
       tooltip: {
         theme: 'dark',
@@ -195,16 +211,17 @@ export class HomeAdmComponent implements OnInit {
     };
   }
 
-  ngOnInit(){
-    this.getTotalUsers()
-    this.getAllProducts()
+  ngOnInit() {
+    this.getTotalUsers();
+    this.getTotalProductsByType()
+    this.getTopCitiesByProductCount()
   }
 
   getTotalUsers() {
-    this.authService.getAllUsers().subscribe({
-      next: (resultado: User[]) => {
-        this.totalUsers = resultado.length;
-        this.headerData.find(data => data.id == 1).value = this.totalUsers;
+    this.authService.getTotalUsers().subscribe({
+      next: (resultado: number) => {
+        this.totalUsers = resultado;
+        this.headerData.find((data) => data.id == 1).value = this.totalUsers;
       },
       error: (err: any) => {
         console.log('Erro', err);
@@ -213,13 +230,15 @@ export class HomeAdmComponent implements OnInit {
     });
   }
 
-  getAllProducts() {
-    this.productService.getAll().subscribe({
-      next: (resultado: Product[]) => {
-        this.products = resultado;
-        this.totalProducts = resultado.length;
-        this.headerData.find(data => data.id == 3).value = this.totalProducts;
-        this.updateDataDonutDash();
+  getTopCitiesByProductCount() {
+    this.cityService.getTopCitiesByProductCount(3).subscribe({
+      next: (resultado: CityProductsDTO[]) => {
+        this.topCities = resultado;
+        let result = resultado.map(cidade => cidade.produto_Qtd);
+        let labels = resultado.map(cidade => cidade.nome);
+        setTimeout(() => {
+          this.updateDataBarDash(result, labels)
+        }, 300);
       },
       error: (err: any) => {
         console.log('Erro', err);
@@ -228,11 +247,34 @@ export class HomeAdmComponent implements OnInit {
     });
   }
 
-   updateDataDonutDash() {
-    let result: number[] = [0, 0, 0]
-    result[0] = this.products.filter(product => product.id_Tipo == ProductType.Hospedagem).length || 0
-    result[1] = this.products.filter(product => product.id_Tipo == ProductType.Transporte).length || 0
-    result[2] = this.products.filter(product => product.id_Tipo == ProductType.PontosTuristicos).length || 0
-    this.chartDonutOptions.series = result
+  updateDataBarDash(result: number[], labels: any[]) {
+    this.chartBarOptions.series = [{ data: result }];
+    labels.forEach(category => {
+      this.chartBarOptions.xaxis.categories.push(category)   
+    })
+  }
+
+  getTotalProductsByType() {
+    this.productService.getTotalProductsByType().subscribe({
+      next: (resultado: ProductTypesDTO[]) => {
+        this.productTypes = resultado;
+        let result = resultado.map(product => product.produtos_Qtd);
+        let labels = resultado.map(product => ProductType.getTypeText(product.id_Tipo));
+        this.totalProducts = resultado.reduce((total, cidade) => total + cidade.produtos_Qtd, 0);
+        this.headerData.find((data) => data.id == 3).value = this.totalProducts;
+        setTimeout(() => {
+          this.updateDataDonutDash(result, labels)
+        }, 300);
+      },
+      error: (err: any) => {
+        console.log('Erro', err);
+        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+      },
+    });
+  }
+
+  updateDataDonutDash(result: number[], labels: string[]) {
+    this.chartDonutOptions.series = result;
+    this.chartDonutOptions.labels = labels;
   }
 }

@@ -66,8 +66,8 @@ export class AuthService {
     return this.nomeUsuarioSubject.value != null
   }
 
-  getAllUsers() {
+  getTotalUsers() {
     return this.httpClient
-      .get<any>(`${this.apiUrl}${this.endpoint}`)
+      .get<number>(`${this.apiUrl}${this.endpoint}/total`)
   }
 }
