@@ -95,6 +95,7 @@ export class HeaderComponent implements OnInit {
       case UserType.Administrador:
         this.listBtn.push(
           { name: 'Dashboard', route: '/home-adm' },
+          { name: 'Lista Produtos', route: '/product' },
           { name: 'Lista Localidades', route: '/location' },
         );
         break;
