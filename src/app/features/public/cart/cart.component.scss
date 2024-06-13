@@ -81,10 +81,15 @@ section {
   }
 }
 
-.coupon {
+.travel-name-field {
   h3 {
     font-weight: 500;
     margin-bottom: 0.5rem;
+  }
+
+  .travel-name-field-input {
+    width: 100%;
+    max-width: 440px;
   }
 }
 

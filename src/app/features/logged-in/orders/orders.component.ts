@@ -55,7 +55,7 @@ export class OrdersComponent {
 
   edit(element: Order, orderNumber: number) {
     if (element) element.numero = orderNumber;
-    this.router.navigate([`orders/detail`], {
+    this.router.navigate([`travels/detail`], {
       state: {
         data: element,
       },

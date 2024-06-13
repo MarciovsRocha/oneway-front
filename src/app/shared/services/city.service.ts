@@ -14,4 +14,20 @@ export class CityService {
   getAll() {
     return this.httpClient.get<City[]>(`${this.apiUrl}${this.endpoint}`);
   }
+
+  save(city: City) {
+    return this.httpClient.post<City>(`${this.apiUrl}${this.endpoint}`, city);
+  }
+
+  update(city: City) {
+    return this.httpClient.put<City>(`${this.apiUrl}${this.endpoint}`, city);
+  }
+
+  delete(id: number) {
+    return this.httpClient.delete<any>(`${this.apiUrl}${this.endpoint}/id=${id}`);
+  }
+
+  getTopCitiesByProductCount(top: number) {
+    return this.httpClient.get<any>(`${this.apiUrl}${this.endpoint}/produto/top=${top}`);
+  }
 }

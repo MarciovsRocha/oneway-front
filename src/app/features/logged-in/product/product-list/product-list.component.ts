@@ -90,7 +90,11 @@ export class ProductListComponent implements OnInit {
   }
 
   newProduct() {
-    this.router.navigate([`product/detail`]);
+    this.router.navigate([`product/detail`], {
+      state: {
+        type: this.tabGroup.selectedIndex+1,
+      },
+    });
   }
 
   convertListToTable(list: Product[]) {

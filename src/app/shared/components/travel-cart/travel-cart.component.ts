@@ -89,6 +89,6 @@ export class InsideTravelCart implements OnInit {
 
   openFullCart() {
     this._bottomSheetRef.dismiss()
-    this.router.navigate(['cart']);
+    this.router.navigate(['package']);
   }
 }

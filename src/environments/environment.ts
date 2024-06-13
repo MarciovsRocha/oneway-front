@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://onewayapi.azurewebsites.net/',
+  apiUrl: 'https://onewayapi.azurewebsites.net',
 };

@@ -52,8 +52,8 @@ export class CartComponent {
   faTrashCan = faTrashCan;
   faAngleLeft = faAngleLeft;
   isFromOrder: boolean = false;
-  title: string = 'Carrinho';
-  cupom = new FormControl('');
+  title: string = 'Monte seu Pacote';
+  name = new FormControl('');
 
   constructor(
     private cartService: CartService,
@@ -72,10 +72,10 @@ export class CartComponent {
     });
 
     if (this.isFromOrder) {
-      this.title = `Pedido #${this.order?.numero}`;
+      this.title = `Viagem #${this.order?.numero} ${this.order?.name ? ' - ' + this.order.name : '' }`;
       this.products = this.order?.produtos || [];
-      this.cupom.disable();
-      this.cupom.setValue(this.order?.cupom || '');
+      this.name.disable();
+      this.name.setValue(this.order?.name || '');
     } else {
       this.cartSubscription = this.cartService.cart$.subscribe((cart) => {
         this.products = cart;
@@ -95,7 +95,7 @@ export class CartComponent {
 
   back() {
     if (this.isFromOrder) {
-      this.router.navigate(['orders']);
+      this.router.navigate(['travels']);
     } else {
       this.router.navigate(['']);
     }
@@ -109,7 +109,7 @@ export class CartComponent {
         newOrder.produtos = this.products;
         newOrder.dataCompra = new Date();
         newOrder.total = this.getTotal(this.products);
-        newOrder.cupom = this.cupom.value;
+        newOrder.name = this.name.value;
         orders.push(newOrder);
         localStorage.setItem('orders', JSON.stringify(orders));
         this.toastService.success('Operação realizada com sucesso!');

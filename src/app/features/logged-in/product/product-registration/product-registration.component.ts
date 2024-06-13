@@ -45,6 +45,7 @@ import { CityService } from '../../../../shared/services/city.service';
 export class ProductRegistrationComponent implements OnInit {
   productForm!: FormGroup<any>;
   product: Product;
+  type: number;
 
   productTypeList: string[] = ProductType.getAllTypesTexts();
   countryList: Country[] = [];
@@ -66,9 +67,10 @@ export class ProductRegistrationComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.product = this.router.getCurrentNavigation()?.extras.state?.['data'];
+    this.type = this.router.getCurrentNavigation()?.extras.state?.['type'];
     this.productForm = new FormGroup({
       nome: new FormControl('', [Validators.required]),
-      tipo: new FormControl('', [Validators.required]),
+      tipo: new FormControl({value: ProductType.getTypeText(this.type), disabled: true}, [Validators.required]),
       preco: new FormControl('', [Validators.required]),
       descricao: new FormControl('', [Validators.required]),
       pais: new FormControl([], [Validators.required]),
@@ -89,7 +91,7 @@ export class ProductRegistrationComponent implements OnInit {
 
   loadDataForm(product: Product) {
     this.productForm.get('nome').setValue(product.nome);
-    this.productForm.get('tipo').setValue(product.id_Tipo);
+    this.productForm.get('tipo').setValue(ProductType.getTypeText(product.id_Tipo));
     this.productForm.get('preco').setValue(product.precoMedioDiaria);
     this.productForm.get('descricao').setValue(product.descricao);
     this.productForm.get('pais').setValue(product.cidade.estado.pais.id);
@@ -137,7 +139,7 @@ export class ProductRegistrationComponent implements OnInit {
     const product: Product = new Product();
     product.id = this.isEditProduct ? this.product.id : 0;
     product.nome = this.productForm.get('nome').value;
-    product.id_Tipo = this.productForm.get('tipo').value;
+    product.id_Tipo = ProductType.getTypeNumber(this.productForm.get('tipo').value);
     product.precoMedioDiaria = this.productForm.get('preco').value;
     product.descricao = this.productForm.get('descricao').value;
     product.id_Cidade = this.productForm.get('cidade').value;

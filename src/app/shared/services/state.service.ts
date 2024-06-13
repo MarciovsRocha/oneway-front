@@ -14,4 +14,12 @@ export class StateService {
   getAll() {
     return this.httpClient.get<State[]>(`${this.apiUrl}${this.endpoint}`);
   }
+
+  save(state: State) {
+    return this.httpClient.post<State>(`${this.apiUrl}${this.endpoint}`, state);
+  }
+
+  update(state: State) {
+    return this.httpClient.put<State>(`${this.apiUrl}${this.endpoint}`, state);
+  }
 }

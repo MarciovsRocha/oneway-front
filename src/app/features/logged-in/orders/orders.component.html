@@ -12,7 +12,7 @@
             aria-label="Voltar"
           >
             <fa-icon [icon]="faAngleLeft"></fa-icon></button
-          >Meus Pedidos
+          >Minhas Viagens
         </mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
@@ -23,7 +23,7 @@
             <div class="col-4">
               <div class="product__row__description d-flex align-items-center">
                 <div class="ms-3">
-                  <h4>Pedido #{{orders.length - i}}</h4>
+                  <h4>Viagem #{{(orders.length - i) + (order?.name ? (' - ' + order?.name) : '')}}</h4>
                   <p>Data da compra: {{order?.dataCompra | date:'dd/MM/yyyy HH:mm'}}</p>
                 </div>
               </div>

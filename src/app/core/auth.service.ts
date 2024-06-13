@@ -65,4 +65,9 @@ export class AuthService {
   isAutenticated(): boolean {
     return this.nomeUsuarioSubject.value != null
   }
+
+  getTotalUsers() {
+    return this.httpClient
+      .get<number>(`${this.apiUrl}${this.endpoint}/total`)
+  }
 }
