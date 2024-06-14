@@ -13,6 +13,7 @@ Clone Repositório
 
 ```
 git clone https://github.com/MarciovsRocha/oneway-front.git
+```
 
 Instale Angular CLI Globalmente
 
