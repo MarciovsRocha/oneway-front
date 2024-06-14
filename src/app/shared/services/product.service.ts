@@ -293,4 +293,10 @@ export class ProductService {
       `${this.apiUrl}${this.endpoint}/total/type`
     );
   }
+
+  getByTypeAndCities(type: number, cityFrom: number, cityTo: number) {
+    return this.httpClient.get<Product[]>(
+      `${this.apiUrl}${this.endpoint}/type=${type}/city=${cityFrom}/city=${cityTo}`
+    );
+  }
 }
