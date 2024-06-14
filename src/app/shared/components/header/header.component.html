@@ -14,10 +14,13 @@
         </li>
         }
       </ul>
-      <div>
-        <button (click)="translateLanguageService.changeLanguage(i)" *ngFor="let i of translateLanguageService.languageOptions">{{ i.label | translate }}</button>
-      </div>
       <ul class="header__icons">
+        <button [matMenuTriggerFor]="menuTranslate" mat-icon-button aria-label="Light Mode">
+          <mat-icon>translate</mat-icon>
+        </button>
+        <mat-menu #menuTranslate="matMenu">
+          <button mat-menu-item (click)="translateLanguageService.changeLanguage(i)" *ngFor="let i of translateLanguageService.languageOptions">{{ i.label.toUpperCase() }}</button>
+        </mat-menu>
         @if (!isMobile) {
         <li (click)="toggleTheme()">
           @if (themeService.themeSignal() === 'dark') {
