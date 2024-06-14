@@ -73,7 +73,7 @@ export class ProductRegistrationComponent implements OnInit {
     this.type = this.router.getCurrentNavigation()?.extras.state?.['type'];
     this.productForm = new FormGroup({
       nome: new FormControl('', [Validators.required]),
-      tipo: new FormControl({value: this.translatePipe.transform(ProductType.getTypeText(this.type)) , disabled: true}, [Validators.required]),
+      tipo: new FormControl({value: ProductType.getTypeText(this.type), disabled: true}, [Validators.required]),
       preco: new FormControl('', [Validators.required]),
       descricao: new FormControl('', [Validators.required]),
       pais: new FormControl([], [Validators.required]),
@@ -94,7 +94,7 @@ export class ProductRegistrationComponent implements OnInit {
 
   loadDataForm(product: Product) {
     this.productForm.get('nome').setValue(product.nome);
-    this.productForm.get('tipo').setValue(this.translatePipe.transform(ProductType.getTypeText(product.id_Tipo)));
+    this.productForm.get('tipo').setValue(ProductType.getTypeText(product.id_Tipo));
     this.productForm.get('preco').setValue(product.precoMedioDiaria);
     this.productForm.get('descricao').setValue(product.descricao);
     this.productForm.get('pais').setValue(product.cidade.estado.pais.id);
