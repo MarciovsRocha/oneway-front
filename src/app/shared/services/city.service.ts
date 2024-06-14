@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { City } from '../models/city';
 import { HttpClient } from '@angular/common/http';
+import { CitySearchDTO } from '../helper/city-search-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class CityService {
 
   getTopCitiesByProductCount(top: number) {
     return this.httpClient.get<any>(`${this.apiUrl}${this.endpoint}/produto/top=${top}`);
+  }
+
+  getLocationList(nome: string) {
+    return this.httpClient.get<CitySearchDTO[]>(`${this.apiUrl}${this.endpoint}/busca/nome=${nome}`);
   }
 }

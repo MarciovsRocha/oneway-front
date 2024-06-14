@@ -6,11 +6,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoaderService {
   totalRequests = 0;
+  disable = false
 
   constructor(private spinnerService: NgxSpinnerService) {}
 
   setLoading(loading: boolean) {
-    if (loading && loading == true) this.spinnerService.show();
+    if (!this.disable && loading && loading == true) this.spinnerService.show();
     else this.spinnerService.hide();
+  }
+
+  setDisable(disable: boolean) {
+    this.disable = disable
   }
 }

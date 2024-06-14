@@ -1,31 +1,35 @@
 <div class="search search-component">
-  <form [formGroup]="searchGroup" class="example-form flex-center">
+  <form [formGroup]="searchGroup" (ngSubmit)="submit()" class="example-form flex-center">
     <div class="container__buttons flex-center">
       <mat-form-field class="search__input-where">
         <mat-label>A partir de onde?</mat-label>
-        <input matInput />
+        <input #inputFrom
+               type="text"
+               matInput
+               formControlName="from"
+               [matAutocomplete]="autoFrom"
+               (input)="filter($event, 'from')">
+        <mat-autocomplete requireSelection  #autoFrom="matAutocomplete" [displayWith]="displayFn">
+          @for (option of locationListFrom; track trackById) {
+            <mat-option [value]="option">{{option.valor}}</mat-option>
+          }
+        </mat-autocomplete>
       </mat-form-field>
       <mat-form-field class="search__input-where">
         <mat-label>Para onde?</mat-label>
-        <input matInput />
+        <input #inputTo
+               type="text"
+               matInput
+               formControlName="to"
+               [matAutocomplete]="autoTo"
+               (input)="filter($event, 'to')">
+        <mat-autocomplete requireSelection #autoTo="matAutocomplete" [displayWith]="displayFn">
+          @for (option of locationListTo; track trackById) {
+            <mat-option [value]="option">{{option.valor}}</mat-option>
+          }
+        </mat-autocomplete>
       </mat-form-field>
-      <mat-form-field class="search__input-date">
-        <mat-label>Quando?</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-          <input
-            matStartDate
-            formControlName="start"
-            placeholder="Data Início"
-          />
-          <input matEndDate formControlName="end" placeholder="Data Fim" />
-        </mat-date-range-input>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-      </mat-form-field>
-      <button mat-fab extended color="primary" class="btn-search" aria-label="Botão de busca">
+      <button type="submit" mat-fab extended color="primary" class="btn-search" aria-label="Botão de busca" [disabled]="searchGroup.invalid">
         <mat-icon>search</mat-icon>
         Buscar
       </button>
