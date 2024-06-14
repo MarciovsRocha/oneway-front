@@ -6,6 +6,7 @@ import { MatIcon } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { UserType } from '../../../shared/enum/user-type.enum';
 import { AuthService } from '../../../core/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-type-user',
@@ -16,6 +17,7 @@ import { AuthService } from '../../../core/auth.service';
     MatButtonModule,
     MatIcon,
     RouterModule,
+    TranslateModule
   ],
   templateUrl: './type-user.component.html',
   styleUrl: './type-user.component.scss',

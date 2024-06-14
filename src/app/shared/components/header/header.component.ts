@@ -82,7 +82,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getMenu() {
-    this.listBtn = [{ name: 'Inicio', route: '/home' }];
+    this.listBtn = [{ name: 'INICIO', route: '/home' }];
     let typeUser = this.authService.getUserType();
     switch (typeUser) {
       case UserType.Cliente:

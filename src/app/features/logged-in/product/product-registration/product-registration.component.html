@@ -1,5 +1,5 @@
 <app-default-registration-layout
-  [title]="textAppendTitle + '  Produto'"
+  [title]="textAppendTitle + '.PRODUTO'"
   [primaryBtnText]="textAppendTitle"
   [disablePrimaryBtn]="!productForm.valid"
   (submit)="submit()"
@@ -8,7 +8,7 @@
 >
   <form [formGroup]="productForm">
     <mat-form-field class="product__field">
-      <mat-label>Título</mat-label>
+      <mat-label>{{ "TITULO" | translate }}</mat-label>
       <input
         formControlName="nome"
         type="text"
@@ -17,7 +17,7 @@
     </mat-form-field>
 
     <mat-form-field class="product__field">
-      <mat-label>Categoria</mat-label>
+      <mat-label>{{ "CATEGORIA" | translate }}</mat-label>
       <input
         formControlName="tipo"
         type="text"
@@ -37,7 +37,7 @@
     </mat-form-field>
 
     <mat-form-field class="product__field">
-      <mat-label>Descrição</mat-label>
+      <mat-label>{{ "DESCRICAO" | translate }}</mat-label>
       <textarea formControlName="descricao" matInput rows="4"></textarea>
     </mat-form-field>
 
@@ -51,7 +51,7 @@
     </mat-form-field>
 
     <mat-form-field class="w-50 pe-e2">
-      <mat-label>Estado</mat-label>
+      <mat-label>{{ "ESTADO" | translate }}</mat-label>
       <mat-select (valueChange)="productForm?.get('cidade')?.setValue('')" formControlName="estado">
         @for (state of stateListByCountry; track state.id) {
         <mat-option [value]="state.id">{{ state.nome }}</mat-option>
@@ -60,7 +60,7 @@
     </mat-form-field>
 
     <mat-form-field class="w-50 ps-2">
-      <mat-label>Cidade</mat-label>
+      <mat-label>{{ "CIDADE" | translate }}</mat-label>
       <mat-select formControlName="cidade">
         @for (city of cityListByState; track city.id) {
         <mat-option [value]="city.id">{{ city.nome }}</mat-option>
@@ -69,7 +69,7 @@
     </mat-form-field>
 
     <mat-form-field class="product__field">
-      <mat-label>Imagens</mat-label>
+      <mat-label>{{ "IMAGENS" | translate }}</mat-label>
       <button mat-icon-button matPrefix (click)="f_input.click()">
         <mat-icon>attach_file</mat-icon>
       </button>

@@ -22,6 +22,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
 import { matchValidator } from '../../../validators/form-validators';
 import { User } from '../../../shared/models/user';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 interface SignupForm {
   name: FormControl;
@@ -63,6 +64,7 @@ export const confirmPasswordValidator: ValidatorFn = (
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    TranslateModule
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
@@ -76,7 +78,8 @@ export class SignupComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private translatePipe: TranslatePipe
   ) {
     this.signupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -105,11 +108,11 @@ export class SignupComponent {
       )
       .subscribe({
         next: () =>  { 
-          this.toastService.success('Cadastrado com sucesso!')
+          this.toastService.success(this.translatePipe.transform("OPERACAO.REALIZADA.SUCESSO"))
           this.navigate()
         },
         error: (error) => {
-          let errorMessage = 'Erro ao cadastrar usuário.';
+          let errorMessage = this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE");
           if (error.error) {
             errorMessage = error.error;
           }

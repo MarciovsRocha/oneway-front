@@ -24,6 +24,7 @@ import { State } from '../../../../shared/models/state';
 import { CountryService } from '../../../../shared/services/country.service';
 import { StateService } from '../../../../shared/services/state.service';
 import { CityService } from '../../../../shared/services/city.service';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-registration',
@@ -38,6 +39,7 @@ import { CityService } from '../../../../shared/services/city.service';
     MatSelectModule,
     MatIconModule,
     CurrencyMaskModule,
+    TranslateModule
   ],
   templateUrl: './product-registration.component.html',
   styleUrl: './product-registration.component.scss',
@@ -64,13 +66,14 @@ export class ProductRegistrationComponent implements OnInit {
     private countryService: CountryService,
     private stateService: StateService,
     private cityService: CityService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private translatePipe: TranslatePipe,
   ) {
     this.product = this.router.getCurrentNavigation()?.extras.state?.['data'];
     this.type = this.router.getCurrentNavigation()?.extras.state?.['type'];
     this.productForm = new FormGroup({
       nome: new FormControl('', [Validators.required]),
-      tipo: new FormControl({value: ProductType.getTypeText(this.type), disabled: true}, [Validators.required]),
+      tipo: new FormControl({value: this.translatePipe.transform(ProductType.getTypeText(this.type)) , disabled: true}, [Validators.required]),
       preco: new FormControl('', [Validators.required]),
       descricao: new FormControl('', [Validators.required]),
       pais: new FormControl([], [Validators.required]),
@@ -85,13 +88,13 @@ export class ProductRegistrationComponent implements OnInit {
     this.getStateList();
     this.getCityList();
     this.isEditProduct = this.product && this.product.id > 0
-    this.textAppendTitle = this.isEditProduct ? 'Editar' : 'Cadastrar';
+    this.textAppendTitle = this.isEditProduct ? 'EDITAR' : 'CADASTRAR';
     if (this.product) this.loadDataForm(this.product);
   }
 
   loadDataForm(product: Product) {
     this.productForm.get('nome').setValue(product.nome);
-    this.productForm.get('tipo').setValue(ProductType.getTypeText(product.id_Tipo));
+    this.productForm.get('tipo').setValue(this.translatePipe.transform(ProductType.getTypeText(product.id_Tipo)));
     this.productForm.get('preco').setValue(product.precoMedioDiaria);
     this.productForm.get('descricao').setValue(product.descricao);
     this.productForm.get('pais').setValue(product.cidade.estado.pais.id);
@@ -124,12 +127,11 @@ export class ProductRegistrationComponent implements OnInit {
     if (this.productForm.valid) {
       this.productService[this.isEditProduct ? 'update' : 'save'](this.getProductFromForm()).subscribe({
         next: () => {
-          this.toastService.success('Realizado com Sucesso');
+          this.toastService.success(this.translatePipe.transform("OPERACAO.REALIZADA.SUCESSO"));
           this.router.navigate(['product']);
         },
         error: (error) => {
-          let errorMessage = 'Erro ao inesperado';
-          this.toastService.error(errorMessage);
+          this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
         },
       });
     }
@@ -157,9 +159,7 @@ export class ProductRegistrationComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error(
-          'Erro inesperado! Não foi possível consultar os países'
-        );
+        this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
       },
     });
   }
@@ -171,9 +171,7 @@ export class ProductRegistrationComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error(
-          'Erro inesperado! Não foi possível consultar os estados'
-        );
+        this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
       },
     });
   }
@@ -185,9 +183,7 @@ export class ProductRegistrationComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error(
-          'Erro inesperado! Não foi possível consultar as cidades'
-        );
+        this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
       },
     });
   }

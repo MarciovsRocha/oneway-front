@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-center align-content-center">
       <mat-card>
         <mat-card-header>
-          <mat-card-title>Selecione o tipo de usuário</mat-card-title>
+          <mat-card-title>{{ "SELECIONE.TIPO.USUARIO" | translate }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div class="d-flex justify-content-center align-content-center gap-2">
@@ -14,7 +14,7 @@
               color="primary"
               aria-label="Botão Sou Cliente"
             >
-              Cliente
+              {{ "CLIENTE" | translate }}
             </button>
             <button
               (click)="navigateAndSetType('/product', UserType.Proprietario)"
@@ -23,7 +23,7 @@
               color="primary"
               aria-label="Botão Sou Proprietário"
             >
-              Proprietário
+            {{ "PROPRIETARIO" | translate }}
             </button>
             <button
               (click)="navigateAndSetType('/home-adm', UserType.Administrador)"
@@ -32,7 +32,7 @@
               color="primary"
               aria-label="Botão Sou Adminstrador"
             >
-              Adminstrador
+            {{ "ADMINISTRADOR" | translate }}
             </button>
           </div>
         </mat-card-content>

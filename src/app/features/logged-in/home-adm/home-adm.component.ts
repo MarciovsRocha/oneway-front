@@ -28,7 +28,7 @@ import ApexCharts from 'apexcharts';
 import { CityService } from '../../../shared/services/city.service';
 import { CityProductsDTO } from '../../../shared/helper/city-products-dto';
 import { ProductTypesDTO } from '../../../shared/helper/product-types-dto';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 export type ChartDonutOptions = {
   series: ApexNonAxisChartSeries;
@@ -100,6 +100,7 @@ export class HomeAdmComponent implements OnInit {
     private toastService: ToastrService,
     private productService: ProductService,
     private cityService: CityService,
+    private translatePipe: TranslatePipe
   ) {
     this.chartDonutOptions = {
       series: [],
@@ -227,7 +228,7 @@ export class HomeAdmComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
       },
     });
   }
@@ -244,7 +245,7 @@ export class HomeAdmComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
       },
     });
   }
@@ -270,7 +271,7 @@ export class HomeAdmComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
       },
     });
   }
