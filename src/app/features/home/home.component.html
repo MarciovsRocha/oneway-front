@@ -1,6 +1,6 @@
 <main class="container-fluid">
   <section class="container">
-    <h2 class="home__title">Viva a sua <b>viajem</b> ao <b>máximo</b>!</h2>
+    <h2 class="home__title" [innerHTML]="'VIVA.VIAJEM.MAXIMO' | translate | safe: 'html'"></h2>
     <div class="home__background-image" aria-label="Imagem de fundo"></div>
   </section>
   <section class="container">

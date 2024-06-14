@@ -8,23 +8,23 @@ export namespace ProductType {
   export function getTypeText(type: ProductType): string {
     switch (type) {
       case ProductType.Hospedagem:
-        return 'Hospedagem';
+        return 'HOSPEDAGEM';
       case ProductType.Transporte:
-        return 'Transporte';
+        return 'TRANSPORTE';
       case ProductType.PontosTuristicos:
-        return 'Pontos Turísticos';
+        return 'PONTOS.TURÍSTICOS';
       default:
-        return 'Desconhecido';
+        return 'DESCONHECIDO';
     }
   }
 
   export function getTypeNumber(type: String): number {
     switch (type) {
-      case 'Hospedagem':
+      case 'HOSPEDAGEM':
         return ProductType.Hospedagem;
-      case 'Transporte':
+      case 'TRANSPORTE':
         return ProductType.Transporte;
-      case 'Pontos Turísticos':
+      case 'PONTOS.TURÍSTICOS':
         return ProductType.PontosTuristicos;
       default:
         return 0;

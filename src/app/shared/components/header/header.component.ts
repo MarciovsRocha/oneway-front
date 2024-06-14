@@ -17,6 +17,8 @@ import { AuthService } from '../../../core/auth.service';
 import { ThemeService } from '../../services/theme.service';
 import { Subscription } from 'rxjs';
 import { UserType } from '../../enum/user-type.enum';
+import { TranslateLanguageService } from '../../../core/translate-language.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -29,6 +31,7 @@ import { UserType } from '../../enum/user-type.enum';
     MatMenuModule,
     CommonModule,
     RouterModule,
+    TranslateModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -52,10 +55,12 @@ export class HeaderComponent implements OnInit {
     private renderer: Renderer2,
     private authService: AuthService,
     protected router: Router,
-    protected themeService: ThemeService
+    protected themeService: ThemeService,
+    protected translateLanguageService: TranslateLanguageService
   ) {}
 
   ngOnInit(): void {
+    this.translateLanguageService.start()
     this.renderer.setAttribute(
       this.document.body,
       'class',

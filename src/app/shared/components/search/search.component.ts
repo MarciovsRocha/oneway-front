@@ -14,7 +14,6 @@ import {
   FormControl,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { CityService } from '../../services/city.service';
@@ -22,7 +21,7 @@ import { CitySearchDTO } from '../../helper/city-search-dto';
 import { ToastrService } from 'ngx-toastr';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { LoaderService } from '../../../core/loader.service';
-import { finalize } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search',
@@ -38,7 +37,8 @@ import { finalize } from 'rxjs';
     ReactiveFormsModule,
     MatAutocompleteModule,
     JsonPipe,
-    AsyncPipe
+    AsyncPipe,
+    TranslateModule
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',

@@ -14,6 +14,9 @@
         </li>
         }
       </ul>
+      <div>
+        <button (click)="translateLanguageService.changeLanguage(i)" *ngFor="let i of translateLanguageService.languageOptions">{{ i.label | translate }}</button>
+      </div>
       <ul class="header__icons">
         @if (!isMobile) {
         <li (click)="toggleTheme()">

@@ -6,12 +6,13 @@ import { ToastrService } from 'ngx-toastr';
 import { ProductService } from '../../../../shared/services/product.service';
 import { CartService } from '../../../../shared/services/cart.service';
 import { ProductType } from '../../../../shared/enum/product-type.enum';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-mat-tab-group-cards',
   standalone: true,
-  imports: [MatTabsModule, CarouselCardComponent],
+  imports: [MatTabsModule, CarouselCardComponent, TranslateModule],
   templateUrl: './mat-tab-group-cards.component.html',
   styleUrl: './mat-tab-group-cards.component.scss',
 })
