@@ -13,17 +13,16 @@
         formControlName="nome"
         type="text"
         matInput
-        placeholder="Rafael Felipe"
       />
     </mat-form-field>
 
     <mat-form-field class="product__field">
       <mat-label>Categoria</mat-label>
-      <mat-select formControlName="tipo">
-        @for (type of productTypeList; track type; let i = $index) {
-        <mat-option [value]="i+1">{{ type }}</mat-option>
-        }
-      </mat-select>
+      <input
+        formControlName="tipo"
+        type="text"
+        matInput
+      />
     </mat-form-field>
 
     <mat-form-field class="product__field" floatLabel="always">

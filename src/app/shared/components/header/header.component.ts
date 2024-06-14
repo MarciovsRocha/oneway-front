@@ -76,20 +76,22 @@ export class HeaderComponent{
 
     if (typeUser === 'Cliente') {
       this.listBtn.push(
-        { name: 'Carrinho', route: '/cart' },
-        { name: 'Pedidos', route: '/start' },
-      );
+          { name: 'Montar Pacote', route: '/package' },
+          { name: 'Minhas Viagens', route: '/travels' },
+        );
     } else if (typeUser === 'Proprietario') {
       this.listBtn.push(
-        { name: 'Lista Produtos', route: '/product' },
-      );
+          { name: 'Lista Produtos', route: '/product' },
+          { name: 'Lista Localidades', route: '/location' },
+        );
     } else if (typeUser === 'Administrador') {
       this.listBtn.push(
-        { name: 'Dashboard', route: '/home-adm' },
-      );
+          { name: 'Dashboard', route: '/home-adm' },
+          { name: 'Lista Produtos', route: '/product' },
+          { name: 'Lista Localidades', route: '/location' },
+        );
     } else {
-      console.log('User Role Not Defined');
-      this.listBtn.push({ name: 'Carrinho', route: '/cart' });
+      this.listBtn.push({ name: 'Montar Pacote', route: '/package' });
     }
 
     this.cdr.detectChanges();

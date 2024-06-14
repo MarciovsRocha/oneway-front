@@ -18,6 +18,19 @@ export namespace ProductType {
     }
   }
 
+  export function getTypeNumber(type: String): number {
+    switch (type) {
+      case 'Hospedagem':
+        return ProductType.Hospedagem;
+      case 'Transporte':
+        return ProductType.Transporte;
+      case 'Pontos Turísticos':
+        return ProductType.PontosTuristicos;
+      default:
+        return 0;
+    }
+  }
+
   export function getAllTypesTexts(): string[] {
     return Object.values(ProductType)
       .filter(value => typeof value === 'number') // Filtra apenas os valores numéricos

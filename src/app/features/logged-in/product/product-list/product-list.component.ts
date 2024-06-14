@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, computed } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, computed } from '@angular/core';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { DefaultListLayoutComponent } from '../../../../shared/components/default-list-layout/default-list-layout.component';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -40,6 +40,7 @@ interface ColumnDisplay {
   styleUrl: './product-list.component.scss',
 })
 export class ProductListComponent implements OnInit {
+  @ViewChild('inputSearch') inputSearch!: ElementRef;
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
 
   productTypeList: string[] = ProductType.getAllTypesTexts();
@@ -90,10 +91,15 @@ export class ProductListComponent implements OnInit {
   }
 
   newProduct() {
-    this.router.navigate([`product/detail`]);
+    this.router.navigate([`product/detail`], {
+      state: {
+        type: this.tabGroup.selectedIndex+1,
+      },
+    });
   }
 
   convertListToTable(list: Product[]) {
+    this.inputSearch.nativeElement.value = ""
     return list.map((product) => ({
       id: product.id,
       nome: product.nome,
@@ -134,7 +140,7 @@ export class ProductListComponent implements OnInit {
       if (result) {
         this.productService.delete(id).subscribe({
           next: (result: any) => {
-            this.toastService.success('Sucesso ao realizar a operação!');
+            this.toastService.success('Operação realizada com sucesso!');
             this.getProdutos(this.tabGroup.selectedIndex+1)
           },
           error: (err: any) => {

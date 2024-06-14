@@ -55,8 +55,12 @@ body {
   border-bottom-color: transparent !important;
 }
 
+.toast-container {
+  position: fixed !important;
+}
+
 .toast-container .ngx-toastr {
-  box-shadow: 0 0 12px #000000;
+  box-shadow: 0 0 12px #000000 !important;
 }
 .toast-error {
   background-color: mat.get-theme-color($themeDark, on-error);

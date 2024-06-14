@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Product } from '../models/product';
+import { ProductTypesDTO } from '../helper/product-types-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -285,5 +286,17 @@ export class ProductService {
 
   delete(id: number) {
     return this.httpClient.delete<any>(`${this.apiUrl}${this.endpoint}/id=${id}`);
+  }
+
+  getTotalProductsByType() {
+    return this.httpClient.get<ProductTypesDTO[]>(
+      `${this.apiUrl}${this.endpoint}/total/type`
+    );
+  }
+
+  getByTypeAndCities(type: number, cityFrom: number, cityTo: number) {
+    return this.httpClient.get<Product[]>(
+      `${this.apiUrl}${this.endpoint}/type=${type}/city=${cityFrom}/city=${cityTo}`
+    );
   }
 }

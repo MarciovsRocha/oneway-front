@@ -5,10 +5,10 @@
   </section>
   <section class="container">
     <div class="home__search">
-      <app-search />
+      <app-search (submit)="receiveSubmitData($event)"/>
     </div>
     <div class="home__custom-carousel my-3">
-      <app-mat-tab-group-cards  style="min-height: 500px;"/>
+      <app-mat-tab-group-cards [submittedData]="submittedData" style="min-height: 500px;"/>
     </div>
   </section>
 </main>

@@ -48,6 +48,7 @@ export class AuthService {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('nome');
     sessionStorage.removeItem('type');
+    localStorage.removeItem('orders');
     this.nomeUsuarioSubject.next(null);
     this.logoutEvent.emit();
   }
@@ -59,5 +60,14 @@ export class AuthService {
   getUserType(): number {
     let typeUser = sessionStorage.getItem('type')
     return typeUser ? parseInt(sessionStorage.getItem('type')) : null;
+  }
+
+  isAutenticated(): boolean {
+    return this.nomeUsuarioSubject.value != null
+  }
+
+  getTotalUsers() {
+    return this.httpClient
+      .get<number>(`${this.apiUrl}${this.endpoint}/total`)
   }
 }

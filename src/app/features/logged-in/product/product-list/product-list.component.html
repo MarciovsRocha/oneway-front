@@ -8,7 +8,7 @@
   >
     <mat-form-field class="w-100">
       <mat-label>Filtro</mat-label>
-      <input matInput (keyup)="applyFilter($event)" />
+      <input #inputSearch matInput (keyup)="applyFilter($event)" />
     </mat-form-field>
 
     <div class="custom-tab-group mb-3">

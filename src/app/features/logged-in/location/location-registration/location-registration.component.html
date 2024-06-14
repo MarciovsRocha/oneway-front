@@ -1,0 +1,67 @@
+<app-default-registration-layout
+  [title]="textAppendTitle + ' ' + (type == 1 ? 'País' : type == 2 ? 'Estado' : type == 3 ? 'Cidade' : '')"
+  [primaryBtnText]="textAppendTitle"
+  [disablePrimaryBtn]="!locationForm.valid"
+  (submit)="submit()"
+  (back)="back()"
+  class="my-3"
+>
+  <form [formGroup]="locationForm">
+    @switch (type) {
+      @case (1) {
+        <mat-form-field class="product__field">
+          <mat-label>Nome</mat-label>
+          <input
+            formControlName="nome"
+            type="text"
+            matInput
+          />
+        </mat-form-field>
+      }
+      @case (2) {
+        <mat-form-field class="product__field">
+          <mat-label>Nome</mat-label>
+          <input
+            formControlName="nome"
+            type="text"
+            matInput
+          />
+        </mat-form-field>
+        <mat-form-field class="product__field">
+          <mat-label>País</mat-label>
+          <mat-select formControlName="pais">
+            @for (country of countryList; track country.id) {
+            <mat-option [value]="country.id">{{ country.nome }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      }
+      @case (3) {
+        <mat-form-field class="product__field">
+          <mat-label>Nome</mat-label>
+          <input
+            formControlName="nome"
+            type="text"
+            matInput
+          />
+        </mat-form-field>
+        <mat-form-field class="product__field">
+          <mat-label>País</mat-label>
+          <mat-select (valueChange)="locationForm?.get('estado')?.setValue('')" formControlName="pais">
+            @for (country of countryList; track country.id) {
+            <mat-option [value]="country.id">{{ country.nome }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="product__field">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="estado">
+            @for (state of stateListByCountry; track state.id) {
+            <mat-option [value]="state.id">{{ state.nome }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      }
+    }
+  </form>
+</app-default-registration-layout>
