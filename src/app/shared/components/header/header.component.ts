@@ -87,25 +87,24 @@ export class HeaderComponent implements OnInit {
     switch (typeUser) {
       case UserType.Cliente:
         this.listBtn.push(
-          { name: 'Montar Pacote', route: '/package' },
-          { name: 'Minhas Viagens', route: '/travels' },
+          { name: 'MONTAR.PACOTE', route: '/package' },
+          { name: 'MINHAS.VIAGENS', route: '/travels' },
         );
         break;
       case UserType.Proprietario:
         this.listBtn.push(
-          { name: 'Lista Produtos', route: '/product' },
-          { name: 'Lista Localidades', route: '/location' },
+          { name: 'LISTA.PRODUTOS', route: '/product' },
         );
         break;
       case UserType.Administrador:
         this.listBtn.push(
           { name: 'Dashboard', route: '/home-adm' },
-          { name: 'Lista Produtos', route: '/product' },
-          { name: 'Lista Localidades', route: '/location' },
+          { name: 'LISTA.PRODUTOS', route: '/product' },
+          { name: 'LISTA.LOCALIDADES', route: '/location' },
         );
         break;
       default:
-        this.listBtn.push({ name: 'Montar Pacote', route: '/package' });
+        this.listBtn.push({ name: 'MONTAR.PACOTE', route: '/package' });
         break;
     }
   }
