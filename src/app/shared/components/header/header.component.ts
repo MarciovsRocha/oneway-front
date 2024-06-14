@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   HostListener,
   Inject,
@@ -13,10 +14,12 @@ import { faUser, faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../../core/auth.service';
 import { ThemeService } from '../../services/theme.service';
-import { Subscription } from 'rxjs';
-import { UserType } from '../../enum/user-type.enum';
+import { LoginButtonComponent } from "../login-button/login-button.component";
+import { LogoutButtonComponent } from "../logout-button/logout-button.component";
+import { UserProfileComponent } from "../user-profile-info/user-profile-info.component";
+import { AuthService } from "@auth0/auth0-angular";
+import {Auth0ManagementService} from "../../services/Auth0ManagementService";
 
 @Component({
   selector: 'app-header',
@@ -29,14 +32,16 @@ import { UserType } from '../../enum/user-type.enum';
     MatMenuModule,
     CommonModule,
     RouterModule,
+    LoginButtonComponent,
+    LogoutButtonComponent,
+    UserProfileComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnInit {
-  nomeUsuario: string | null = null;
+export class HeaderComponent{
+  userId: string;
   innerWidth: number = window.innerWidth;
-  isAuthenticated = false;
   isNightMode = false;
   listBtn: any = [];
 
@@ -45,64 +50,51 @@ export class HeaderComponent implements OnInit {
   faMoon = faMoon;
   faSun = faSun;
 
-  private subscription: Subscription;
-
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
-    private authService: AuthService,
+    protected authService: AuthService,
     protected router: Router,
-    protected themeService: ThemeService
-  ) {}
-
-  ngOnInit(): void {
-    this.renderer.setAttribute(
-      this.document.body,
-      'class',
-      this.themeService.themeSignal()
-    );
-    this.subscription = this.authService.nomeUsuario$.subscribe((nome) => {
-      this.nomeUsuario = nome;
-      this.updateMenu();
-    });
+    protected themeService: ThemeService,
+    protected authManagement: Auth0ManagementService,
+    private cdr: ChangeDetectorRef,
+  ) {
+    // store UserID
+    if (this.authService.isAuthenticated$){
+      this.authService.user$.subscribe((profile)=>{
+        if (profile){
+          this.userId = profile.sub;
+          this.getMenu();
+        }
+      });
+    }
   }
 
-  loadSession() {
-    this.nomeUsuario = sessionStorage.getItem('nome');
-    this.updateMenu()
-  }
-
-  updateMenu() {
-    this.getMenu()
-  }
-
-  getMenu() {
+  async getMenu() {
     this.listBtn = [{ name: 'Inicio', route: '/home' }];
-    let typeUser = this.authService.getUserType();
-    switch (typeUser) {
-      case UserType.Cliente:
-        this.listBtn.push(
+    let typeUser = await this.authManagement.getUserRole(this.userId);
+
+    if (typeUser === 'Cliente') {
+      this.listBtn.push(
           { name: 'Montar Pacote', route: '/package' },
           { name: 'Minhas Viagens', route: '/travels' },
         );
-        break;
-      case UserType.Proprietario:
-        this.listBtn.push(
+    } else if (typeUser === 'Proprietario') {
+      this.listBtn.push(
           { name: 'Lista Produtos', route: '/product' },
           { name: 'Lista Localidades', route: '/location' },
         );
-        break;
-      case UserType.Administrador:
-        this.listBtn.push(
+    } else if (typeUser === 'Administrador') {
+      this.listBtn.push(
           { name: 'Dashboard', route: '/home-adm' },
           { name: 'Lista Produtos', route: '/product' },
           { name: 'Lista Localidades', route: '/location' },
         );
-        break;
-      default:
-        this.listBtn.push({ name: 'Montar Pacote', route: '/package' });
-        break;
+    } else {
+      this.listBtn.push({ name: 'Montar Pacote', route: '/package' });
     }
+
+    this.cdr.detectChanges();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -114,11 +106,6 @@ export class HeaderComponent implements OnInit {
     return this.innerWidth <= 576;
   }
 
-  onLogout() {
-    this.authService.logout();
-    this.router.navigateByUrl('/');
-  }
-
   toggleTheme() {
     this.themeService.updateTheme();
     this.renderer.setAttribute(
@@ -126,11 +113,5 @@ export class HeaderComponent implements OnInit {
       'class',
       this.themeService.themeSignal()
     );
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 }
