@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '../models/product';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,8 @@ export class CartService {
   private cartSubject = new BehaviorSubject<Product[]>(this.cart);
   cart$ = this.cartSubject.asObservable();
   toastService = inject(ToastrService);
+
+  constructor(private translatePipe: TranslatePipe){}
 
   getProducts(): Product[] {
     return this.products;
@@ -31,7 +34,7 @@ export class CartService {
       this.cart.push(product);
       localStorage.setItem(this.cartKey, JSON.stringify(this.cart));
       this.cartSubject.next(this.cart); 
-      this.toastService.success('Adicionado no carrinho!');
+      this.toastService.success(this.translatePipe.transform("OPERACAO.REALIZADA.SUCESSO"));
     }
   }
 
@@ -41,7 +44,7 @@ export class CartService {
       this.cart.splice(index, 1);
       localStorage.setItem(this.cartKey, JSON.stringify(this.cart));
       this.cartSubject.next(this.cart);
-      this.toastService.warning('Removido do carrinho!');
+      this.toastService.warning(this.translatePipe.transform("REMOVIDO.CARRINHO"));
     }
   }
 
