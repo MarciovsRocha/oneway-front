@@ -4,6 +4,7 @@ import {AsyncPipe} from "@angular/common";
 import {Auth0ManagementService} from "../../services/Auth0ManagementService";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-button',
@@ -16,11 +17,14 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
     >
       <div class="flex-center">
         <fa-icon class="session-icon" [icon]="faUser"></fa-icon>
-        <p>{{ "Iniciar Sessão" }}</p>
+        <p>{{ "INICIAR.SESSAO" | translate }}</p>
       </div>
     </button>
   `,
   styles: `.btn-session {
+    border: none;
+    background: none;
+    cursor: pointer;
     height: 45px !important;
     div {
       gap: 10px;
@@ -38,7 +42,8 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
   }`,
   imports: [
     AsyncPipe,
-    FaIconComponent
+    FaIconComponent,
+    TranslateModule
   ],
   standalone: true
 })

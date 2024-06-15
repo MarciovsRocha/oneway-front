@@ -36,7 +36,7 @@
         </li>
         }
         <li>
-          <div *ngIf="authService.user$ | async as user ; else showLoginButton">
+          <ng-container *ngIf="authService.user$ | async as user ; else showLoginButton">
 
             <button
               class="btn-session"
@@ -52,7 +52,7 @@
             <mat-menu #menu="matMenu">
               <app-logout-button/>
             </mat-menu>
-          </div>
+          </ng-container>
           <ng-template #showLoginButton>
             <app-login-button/>
           </ng-template>
