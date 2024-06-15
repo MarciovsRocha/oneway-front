@@ -20,6 +20,8 @@ import { LogoutButtonComponent } from "../logout-button/logout-button.component"
 import { UserProfileComponent } from "../user-profile-info/user-profile-info.component";
 import { AuthService } from "@auth0/auth0-angular";
 import {Auth0ManagementService} from "../../services/Auth0ManagementService";
+import { TranslateLanguageService } from '../../../core/translate-language.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +34,7 @@ import {Auth0ManagementService} from "../../services/Auth0ManagementService";
     MatMenuModule,
     CommonModule,
     RouterModule,
+    TranslateModule,
     LoginButtonComponent,
     LogoutButtonComponent,
     UserProfileComponent
@@ -39,7 +42,7 @@ import {Auth0ManagementService} from "../../services/Auth0ManagementService";
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent{
+export class HeaderComponent implements OnInit{
   userId: string;
   innerWidth: number = window.innerWidth;
   isNightMode = false;
@@ -58,6 +61,7 @@ export class HeaderComponent{
     protected themeService: ThemeService,
     protected authManagement: Auth0ManagementService,
     private cdr: ChangeDetectorRef,
+    protected translateLanguageService: TranslateLanguageService
   ) {
     // store UserID
     if (this.authService.isAuthenticated$){
@@ -68,6 +72,10 @@ export class HeaderComponent{
         }
       });
     }
+  }
+
+  ngOnInit() {
+    this.translateLanguageService.start()
   }
 
   async getMenu() {
@@ -87,8 +95,8 @@ export class HeaderComponent{
     } else if (typeUser === 'Administrador') {
       this.listBtn.push(
           { name: 'Dashboard', route: '/home-adm' },
-          { name: 'Lista Produtos', route: '/product' },
-          { name: 'Lista Localidades', route: '/location' },
+          { name: 'LISTA.PRODUTOS', route: '/product' },
+          { name: 'LISTA.LOCALIDADES', route: '/location' },
         );
     } else {
       this.listBtn.push({ name: 'Montar Pacote', route: '/package' });

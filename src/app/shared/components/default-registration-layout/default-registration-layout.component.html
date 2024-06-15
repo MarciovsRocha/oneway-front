@@ -5,9 +5,9 @@
         <mat-card-title class="custom-title">
           <button (click)="back()" mat-icon-button class="m-1" aria-label="Voltar">
             <fa-icon [icon]="faAngleLeft"></fa-icon></button
-          >{{ title }}
+          >{{ title | translate }}
         </mat-card-title>
-        <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ subtitle | translate }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="py-2">
         <ng-content></ng-content>
@@ -17,7 +17,7 @@
           mat-flat-button
           [disabled]="disablePrimaryBtn"
         >
-          {{ primaryBtnText }}
+          {{ primaryBtnText | translate }}
         </button>
       </mat-card-content>
     </mat-card>

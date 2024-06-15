@@ -10,11 +10,17 @@
       <ul class="header__icons buttons">
         @for (btn of listBtn; track btn) {
         <li>
-          <button [routerLink]="btn.route" mat-button>{{ btn.name }}</button>
+          <button [routerLink]="btn.route" mat-button>{{ btn.name | translate }}</button>
         </li>
         }
       </ul>
       <ul class="header__icons">
+        <button [matMenuTriggerFor]="menuTranslate" mat-icon-button aria-label="Light Mode">
+          <mat-icon>translate</mat-icon>
+        </button>
+        <mat-menu #menuTranslate="matMenu">
+          <button mat-menu-item (click)="translateLanguageService.changeLanguage(i)" *ngFor="let i of translateLanguageService.languageOptions">{{ i.label.toUpperCase() }}</button>
+        </mat-menu>
         @if (!isMobile) {
         <li (click)="toggleTheme()">
           @if (themeService.themeSignal() === 'dark') {

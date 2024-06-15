@@ -28,6 +28,7 @@ import ApexCharts from 'apexcharts';
 import { CityService } from '../../../shared/services/city.service';
 import { CityProductsDTO } from '../../../shared/helper/city-products-dto';
 import { ProductTypesDTO } from '../../../shared/helper/product-types-dto';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 export type ChartDonutOptions = {
   series: ApexNonAxisChartSeries;
@@ -61,6 +62,7 @@ export type ChartBarOptions = {
     MatIcon,
     MatRippleModule,
     NgApexchartsModule,
+    TranslateModule
   ],
   templateUrl: './home-adm.component.html',
   styleUrl: './home-adm.component.scss',
@@ -74,7 +76,7 @@ export class HomeAdmComponent implements OnInit {
   headerData = [
     {
       id: 1,
-      title: 'Total de Usuários',
+      title: 'TOTAL.USUARIOS',
       value: this.totalUsers,
     },
     // {
@@ -83,7 +85,7 @@ export class HomeAdmComponent implements OnInit {
     // },
     {
       id: 3,
-      title: 'Total de Produtos',
+      title: 'TOTAL.PRODUTOS',
       value: this.totalProducts,
     },
   ];
@@ -98,6 +100,7 @@ export class HomeAdmComponent implements OnInit {
     private toastService: ToastrService,
     private productService: ProductService,
     private cityService: CityService,
+    private translatePipe: TranslatePipe
   ) {
     this.chartDonutOptions = {
       series: [],
@@ -225,7 +228,7 @@ export class HomeAdmComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
       },
     });
   }
@@ -242,7 +245,7 @@ export class HomeAdmComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
       },
     });
   }
@@ -268,7 +271,7 @@ export class HomeAdmComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
       },
     });
   }

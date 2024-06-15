@@ -4,7 +4,7 @@
     (selectedTabChange)="onTabChange($event)" #tabGroup
     >
     @for (type of productTypeList; track type) {
-      <mat-tab [label]="type"></mat-tab>
+      <mat-tab [label]="type | translate"></mat-tab>
     }
   </mat-tab-group>
 </div>

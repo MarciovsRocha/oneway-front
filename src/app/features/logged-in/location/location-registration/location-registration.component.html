@@ -1,5 +1,5 @@
 <app-default-registration-layout
-  [title]="textAppendTitle + ' ' + (type == 1 ? 'País' : type == 2 ? 'Estado' : type == 3 ? 'Cidade' : '')"
+  [title]="textAppendTitle + '.' + (type == 1 ? 'PAIS' : type == 2 ? 'ESTADO' : type == 3 ? 'CIDADE' : '')"
   [primaryBtnText]="textAppendTitle"
   [disablePrimaryBtn]="!locationForm.valid"
   (submit)="submit()"
@@ -10,7 +10,7 @@
     @switch (type) {
       @case (1) {
         <mat-form-field class="product__field">
-          <mat-label>Nome</mat-label>
+          <mat-label>{{ "NOME" | translate }}</mat-label>
           <input
             formControlName="nome"
             type="text"
@@ -20,7 +20,7 @@
       }
       @case (2) {
         <mat-form-field class="product__field">
-          <mat-label>Nome</mat-label>
+          <mat-label>{{ "NOME" | translate }}</mat-label>
           <input
             formControlName="nome"
             type="text"
@@ -28,7 +28,7 @@
           />
         </mat-form-field>
         <mat-form-field class="product__field">
-          <mat-label>País</mat-label>
+          <mat-label>{{ "PAIS" | translate }}</mat-label>
           <mat-select formControlName="pais">
             @for (country of countryList; track country.id) {
             <mat-option [value]="country.id">{{ country.nome }}</mat-option>
@@ -38,7 +38,7 @@
       }
       @case (3) {
         <mat-form-field class="product__field">
-          <mat-label>Nome</mat-label>
+          <mat-label>{{ "NOME" | translate }}</mat-label>
           <input
             formControlName="nome"
             type="text"
@@ -46,7 +46,7 @@
           />
         </mat-form-field>
         <mat-form-field class="product__field">
-          <mat-label>País</mat-label>
+          <mat-label>{{ "PAIS" | translate }}</mat-label>
           <mat-select (valueChange)="locationForm?.get('estado')?.setValue('')" formControlName="pais">
             @for (country of countryList; track country.id) {
             <mat-option [value]="country.id">{{ country.nome }}</mat-option>
@@ -54,7 +54,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field class="product__field">
-          <mat-label>Estado</mat-label>
+          <mat-label>{{ "ESTADO" | translate }}</mat-label>
           <mat-select formControlName="estado">
             @for (state of stateListByCountry; track state.id) {
             <mat-option [value]="state.id">{{ state.nome }}</mat-option>

@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ProductType } from '../../../../shared/enum/product-type.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 interface ColumnDisplay {
   name: string;
@@ -35,6 +36,7 @@ interface ColumnDisplay {
     MatFormFieldModule,
     MatIconModule,
     MatTabsModule,
+    TranslateModule
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
@@ -47,13 +49,13 @@ export class ProductListComponent implements OnInit {
   dataListToTable: any[] = [];
   dataSource = new MatTableDataSource([]);
   displayedColumns: ColumnDisplay[] = [
-    { name: 'Nome', attribute: 'nome'},
-    { name: 'Tipo', attribute: 'tipo'},
-    { name: 'Preço Médio Diária', attribute: 'preco'},
-    { name: 'País', attribute: 'pais'},
-    { name: 'Estado', attribute: 'estado'},
-    { name: 'Cidade', attribute: 'cidade'},
-    { name: 'Ação', attribute: 'acao'},
+    { name: 'NOME', attribute: 'nome'},
+    { name: 'TIPO', attribute: 'tipo'},
+    { name: 'PRECO.MEDIO.DIARIA', attribute: 'preco'},
+    { name: 'PAIS', attribute: 'pais'},
+    { name: 'ESTADO', attribute: 'estado'},
+    { name: 'CIDADE', attribute: 'cidade'},
+    { name: 'ACAO', attribute: 'acao'},
   ];
   columnsWithoutAction: ColumnDisplay[] = this.displayedColumns.slice(0, -1);
   columnsToDisplay: string[] = this.displayedColumns.slice().map(column => column.attribute);
@@ -67,6 +69,7 @@ export class ProductListComponent implements OnInit {
     private router: Router,
     private productService: ProductService,
     public dialog: MatDialog,
+    private translatePipe: TranslatePipe
   ) {}
 
   ngOnInit() {
@@ -103,7 +106,7 @@ export class ProductListComponent implements OnInit {
     return list.map((product) => ({
       id: product.id,
       nome: product.nome,
-      tipo: ProductType.getTypeText(product.id_Tipo),
+      tipo: this.translatePipe.transform(ProductType.getTypeText(product.id_Tipo)),
       preco: 'R$ ' + product.precoMedioDiaria.toLocaleString('pt-BR', { minimumFractionDigits: 2 }),
       pais: product.cidade.estado.pais.nome,
       estado: product.cidade.estado.nome,
@@ -121,7 +124,7 @@ export class ProductListComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
         this.products = this.productService.getAllByTypeMocked(id);
         this.dataSource = new MatTableDataSource(
           this.convertListToTable(this.products)
@@ -140,12 +143,12 @@ export class ProductListComponent implements OnInit {
       if (result) {
         this.productService.delete(id).subscribe({
           next: (result: any) => {
-            this.toastService.success('Operação realizada com sucesso!');
+            this.toastService.success(this.translatePipe.transform("OPERACAO.REALIZADA.SUCESSO"));
             this.getProdutos(this.tabGroup.selectedIndex+1)
           },
           error: (err: any) => {
             console.log('Erro', err);
-            this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+            this.toastService.error(this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE"));
           },
         });
       }

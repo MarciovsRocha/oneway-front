@@ -2,7 +2,7 @@
   <form [formGroup]="searchGroup" (ngSubmit)="submit()" class="example-form flex-center">
     <div class="container__buttons flex-center">
       <mat-form-field class="search__input-where">
-        <mat-label>A partir de onde?</mat-label>
+        <mat-label>{{ "PARTIR.DE.ONDE" | translate }}</mat-label>
         <input #inputFrom
                type="text"
                matInput
@@ -16,7 +16,7 @@
         </mat-autocomplete>
       </mat-form-field>
       <mat-form-field class="search__input-where">
-        <mat-label>Para onde?</mat-label>
+        <mat-label>{{ "PARA.ONDE" | translate }}</mat-label>
         <input #inputTo
                type="text"
                matInput
@@ -31,7 +31,7 @@
       </mat-form-field>
       <button type="submit" mat-fab extended color="primary" class="btn-search" aria-label="Botão de busca" [disabled]="searchGroup.invalid">
         <mat-icon>search</mat-icon>
-        Buscar
+        {{ "BUSCAR" | translate }}
       </button>
     </div>
   </form>

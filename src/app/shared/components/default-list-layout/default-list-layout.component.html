@@ -2,17 +2,17 @@
   <section class="form-section">
     <mat-card class="autenticate-card">
       <mat-card-header>
-        <mat-card-title class="custom-title">{{ title }}</mat-card-title>
-        <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
+        <mat-card-title class="custom-title">{{ title | translate }}</mat-card-title>
+        <mat-card-subtitle>{{ subtitle | translate }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="py-2">
         <ng-content></ng-content>
         <div class="d-flex w-100 justify-content-center align-items-center gap-1">
           <button (click)="back()" class="btn-back" mat-flat-button>
-            {{ backBtnText }}
+            {{ backBtnText | translate }}
           </button>
           <button (click)="newItem()" class="btn-new-item" mat-flat-button>
-            {{ newItemBtnText }}
+            {{ newItemBtnText | translate }}
           </button>
         </div>
       </mat-card-content>

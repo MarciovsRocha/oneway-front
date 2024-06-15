@@ -21,6 +21,7 @@ import { ProductType } from '../../../shared/enum/product-type.enum';
 import { Order } from '../../../shared/models/order';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/auth.service';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cart',
@@ -37,8 +38,8 @@ import { AuthService } from '../../../core/auth.service';
     MatIconModule,
     MatProgressBarModule,
     FontAwesomeModule,
-    MatButtonModule,
     MatDialogModule,
+    TranslateModule
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
@@ -52,7 +53,7 @@ export class CartComponent {
   faTrashCan = faTrashCan;
   faAngleLeft = faAngleLeft;
   isFromOrder: boolean = false;
-  title: string = 'Monte seu Pacote';
+  title: string = 'MONTE.SEU.PACOTE';
   name = new FormControl('');
 
   constructor(
@@ -61,7 +62,8 @@ export class CartComponent {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private translatePipe: TranslatePipe
   ) {
     this.order = this.router.getCurrentNavigation()?.extras.state?.['data'];
   }
@@ -112,12 +114,12 @@ export class CartComponent {
         newOrder.name = this.name.value;
         orders.push(newOrder);
         localStorage.setItem('orders', JSON.stringify(orders));
-        this.toastService.success('Operação realizada com sucesso!');
+        this.toastService.success(this.translatePipe.transform("OPERACAO.REALIZADA.SUCESSO"));
         this.cartService.cleanCart();
         this.router.navigate(['']);
       }
     } else {
-      this.toastService.warning("Você precisar autenticar para realizar essa operação")
+      this.toastService.warning(this.translatePipe.transform("VOCE.PRECISA.AUTENTICAR.OPERACAO"))
     }
   }
 

@@ -25,6 +25,7 @@ import { CountryService } from '../../../../shared/services/country.service';
 import { StateService } from '../../../../shared/services/state.service';
 import { CityService } from '../../../../shared/services/city.service';
 import { forkJoin } from 'rxjs';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-location-registration',
@@ -39,6 +40,7 @@ import { forkJoin } from 'rxjs';
     MatSelectModule,
     MatIconModule,
     CurrencyMaskModule,
+    TranslateModule
   ],
   templateUrl: './location-registration.component.html',
   styleUrl: './location-registration.component.scss',
@@ -65,7 +67,8 @@ export class LocationRegistrationComponent implements OnInit {
     private countryService: CountryService,
     private stateService: StateService,
     private cityService: CityService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private translatePipe: TranslatePipe
   ) {
     this.product = this.router.getCurrentNavigation()?.extras.state?.['data'];
     this.type = this.router.getCurrentNavigation()?.extras.state?.['type'];
@@ -79,7 +82,7 @@ export class LocationRegistrationComponent implements OnInit {
   ngOnInit() {
     this.getLocations();
     this.isEditProduct = this.product && this.product.id > 0;
-    this.textAppendTitle = this.isEditProduct ? 'Editar' : 'Cadastrar';
+    this.textAppendTitle = this.isEditProduct ? 'EDITAR' : 'CADASTRAR';
   }
 
   loadDataForm(product: any) {
@@ -129,7 +132,7 @@ export class LocationRegistrationComponent implements OnInit {
         this.getLocationFromForm()
       ).subscribe({
         next: () => {
-          this.toastService.success('Realizado com Sucesso');
+          this.toastService.success(this.translatePipe.transform("OPERACAO.REALIZADA.SUCESSO"));
           this.router.navigate(['location']);
         },
         error: () => {
@@ -199,7 +202,7 @@ export class LocationRegistrationComponent implements OnInit {
       error: (err) => {
         console.log('Erro', err);
         this.toastService.error(
-          'Erro inesperado! Não foi possível consultar os dados'
+          this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE")
         );
       },
     });

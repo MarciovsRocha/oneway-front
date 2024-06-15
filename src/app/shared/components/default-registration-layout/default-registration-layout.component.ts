@@ -5,11 +5,12 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-default-registration-layout',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIcon, MatRippleModule, FontAwesomeModule],
+  imports: [MatCardModule, MatButtonModule, MatIcon, MatRippleModule, FontAwesomeModule, TranslateModule],
   templateUrl: './default-registration-layout.component.html',
   styleUrl: './default-registration-layout.component.scss'
 })

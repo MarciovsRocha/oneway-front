@@ -12,7 +12,7 @@ import { User } from '../shared/models/user';
 export class AuthService {
   logoutEvent: EventEmitter<void> = new EventEmitter<void>();
   private nomeUsuarioSubject = new BehaviorSubject<string | null>(
-    sessionStorage.getItem('nome')
+    localStorage.getItem('user_role')
   );
   nomeUsuario$ = this.nomeUsuarioSubject.asObservable();
 
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   updateData() {
-    this.nomeUsuarioSubject.next(sessionStorage.getItem('nome'))
+    this.nomeUsuarioSubject.next(localStorage.getItem('user0role'))
   }
 
   getUserType(): number {
