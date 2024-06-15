@@ -75,6 +75,11 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.renderer.setAttribute(
+      this.document.body,
+      'class',
+      this.themeService.themeSignal()
+    );
     this.translateLanguageService.start()
   }
 
