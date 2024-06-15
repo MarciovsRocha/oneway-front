@@ -12,7 +12,7 @@
             aria-label="Voltar"
           >
             <fa-icon [icon]="faAngleLeft"></fa-icon></button
-          >Minhas Viagens
+          >{{ "MINHAS.VIAGENS" | translate }}
         </mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
@@ -23,14 +23,14 @@
             <div class="col-4">
               <div class="product__row__description d-flex align-items-center">
                 <div class="ms-3">
-                  <h4>Viagem #{{(orders.length - i) + (order?.name ? (' - ' + order?.name) : '')}}</h4>
-                  <p>Data da compra: {{order?.dataCompra | date:'dd/MM/yyyy HH:mm'}}</p>
+                  <h4>{{ "VIAGEM" | translate }} #{{(orders.length - i) + (order?.name ? (' - ' + order?.name) : '')}}</h4>
+                  <p>{{ "DATA.DA.COMPRA" | translate }}: {{order?.dataCompra | date:'dd/MM/yyyy HH:mm'}}</p>
                 </div>
               </div>
             </div>
-            <div class="col-4"><p>Quantidade de itens: <span>{{order?.produtos?.length || 0}}</span></p></div>
+            <div class="col-4"><p>{{ "QUANTIDADE.ITENS" | translate }}: <span>{{order?.produtos?.length || 0}}</span></p></div>
             <div class="col">
-              <p>Total: R$ {{(order?.total || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}}</p>
+              <p>{{ "TOTAL" | translate }}: R$ {{(order?.total || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}}</p>
             </div>
             <div class="col text-center d-flex justify-content-end align-items-end">
               <button
@@ -44,7 +44,7 @@
             </div>
           </div>
           } @empty {
-            <p class="text-center p-3">Nenhum pedido encontrado!</p>
+            <p class="text-center p-3">{{ "NENHUM.PEDIDO.ENCONTRADO" | translate }}</p>
           }
         </div>
       </mat-card-content>

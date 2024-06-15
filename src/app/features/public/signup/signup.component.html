@@ -1,7 +1,7 @@
 <app-default-autenticate-layout 
-    [title]="'Crie sua conta'"
-    [primaryBtnText]="'Cadastre-se'"
-    [secondaryBtnText]="'Iniciar sessão'"
+    [title]="'CRIE.SUA.CONTA'"
+    [primaryBtnText]="'CADASTRE.SE'"
+    [secondaryBtnText]="'INICIAR.SESSAO'"
     [disablePrimaryBtn]="!signupForm.valid"
     (submit)="submit()"
     (navigate)="navigate()"
@@ -9,7 +9,7 @@
     >
   <form [formGroup]="signupForm">
     <mat-form-field>
-      <mat-label>Seu nome</mat-label>
+      <mat-label>{{ "SEU.NOME" | translate }}</mat-label>
       <input
         type="text"
         matInput
@@ -19,7 +19,7 @@
       />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>E-mail</mat-label>
+      <mat-label>{{ "EMAIL" | translate }}</mat-label>
       <input
         type="email"
         matInput
@@ -30,11 +30,11 @@
       />
       @if (signupForm.controls.email.hasError('email') &&
       !signupForm.controls.email.hasError('required')) {
-      <mat-error>Por favor, insira um e-mail válido</mat-error>
+      <mat-error>{{ "INSIRA.EMAIL.VALIDO" | translate }}</mat-error>
       }
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Sua senha</mat-label>
+      <mat-label>{{ "SUA.SENHA" | translate }}</mat-label>
       <input
         matInput
         formControlName="password"
@@ -52,11 +52,11 @@
       </button>
       @if (signupForm.controls.password.hasError('minlength') &&
       !signupForm.controls.password.hasError('required')) {
-      <mat-error>A senha deve ter no mínimo 6 caracteres</mat-error>
+      <mat-error>{{ "SENHA.DEVE.TER.CARACTERES" | translate  }}</mat-error>
       }
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Confirme sua senha</mat-label>
+      <mat-label>{{ "CONFIRME.SENHA" | translate }}</mat-label>
       <input
         matInput
         formControlName="passwordConfirm"
@@ -74,7 +74,7 @@
       </button>
       @if (signupForm.controls.passwordConfirm.hasError('matching') &&
       !signupForm.controls.passwordConfirm.hasError('required')) {
-      <mat-error>As senhas não estão iguais</mat-error>
+      <mat-error>{{ "SENHA.NAO.IGUAIS" | translate }}</mat-error>
       }
     </mat-form-field>
   </form>

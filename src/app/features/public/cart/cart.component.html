@@ -10,7 +10,7 @@
             aria-label="Voltar"
           >
             <fa-icon [icon]="faAngleLeft"></fa-icon></button
-          >{{title}}
+          >{{ title | translate }}
         </mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
@@ -25,15 +25,15 @@
 
         <div class="product">
           @if (products.length == 0) {
-            <p class="text-center pt-3">Pacote vazio!</p>
+            <p class="text-center pt-3">{{ "PACOTE.VAZIO" | translate }}</p>
           } @else {
             <div class="row product__header d-flex align-items-center">
-              <div class="col-5"><span>Produto</span> </div>
-              <div class="col-2"><span>Categoria</span></div>
-              <div class="col-2"><span>Quantidade</span></div>
-              <div class="col-2"><span>Subtotal</span></div>
+              <div class="col-5"><span>{{ "PRODUTO" | translate }}</span></div>
+              <div class="col-2"><span>{{ "CATEGORIA" | translate }}</span></div>
+              <div class="col-2"><span>{{ "QUANTIDADE" | translate }}</span></div>
+              <div class="col-2"><span>{{ "SUBTOTAL" | translate }}</span></div>
               @if (!isFromOrder) {
-                <div class="col-1 text-center"><span>Ação</span></div>
+                <div class="col-1 text-center"><span>{{ "ACAO" | translate }}</span></div>
               }
             </div>
           }
@@ -53,7 +53,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-2"><p>{{ ProductType.getTypeText(product?.id_Tipo) }}</p></div>
+            <div class="col-2"><p>{{ ProductType.getTypeText(product?.id_Tipo) | translate }}</p></div>
             <div class="col-2"><p>1</p></div>
             <div class="col-2">
               <p>R$ {{ product.precoMedioDiaria.toFixed(2) }}</p>
@@ -76,9 +76,9 @@
         <div class="row mt-5">
           <div class="travel-name-field col">
           @if (!isFromOrder) {
-            <h3>Que tal um nome para sua viagem?</h3>
+            <h3>{{ "QUE.TAL.NOME.PARA.VIAGEM" | translate }}</h3>
             <mat-form-field class="mt-2 travel-name-field-input">
-              <input type="text" matInput placeholder="Escreva aqui" [formControl]="name" maxlength="40"/>
+              <input type="text" matInput [placeholder]="'ESCREVA.AQUI' | translate" [formControl]="name" maxlength="40"/>
             </mat-form-field>
           }
           </div>
@@ -90,7 +90,7 @@
                 class="button-custom"
                 (click)="finish()"
               >
-                Finalizar Pacote
+                {{ "FINALIZAR.PACOTE" | translate }}
               </button>
             }
           </div>

@@ -6,12 +6,13 @@ import { ToastrService } from 'ngx-toastr';
 import { ProductService } from '../../../../shared/services/product.service';
 import { CartService } from '../../../../shared/services/cart.service';
 import { ProductType } from '../../../../shared/enum/product-type.enum';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-mat-tab-group-cards',
   standalone: true,
-  imports: [MatTabsModule, CarouselCardComponent],
+  imports: [MatTabsModule, CarouselCardComponent, TranslateModule],
   templateUrl: './mat-tab-group-cards.component.html',
   styleUrl: './mat-tab-group-cards.component.scss',
 })
@@ -26,7 +27,8 @@ export class MatTabGroupCardsComponent implements OnInit {
   constructor(
     private produtoService: ProductService,
     private toastService: ToastrService,
-    private cartService: CartService
+    private cartService: CartService,
+    private translatePipe: TranslatePipe
   ) {}
 
     
@@ -55,7 +57,7 @@ export class MatTabGroupCardsComponent implements OnInit {
       },
       error: (err: any) => {
         console.log('Erro', err);
-        this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+        this.toastService.error(this.translatePipe.transform('ERRO.INESPERADO.TENTE.NOVAMENTE'));
         this.produtos = this.produtoService.getAllByTypeMocked(type);
       },
     });

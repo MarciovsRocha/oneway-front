@@ -16,6 +16,7 @@ import { CartService } from '../../services/cart.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Product } from '../../models/product';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-travel-cart',
@@ -60,7 +61,7 @@ export class TravelCartComponent {
   templateUrl: './inside-travel-cart/inside-travel-cart.html',
   styleUrl: './travel-cart.component.scss',
   standalone: true,
-  imports: [MatButtonModule, MatListModule, MatCardModule, MatIconModule, MatRippleModule],
+  imports: [MatButtonModule, MatListModule, MatCardModule, MatIconModule, MatRippleModule, TranslateModule],
 })
 export class InsideTravelCart implements OnInit {
   cart: Product[]

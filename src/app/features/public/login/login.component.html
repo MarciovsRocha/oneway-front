@@ -1,14 +1,14 @@
 <app-default-autenticate-layout 
-    [title]="'Autenticar'"
-    [primaryBtnText]="'Iniciar sessão'"
-    [secondaryBtnText]="'Cadastre-se'"
+    [title]="'AUTENTICAR'"
+    [primaryBtnText]="'INICIAR.SESSAO'"
+    [secondaryBtnText]="'CADASTRE.SE'"
     [disablePrimaryBtn]="!loginForm.valid"
     (submit)="submit()"
     (navigate)="navigate()"
     >
   <form [formGroup]="loginForm">
     <mat-form-field>
-      <mat-label>E-mail</mat-label>
+      <mat-label>{{ "EMAIL" | translate }}</mat-label>
       <input
         type="email"
         matInput
@@ -18,7 +18,7 @@
       />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Sua senha</mat-label>
+      <mat-label>{{ "SUA.SENHA" | translate }}</mat-label>
       <input
         matInput
         formControlName="password"

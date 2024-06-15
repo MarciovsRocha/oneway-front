@@ -15,6 +15,7 @@ import { Product } from '../../../shared/models/product';
 import { Order } from '../../../shared/models/order';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-orders',
@@ -33,6 +34,7 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatDialogModule,
     CommonModule,
+    TranslateModule,
   ],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss',

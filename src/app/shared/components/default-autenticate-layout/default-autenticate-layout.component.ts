@@ -3,11 +3,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-default-autenticate-layout',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIcon, MatRippleModule],
+  imports: [MatCardModule, MatButtonModule, MatIcon, MatRippleModule, TranslateModule],
   templateUrl: './default-autenticate-layout.component.html',
   styleUrl: './default-autenticate-layout.component.scss'
 })

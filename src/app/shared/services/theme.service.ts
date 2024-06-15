@@ -12,7 +12,7 @@ export class ThemeService {
     this.themeSignal.set(theme);
   }
 
-  updateTheme() {
+    updateTheme() {
     this.themeSignal.update((value) => (value === 'dark' ? 'light' : 'dark'));
   }
 

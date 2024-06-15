@@ -28,6 +28,7 @@ import { CountryService } from '../../../../shared/services/country.service';
 import { StateService } from '../../../../shared/services/state.service';
 import { LoaderService } from '../../../../core/loader.service';
 import { forkJoin } from 'rxjs';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 interface ColumnDisplay {
   name: string;
@@ -47,6 +48,7 @@ interface ColumnDisplay {
     MatFormFieldModule,
     MatIconModule,
     MatTabsModule,
+    TranslateModule
   ],
   templateUrl: './location-list.component.html',
   styleUrl: './location-list.component.scss',
@@ -55,7 +57,7 @@ export class LocationListComponent implements OnInit {
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
   @ViewChild('inputSearch') inputSearch!: ElementRef;
 
-  locationTypeList: string[] = ['País', 'Estado', 'Cidade'];
+  locationTypeList: string[] = ['PAIS', 'ESTADO', 'CIDADE'];
   dataListToTable: any[] = [];
   dataSource = new MatTableDataSource([]);
   faTrashCan = faTrashCan;
@@ -78,6 +80,7 @@ export class LocationListComponent implements OnInit {
     private stateService: StateService,
     private cityService: CityService,
     private loaderService: LoaderService,
+    private translatePipe: TranslatePipe,
   ) {}
 
   ngOnInit() {
@@ -171,13 +174,13 @@ export class LocationListComponent implements OnInit {
       if (result) {
         this.cityService.delete(id).subscribe({
           next: (result: any) => {
-            this.toastService.success('Operação realizada com sucesso!');
+            this.toastService.success(this.translatePipe.transform("OPERACAO.REALIZADA.SUCESSO"));
             this.getLocations()
           },
           error: (err: any) => {
             console.log('Erro', err);
             this.toastService.error(
-              'Erro inesperado! Tente novamente mais tarde'
+              this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE")
             );
           },
         });
@@ -189,23 +192,23 @@ export class LocationListComponent implements OnInit {
     let result: ColumnDisplay[] = [];
     switch (this.locationTypeSelected) {
       case 1:
-        result = [{ name: 'Nome', attribute: 'pais' }];
+        result = [{ name: 'NOME', attribute: 'pais' }];
         break;
       case 2:
         result = [
-          { name: 'Nome', attribute: 'estado' },
-          { name: 'País', attribute: 'pais' },
+          { name: 'NOME', attribute: 'estado' },
+          { name: 'PAIS', attribute: 'pais' },
         ];
         break;
       case 3:
         result = [
-          { name: 'Nome', attribute: 'cidade' },
-          { name: 'País', attribute: 'pais' },
-          { name: 'Estado', attribute: 'estado' },
+          { name: 'NOME', attribute: 'cidade' },
+          { name: 'PAIS', attribute: 'pais' },
+          { name: 'ESTADO', attribute: 'estado' },
         ];
         break;
     }
-    if (result.length > 0) result.push({ name: 'Ação', attribute: 'acao' });
+    if (result.length > 0) result.push({ name: 'ACAO', attribute: 'acao' });
     return result;
   }
 
@@ -235,7 +238,7 @@ export class LocationListComponent implements OnInit {
       error: (err) => {
         console.log('Erro', err);
         this.toastService.error(
-          'Erro inesperado! Não foi possível consultar os dados'
+          this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE")
         );
       },
     });

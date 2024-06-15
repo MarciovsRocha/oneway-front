@@ -14,6 +14,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 interface LoginForm {
   email: FormControl;
@@ -31,6 +32,7 @@ interface LoginForm {
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    TranslateModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -42,7 +44,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private translatePipe: TranslatePipe
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
@@ -54,18 +57,18 @@ export class LoginComponent {
     if (this.loginForm.value.email == 'easy@login.com') {
       sessionStorage.setItem('nome', 'Test Easy');
       this.authService.updateData();
-      this.toastService.success('Logado com sucesso!');
+      this.toastService.success(this.translatePipe.transform("OPERACAO.REALIZADA.SUCESSO"));
       this.router.navigate(['type-user']);
     } else {
       this.authService
         .login(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe({
           next: () => {
-            this.toastService.success('Logado com sucesso!');
+            this.toastService.success(this.translatePipe.transform("OPERACAO.REALIZADA.SUCESSO"));
             this.router.navigate(['type-user']);
           },
           error: (error) => {
-            let errorMessage = 'Erro ao autenticar o usuário.';
+            let errorMessage = this.translatePipe.transform("ERRO.INESPERADO.TENTE.NOVAMENTE");
             if (error.error) {
               errorMessage = error.error;
             }

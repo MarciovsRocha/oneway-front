@@ -1,13 +1,13 @@
 <main class="container">
   <app-default-list-layout
-    [title]="'Lista de Localidades'"
-    [backBtnText]="'Voltar'"
-    [newItemBtnText]="'Nova Localidade'"
+    [title]="'LISTA.LOCALIDADES'"
+    [backBtnText]="'VOLTAR'"
+    [newItemBtnText]="'NOVA.LOCALIDADE'"
     (back)="back()"
     (newItem)="newProduct()"
   >
     <mat-form-field class="w-100">
-      <mat-label>Filtro</mat-label>
+      <mat-label>{{ "FILTRO" | translate }}</mat-label>
       <input #inputSearch matInput (keyup)="applyFilter($event)" />
     </mat-form-field>
 
@@ -20,7 +20,7 @@
         #tabGroup
       >
         @for (type of locationTypeList; track type) {
-        <mat-tab [label]="type"></mat-tab>
+        <mat-tab [label]="type | translate"></mat-tab>
         }
       </mat-tab-group>
     </div>
@@ -28,13 +28,13 @@
       <table mat-table [dataSource]="dataSource">
         @for (column of columnsWithoutAction; track column.attribute; let i = $index) {
         <ng-container [matColumnDef]="column.attribute">
-          <th mat-header-cell *matHeaderCellDef>{{ column.name }}</th>
+          <th mat-header-cell *matHeaderCellDef>{{ column.name | translate }}</th>
           <td mat-cell *matCellDef="let element">{{ element[column.attribute] }}</td>
         </ng-container>
         }
 
         <ng-container matColumnDef="acao">
-          <th mat-header-cell *matHeaderCellDef>Ação</th>
+          <th mat-header-cell *matHeaderCellDef>{{ "ACAO" | translate }}</th>
           <td mat-cell *matCellDef="let element">
             <button
               (click)="edit(element)"
@@ -63,10 +63,10 @@
         ></tr>
       </table>
       @if (dataSource?.data?.length == 0) {
-        <p class="text-center pt-3">Nenhum registro encontrado</p>
+        <p class="text-center pt-3">{{ "NENHUM.REGISTRO.ENCONTRADO" | translate }}</p>
       }
       @else if (dataSource?.filteredData?.length == 0) {
-        <p class="text-center pt-3">Nenhum registro filtrado encontrado</p>
+        <p class="text-center pt-3">{{ "NENHUM.REGISTRO.FILTRADO.ENCONTRADO" | translate }}</p>
       }
     </div>
   </app-default-list-layout>
