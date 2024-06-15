@@ -11,6 +11,13 @@ import { DOCUMENT } from '@angular/common';
   `,
   standalone: true,
   styles: `
+    ::ng-deep {
+      .dark {
+        .btn-logout {
+          color: #f2f3ea
+        }
+      }
+    }
     .btn-logout {
       border: none;
       background: none;
