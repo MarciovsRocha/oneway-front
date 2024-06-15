@@ -79,27 +79,27 @@ export class HeaderComponent implements OnInit{
   }
 
   async getMenu() {
-    this.listBtn = [{ name: 'Inicio', route: '/home' }];
+    this.listBtn = [{ name: 'INICIO', route: '/home' }];
     let typeUser = await this.authManagement.getUserRole(this.userId);
 
     if (typeUser === 'Cliente') {
       this.listBtn.push(
-          { name: 'Montar Pacote', route: '/package' },
-          { name: 'Minhas Viagens', route: '/travels' },
+          { name: 'MONTAR.PACOTE', route: '/package' },
+          { name: 'MINHAS.VIAGENS', route: '/travels' },
         );
     } else if (typeUser === 'Proprietario') {
       this.listBtn.push(
-          { name: 'Lista Produtos', route: '/product' },
-          { name: 'Lista Localidades', route: '/location' },
+          { name: 'LISTA.PRODUTOS', route: '/product' },
+          { name: 'LISTA.LOCALIDADES', route: '/location' },
         );
     } else if (typeUser === 'Administrador') {
       this.listBtn.push(
-          { name: 'Dashboard', route: '/home-adm' },
+          { name: 'DASHBOARD', route: '/home-adm' },
           { name: 'LISTA.PRODUTOS', route: '/product' },
           { name: 'LISTA.LOCALIDADES', route: '/location' },
         );
     } else {
-      this.listBtn.push({ name: 'Montar Pacote', route: '/package' });
+      this.listBtn.push({ name: 'MONTAR.PACOTE', route: '/package' });
     }
 
     this.cdr.detectChanges();
